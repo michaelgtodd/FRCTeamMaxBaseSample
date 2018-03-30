@@ -161,28 +161,13 @@
     <ClInclude Include="src\include\DashboardTask.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\include\DrivingTask.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\include\maxutils\MaxAutonomous.h">
       <Filter>Header Files\maxutils</Filter>
     </ClInclude>
     <ClInclude Include="src\include\SampleAutonomous.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\include\LiftingTask.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\include\PowerReportingTask.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\AutonomousRight.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\AutonomousCenter.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\AutonomousLeft.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
