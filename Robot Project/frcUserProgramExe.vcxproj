@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build" ToolsVersion="15.0">
+  <Import Project="packages\cef.redist.x86.3.3239.1723\build\cef.redist.x86.props" Condition="Exists('packages\cef.redist.x86.3.3239.1723\build\cef.redist.x86.props')" />
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="debug|Win32">
+      <Configuration>debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <Keyword>MakeFileProj</Keyword>
+    <ProjectGUID>{344AB844-85B9-3D96-91F1-18D37B55E254}</ProjectGUID>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='debug|Win32'">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <OutDir>.vs\frcUserProgramExe\$(Configuration)</OutDir>
+    <IntDir>.vs\frcUserProgramExe\$(Configuration)</IntDir>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Label="NMakeConfiguration" Condition="'$(Configuration)|$(Platform)'=='debug|Win32'">
+    <NMakeBuildCommandLine>gradlew.bat :installFrcUserProgramExecutable</NMakeBuildCommandLine>
+    <NMakeCleanCommandLine>gradlew.bat :clean</NMakeCleanCommandLine>
+    <NMakeReBuildCommandLine>gradlew.bat :clean :installFrcUserProgramExecutable</NMakeReBuildCommandLine>
+    <NMakePreprocessorDefinitions>
+    </NMakePreprocessorDefinitions>
+    <NMakeIncludeSearchPath>src\cpp;src\include;build\tmp\expandedArchives\wpilibc-2018.3.2-headers.zip_4790c768d89540161556bab2475dfed0;build\tmp\expandedArchives\hal-2018.3.2-headers.zip_c2e0b10dbe01f5bb317559e19f923b7b;build\tmp\expandedArchives\wpiutil-cpp-3.1.0-headers.zip_8913f4f6489a6d0e0336260f474dc3a0;build\tmp\expandedArchives\ntcore-cpp-4.0.0-headers.zip_517391151665b6a51f10f788c06ee62d;build\tmp\expandedArchives\cscore-cpp-1.2.0-headers.zip_d74028ab3c80a2c64e1d3f5057fd0f19;build\tmp\expandedArchives\opencv-cpp-3.2.0-headers.zip_1b8591564854592a4aff6bd224b2b0a3;build\tmp\expandedArchives\ni-libraries-2018.3.2-headers.zip_55705e66b0e6e7d3459ef1e0f179830e;build\tmp\expandedArchives\CTRE-phoenix-cpp-5.2.1.1-headers.zip_ed51ae3396f2e2d306a9f6a233af2bce;build\tmp\expandedArchives\navx-cpp-3.0.346-headers.zip_bdc8378de58d7490d517245a513e81b3</NMakeIncludeSearchPath>
+    <NMakeOutput>build\install\frcUserProgram\lib\frcUserProgram</NMakeOutput>
+  </PropertyGroup>
+  <ItemGroup Label="Sources">
+    <ClCompile Include="build.gradle" />
+    <ClCompile Include="src\cpp\AutonomousCenter.cpp" />
+    <ClCompile Include="src\cpp\AutonomousLeft.cpp" />
+    <ClCompile Include="src\cpp\AutonomousRight.cpp" />
+    <ClCompile Include="src\cpp\ControlTask.cpp" />
+    <ClCompile Include="src\cpp\DashboardTask.cpp" />
+    <ClCompile Include="src\cpp\DrivingTask.cpp" />
+    <ClCompile Include="src\cpp\ip\IpEndpointName.cpp" />
+    <ClCompile Include="src\cpp\ip\NetworkingUtils.cpp" />
+    <ClCompile Include="src\cpp\ip\UdpSocket.cpp" />
+    <ClCompile Include="src\cpp\LiftingTask.cpp" />
+    <ClCompile Include="src\cpp\maxutils\MaxAutonomous.cpp" />
+    <ClCompile Include="src\cpp\maxutils\MaxDataStream.cpp" />
+    <ClCompile Include="src\cpp\maxutils\MaxTask.cpp" />
+    <ClCompile Include="src\cpp\osc\OscOutboundPacketStream.cpp" />
+    <ClCompile Include="src\cpp\osc\OscPrintReceivedElements.cpp" />
+    <ClCompile Include="src\cpp\osc\OscReceivedElements.cpp" />
+    <ClCompile Include="src\cpp\osc\OscTypes.cpp" />
+    <ClCompile Include="src\cpp\PowerReportingTask.cpp" />
+    <ClCompile Include="src\cpp\Robot.cpp" />
+    <ClCompile Include="src\cpp\SampleAutonomous.cpp" />
+    <ClCompile Include="src\cpp\SampleTask.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\include\AutonomousRight.h" />
+    <ClInclude Include="src\include\AutonomousCenter.h" />
+    <ClInclude Include="src\include\ControlTask.h" />
+    <ClInclude Include="src\include\DashboardTask.h" />
+    <ClInclude Include="src\include\DrivingTask.h" />
+    <ClInclude Include="src\include\ip\IpEndpointName.h" />
+    <ClInclude Include="src\include\ip\NetworkingUtils.h" />
+    <ClInclude Include="src\include\ip\PacketListener.h" />
+    <ClInclude Include="src\include\ip\TimerListener.h" />
+    <ClInclude Include="src\include\ip\UdpSocket.h" />
+    <ClInclude Include="src\include\AutonomousLeft.h" />
+    <ClInclude Include="src\include\LiftingTask.h" />
+    <ClInclude Include="src\include\maxutils\MaxAutonomous.h" />
+    <ClInclude Include="src\include\maxutils\MaxControls.h" />
+    <ClInclude Include="src\include\maxutils\MaxDataStream.h" />
+    <ClInclude Include="src\include\maxutils\MaxDefs.h" />
+    <ClInclude Include="src\include\maxutils\MaxTask.h" />
+    <ClInclude Include="src\include\osc\MessageMappingOscPacketListener.h" />
+    <ClInclude Include="src\include\osc\OscException.h" />
+    <ClInclude Include="src\include\osc\OscHostEndianness.h" />
+    <ClInclude Include="src\include\osc\OscOutboundPacketStream.h" />
+    <ClInclude Include="src\include\osc\OscPacketListener.h" />
+    <ClInclude Include="src\include\osc\OscPrintReceivedElements.h" />
+    <ClInclude Include="src\include\osc\OscReceivedElements.h" />
+    <ClInclude Include="src\include\osc\OscTypes.h" />
+    <ClInclude Include="src\include\PowerReportingTask.h" />
+    <ClInclude Include="src\include\Robot.h" />
+    <ClInclude Include="src\include\SampleAutonomous.h" />
+    <ClInclude Include="src\include\SampleTask.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\cef.redist.x86.3.3239.1723\build\cef.redist.x86.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\cef.redist.x86.3.3239.1723\build\cef.redist.x86.props'))" />
+  </Target>
+</Project>

@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <ItemGroup Label="Filters">
+    <Filter Include="Source Files">
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+    <Filter Include="Header Files\osc">
+      <UniqueIdentifier>{ebcbb9fe-e62b-44f7-9f57-245b501b5b02}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\ip">
+      <UniqueIdentifier>{c6a44a48-8293-4f50-8088-c92892e5ad45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ip">
+      <UniqueIdentifier>{c1801efe-aa99-4850-a5c8-249095bed048}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\osc">
+      <UniqueIdentifier>{d8aaf258-1146-4120-967d-ab9b8e0365a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\maxutils">
+      <UniqueIdentifier>{755381a5-ba96-4355-905e-33cac5f15dd9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\maxutils">
+      <UniqueIdentifier>{392a40b5-b39f-4633-9d27-de053a72a543}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup Label="Sources">
+    <ClCompile Include="build.gradle">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\Robot.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\ip\IpEndpointName.cpp">
+      <Filter>Source Files\ip</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\osc\OscOutboundPacketStream.cpp">
+      <Filter>Source Files\osc</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\osc\OscPrintReceivedElements.cpp">
+      <Filter>Source Files\osc</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\osc\OscReceivedElements.cpp">
+      <Filter>Source Files\osc</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\osc\OscTypes.cpp">
+      <Filter>Source Files\osc</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\ip\NetworkingUtils.cpp">
+      <Filter>Source Files\ip</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\ip\UdpSocket.cpp">
+      <Filter>Source Files\ip</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\SampleTask.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\maxutils\MaxDataStream.cpp">
+      <Filter>Source Files\maxutils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\maxutils\MaxTask.cpp">
+      <Filter>Source Files\maxutils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\ControlTask.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\DashboardTask.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\DrivingTask.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\maxutils\MaxAutonomous.cpp">
+      <Filter>Source Files\maxutils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\SampleAutonomous.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\LiftingTask.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\PowerReportingTask.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\AutonomousCenter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\AutonomousLeft.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\AutonomousRight.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\include\Robot.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\ip\IpEndpointName.h">
+      <Filter>Header Files\ip</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\ip\NetworkingUtils.h">
+      <Filter>Header Files\ip</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\ip\PacketListener.h">
+      <Filter>Header Files\ip</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\ip\TimerListener.h">
+      <Filter>Header Files\ip</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\ip\UdpSocket.h">
+      <Filter>Header Files\ip</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\osc\MessageMappingOscPacketListener.h">
+      <Filter>Header Files\osc</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\osc\OscException.h">
+      <Filter>Header Files\osc</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\osc\OscHostEndianness.h">
+      <Filter>Header Files\osc</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\osc\OscOutboundPacketStream.h">
+      <Filter>Header Files\osc</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\osc\OscPacketListener.h">
+      <Filter>Header Files\osc</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\osc\OscPrintReceivedElements.h">
+      <Filter>Header Files\osc</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\osc\OscReceivedElements.h">
+      <Filter>Header Files\osc</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\osc\OscTypes.h">
+      <Filter>Header Files\osc</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\SampleTask.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\maxutils\MaxDataStream.h">
+      <Filter>Header Files\maxutils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\maxutils\MaxDefs.h">
+      <Filter>Header Files\maxutils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\maxutils\MaxTask.h">
+      <Filter>Header Files\maxutils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\maxutils\MaxControls.h">
+      <Filter>Header Files\maxutils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\ControlTask.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\DashboardTask.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\DrivingTask.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\maxutils\MaxAutonomous.h">
+      <Filter>Header Files\maxutils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\SampleAutonomous.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\LiftingTask.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\PowerReportingTask.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\AutonomousRight.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\AutonomousCenter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\AutonomousLeft.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+</Project>
