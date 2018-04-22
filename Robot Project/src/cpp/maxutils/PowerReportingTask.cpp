@@ -1,4 +1,4 @@
-#include "PowerReportingTask.h"
+#include "maxutils/PowerReportingTask.h"
 #include <iostream>
 #include "maxutils/MaxDataStream.h"
 #include "ControlTask.h"

@@ -3,7 +3,7 @@
 #include "maxutils/MaxDataStream.h"
 #include "maxutils/MaxAutonomous.h"
 #include "SampleAutonomous.h"
-#include "PowerReportingTask.h"
+#include "maxutils/PowerReportingTask.h"
 #include "iostream"
 
 void Robot::RobotInit() 

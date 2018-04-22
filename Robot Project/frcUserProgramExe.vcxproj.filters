@@ -75,8 +75,8 @@
     <ClCompile Include="src\cpp\SampleAutonomous.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\cpp\PowerReportingTask.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\cpp\maxutils\PowerReportingTask.cpp">
+      <Filter>Source Files\maxutils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -146,8 +146,8 @@
     <ClInclude Include="src\include\SampleAutonomous.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\include\PowerReportingTask.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\include\maxutils\PowerReportingTask.h">
+      <Filter>Header Files\maxutils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
