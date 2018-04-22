@@ -20,15 +20,15 @@ void MaxTaskStatisticsTask::Always()
 		i++)
 	{
 		std::string baselabel = "/TaskStats/" + std::to_string(j);
-		MaxLog::TransmitString(baselabel + "/Name", (*i)->GetTaskName());
-		MaxLog::TransmitInt(baselabel + "/Period", (*i)->GetAverageTaskPeriod());
-		MaxLog::TransmitInt(baselabel + "/Duration", (*i)->GetAverageTaskDuration());
+		//MaxLog::TransmitString(baselabel + "/Name", (*i)->GetTaskName());
+		//MaxLog::TransmitInt(baselabel + "/Period", (*i)->GetAverageTaskPeriod());
+		//MaxLog::TransmitInt(baselabel + "/Duration", (*i)->GetAverageTaskDuration());
 		j++;
 	}
 	std::string baselabel = "/TaskStats/" + std::to_string(j);
-	MaxLog::TransmitString(baselabel + "/Name", "TaskStatsTask");
-	MaxLog::TransmitInt(baselabel + "/Period", GetAverageTaskPeriod());
-	MaxLog::TransmitInt(baselabel + "/Duration", GetAverageTaskDuration());
+	//MaxLog::TransmitString(baselabel + "/Name", "TaskStatsTask");
+	//MaxLog::TransmitInt(baselabel + "/Period", GetAverageTaskPeriod());
+	//MaxLog::TransmitInt(baselabel + "/Duration", GetAverageTaskDuration());
 }
 
 void MaxTaskStatisticsTask::Run()
@@ -218,3 +218,5 @@ void MaxTask::ThreadProcess()
 		} while (true);
 	}
 }
+
+MaxTaskSchedule taskschedule;

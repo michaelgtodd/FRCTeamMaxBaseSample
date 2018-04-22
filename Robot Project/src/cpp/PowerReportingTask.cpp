@@ -25,10 +25,10 @@ void PowerReportingTask::Always()
 
 	for (int i = 0; i < 16; i++)
 	{
-		MaxLog::TransmitDouble("/power/" + std::to_string(i), AveragePowerValues[i]);
+		//MaxLog::TransmitDouble("/power/" + std::to_string(i), AveragePowerValues[i]);
 	}
 
-	MaxLog::TransmitDouble("/Power/Total/", PDP->GetTotalCurrent());
+	//MaxLog::TransmitDouble("/Power/Total/", PDP->GetTotalCurrent());
 }
 
 void PowerReportingTask::Autonomous()

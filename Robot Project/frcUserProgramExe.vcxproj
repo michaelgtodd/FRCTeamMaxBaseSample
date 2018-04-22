@@ -33,16 +33,10 @@
   </PropertyGroup>
   <ItemGroup Label="Sources">
     <ClCompile Include="build.gradle" />
-    <ClCompile Include="src\cpp\AutonomousCenter.cpp" />
-    <ClCompile Include="src\cpp\AutonomousLeft.cpp" />
-    <ClCompile Include="src\cpp\AutonomousRight.cpp" />
     <ClCompile Include="src\cpp\ControlTask.cpp" />
-    <ClCompile Include="src\cpp\DashboardTask.cpp" />
-    <ClCompile Include="src\cpp\DrivingTask.cpp" />
     <ClCompile Include="src\cpp\ip\IpEndpointName.cpp" />
     <ClCompile Include="src\cpp\ip\NetworkingUtils.cpp" />
     <ClCompile Include="src\cpp\ip\UdpSocket.cpp" />
-    <ClCompile Include="src\cpp\LiftingTask.cpp" />
     <ClCompile Include="src\cpp\maxutils\MaxAutonomous.cpp" />
     <ClCompile Include="src\cpp\maxutils\MaxDataStream.cpp" />
     <ClCompile Include="src\cpp\maxutils\MaxTask.cpp" />
@@ -57,7 +51,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\include\ControlTask.h" />
-    <ClInclude Include="src\include\DashboardTask.h" />
     <ClInclude Include="src\include\ip\IpEndpointName.h" />
     <ClInclude Include="src\include\ip\NetworkingUtils.h" />
     <ClInclude Include="src\include\ip\PacketListener.h" />

@@ -69,31 +69,13 @@
     <ClCompile Include="src\cpp\ControlTask.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\cpp\DashboardTask.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\cpp\DrivingTask.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\cpp\maxutils\MaxAutonomous.cpp">
       <Filter>Source Files\maxutils</Filter>
     </ClCompile>
     <ClCompile Include="src\cpp\SampleAutonomous.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\cpp\LiftingTask.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\cpp\PowerReportingTask.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\cpp\AutonomousCenter.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\cpp\AutonomousLeft.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\cpp\AutonomousRight.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -156,9 +138,6 @@
       <Filter>Header Files\maxutils</Filter>
     </ClInclude>
     <ClInclude Include="src\include\ControlTask.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\DashboardTask.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\include\maxutils\MaxAutonomous.h">

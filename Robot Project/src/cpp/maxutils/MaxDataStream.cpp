@@ -14,58 +14,8 @@
 
 namespace MaxLog
 {
-	void MaxCautionManager::RegisterCaution(std::string caution)
-	{
-		bool cautionDuplicate = false;
-		for (std::vector<std::string>::iterator i = CautionList.begin();
-			i != CautionList.end();
-			i++)
-		{
-			cautionDuplicate = caution == (*i);
-		}
-		if (!cautionDuplicate)
-		{
-			CautionList.push_back(caution);
-		}
-	}
 
-	void MaxCautionManager::ClearCautions()
-	{
-		CautionList.clear();
-	}
-
-	void MaxCautionManager::Run()
-	{
-
-	}
-
-	void MaxCautionManager::Always()
-	{
-		for (std::vector<std::string>::iterator i = CautionList.begin();
-			i != CautionList.end();
-			i++)
-		{
-			MaxLog::TransmitString("/caution", (*i));
-		}
-	}
-
-	void MaxCautionManager::Disable()
-	{
-	}
-
-	void MaxCautionManager::Autonomous()
-	{
-	}
-
-	void MaxCautionManager::ControllerUpdate(MaxControl * controls)
-	{
-
-	}
-
-	void MaxCautionManager::Init()
-	{
-
-	}
+	static bool Initialized = false;
 
 	class MaxPacketListener : public osc::OscPacketListener {
 	protected:
@@ -97,17 +47,26 @@ namespace MaxLog
 		s.RunUntilSigInt();
 	}
 
+	void AddTargetAddress(std::string address)
+	{
+		if (!Initialized) 
+		{
+			try {
+				transmitSockets.push_back(new UdpTransmitSocket(IpEndpointName(address.c_str(), BROADCASTPORT)));
+			}
+			catch (...)
+			{
+				std::cout << "Error adding endpoint: " << address << std::endl;
+			}
+		}
+		else
+		{
+			std::cout << "Error adding endpoint: " << address << ", log already initialized" << std::endl;
+		}
+	}
+
 	void InitializeMaxLog()
 	{
-		transmitSockets.push_back(new UdpTransmitSocket(IpEndpointName("10.10.71.5", BROADCASTPORT)));
-		transmitSockets.push_back(new UdpTransmitSocket(IpEndpointName("10.10.71.9", BROADCASTPORT)));
-		transmitSockets.push_back(new UdpTransmitSocket(IpEndpointName("10.10.71.10", BROADCASTPORT)));
-		transmitSockets.push_back(new UdpTransmitSocket(IpEndpointName("10.10.71.11", BROADCASTPORT)));
-		transmitSockets.push_back(new UdpTransmitSocket(IpEndpointName("10.10.71.12", BROADCASTPORT)));
-		transmitSockets.push_back(new UdpTransmitSocket(IpEndpointName("10.10.71.13", BROADCASTPORT)));
-		transmitSockets.push_back(new UdpTransmitSocket(IpEndpointName("10.10.71.14", BROADCASTPORT)));
-		lemurSocket = new UdpTransmitSocket(IpEndpointName("10.10.71.15", BROADCASTPORT2));
-
 		std::thread * oscReceiveThread =  new std::thread(&RunListener);
 
 		int priority = 97;
@@ -135,11 +94,6 @@ namespace MaxLog
 			(*i)->Send(p.Data(), p.Size());
 		}
 	}
-
-	void TransmitLemur(osc::OutboundPacketStream p)
-	{
-		lemurSocket->Send(p.Data(), p.Size());
-	}
 	
 	void LogPass(std::string error_message)
 	{
@@ -150,7 +104,6 @@ namespace MaxLog
 		p << osc::BeginMessage("/pass") << error_message.c_str() << osc::EndMessage;
 
 		transmit(p);
-		TransmitLemur(p);
 	}
 
 	void LogInfo(std::string error_message)
@@ -162,7 +115,6 @@ namespace MaxLog
 		p << osc::BeginMessage("/info") << error_message.c_str() << osc::EndMessage;
 
 		transmit(p);
-		TransmitLemur(p);
 	}
 
 	void LogError(std::string error_message)
@@ -174,62 +126,5 @@ namespace MaxLog
 		p << osc::BeginMessage("/error") << error_message.c_str() << osc::EndMessage;
 
 		transmit(p);
-		TransmitLemur(p);
-	}
-
-	void TransmitInt(std::string label, int value) 
-	{
-		char buffer[OUTPUT_BUFFER_SIZE];
-
-		osc::OutboundPacketStream p(buffer, OUTPUT_BUFFER_SIZE);
-
-		p << osc::BeginMessage(label.c_str()) << value << osc::EndMessage;
-
-		transmit(p);
-		TransmitLemur(p);
-	}
-
-	void TransmitString(std::string label, std::string value)
-	{
-		char buffer[OUTPUT_BUFFER_SIZE];
-
-		osc::OutboundPacketStream p(buffer, OUTPUT_BUFFER_SIZE);
-
-		p << osc::BeginMessage(label.c_str()) << value.c_str() << osc::EndMessage;
-
-		transmit(p);
-		TransmitLemur(p);
-	}
-
-	void TransmitDouble(std::string label, double value)
-	{
-		char buffer[OUTPUT_BUFFER_SIZE];
-
-		osc::OutboundPacketStream p(buffer, OUTPUT_BUFFER_SIZE);
-
-		p << osc::BeginMessage(label.c_str()) << value << osc::EndMessage;
-
-		transmit(p);
-
-		char lbuffer[OUTPUT_BUFFER_SIZE];
-
-		osc::OutboundPacketStream q(lbuffer, OUTPUT_BUFFER_SIZE);
-
-		q << osc::BeginMessage(label.c_str()) << (float)value << osc::EndMessage;
-
-		TransmitLemur(q);
-
-	}
-
-	void TransmitBool(std::string label, bool value)
-	{
-		char buffer[OUTPUT_BUFFER_SIZE];
-
-		osc::OutboundPacketStream p(buffer, OUTPUT_BUFFER_SIZE);
-
-		p << osc::BeginMessage(label.c_str()) << value << osc::EndMessage;
-
-		transmit(p);
-		TransmitLemur(p);
 	}
 }
