@@ -19,7 +19,7 @@ public:
 	std::string virtual GetName() = 0;
 };
 
-class MaxAutonomousManager : MaxTask
+class MaxAutonomousManager : RobotTask
 {
 public:
 	void Run();

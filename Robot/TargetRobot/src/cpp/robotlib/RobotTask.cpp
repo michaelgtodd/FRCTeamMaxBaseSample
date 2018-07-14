@@ -10,7 +10,7 @@
 #include <iostream>
 #include "Robot.h"
 
-MaxTaskStatisticsTask::MaxTaskStatisticsTask(std::vector<MaxTask*> TaskList)
+MaxTaskStatisticsTask::MaxTaskStatisticsTask(std::vector<RobotTask*> TaskList)
 {
 	TaskList_ = TaskList;
 }
@@ -18,7 +18,7 @@ MaxTaskStatisticsTask::MaxTaskStatisticsTask(std::vector<MaxTask*> TaskList)
 void MaxTaskStatisticsTask::Always()
 {
 	int j = 1;
-	for (std::vector<MaxTask*>::iterator i = TaskList_.begin();
+	for (std::vector<RobotTask*>::iterator i = TaskList_.begin();
 		i != TaskList_.end();
 		i++)
 	{
@@ -59,7 +59,7 @@ void MaxTaskStatisticsTask::Init()
 
 }
 
-void MaxTaskSchedule::AddTask(MaxTask* task, std::string taskname, uint32_t period)
+void MaxTaskSchedule::AddTask(RobotTask* task, std::string taskname, uint32_t period)
 {
 	TaskList.push_back(task);
 	task->ExecInit(taskname, period);
@@ -84,7 +84,7 @@ void MaxTaskSchedule::LaunchTasks()
 #endif
 	MaxLog::LogInfo("Starting tasks");
 	priority = 80;
-	for (std::vector<MaxTask*>::iterator i = TaskList.begin();
+	for (std::vector<RobotTask*>::iterator i = TaskList.begin();
 		i != TaskList.end();
 		i++)
 	{
@@ -92,14 +92,14 @@ void MaxTaskSchedule::LaunchTasks()
 		priority--;
 	}
 
-	MaxTask * stats_task = new MaxTaskStatisticsTask(TaskList);
+	RobotTask * stats_task = new MaxTaskStatisticsTask(TaskList);
 	stats_task->ExecInit("StatsTask", 1);
 	stats_task->Launch(98);
 }
 
 void MaxTaskSchedule::DispatchControl(MaxControl * ControlUpdate)
 {
-	for (std::vector<MaxTask*>::iterator i = TaskList.begin();
+	for (std::vector<RobotTask*>::iterator i = TaskList.begin();
 		i != TaskList.end();
 		i++)
 	{
@@ -107,27 +107,27 @@ void MaxTaskSchedule::DispatchControl(MaxControl * ControlUpdate)
 	}
 }
 
-std::string MaxTask::GetTaskName()
+std::string RobotTask::GetTaskName()
 {
 	return taskname_;
 }
 
-uint32_t MaxTask::GetTaskPeriod()
+uint32_t RobotTask::GetTaskPeriod()
 {
 	return task_period_;
 }
 
-uint32_t MaxTask::GetAverageTaskPeriod()
+uint32_t RobotTask::GetAverageTaskPeriod()
 {
 	return (uint32_t)ceil(average_task_period);
 }
 
-uint32_t MaxTask::GetAverageTaskDuration()
+uint32_t RobotTask::GetAverageTaskDuration()
 {
 	return (uint32_t)ceil(average_task_duration);
 }
 
-void MaxTask::ExecInit(std::string taskname, uint32_t task_period)
+void RobotTask::ExecInit(std::string taskname, uint32_t task_period)
 {
 	taskname_ = taskname;
 	uint32_t capped_period = std::min(task_period, (uint32_t) 200);
@@ -137,10 +137,10 @@ void MaxTask::ExecInit(std::string taskname, uint32_t task_period)
 	Init();
 }
 
-void MaxTask::Launch(int priority)
+void RobotTask::Launch(int priority)
 {
 	MaxLog::LogInfo("Launching: " + taskname_);
-	running_thread = std::thread(&MaxTask::ThreadProcess, this);
+	running_thread = std::thread(&RobotTask::ThreadProcess, this);
 #ifndef WIN32
 	sched_param sch;
 	sch.sched_priority = priority;
@@ -157,7 +157,7 @@ void MaxTask::Launch(int priority)
 #endif
 }
 
-void MaxTask::ThreadProcess()
+void RobotTask::ThreadProcess()
 {
 	while (true)
 	{

@@ -5,7 +5,7 @@
 #include <vector>
 #include "robotlib/RobotControls.h"
 
-class MaxTask 
+class RobotTask 
 {
 public:
 	void virtual Run() = 0;
@@ -38,17 +38,17 @@ private:
 class MaxTaskSchedule
 {
 public:
-	void AddTask(MaxTask* task, std::string taskname, uint32_t period);
+	void AddTask(RobotTask* task, std::string taskname, uint32_t period);
 	void LaunchTasks();
 	void DispatchControl(MaxControl * ControlUpdate);
 private:
-	std::vector<MaxTask*> TaskList;
+	std::vector<RobotTask*> TaskList;
 };
 
-class MaxTaskStatisticsTask : public MaxTask
+class MaxTaskStatisticsTask : public RobotTask
 {
 public:
-	MaxTaskStatisticsTask(std::vector<MaxTask*> TaskList);
+	MaxTaskStatisticsTask(std::vector<RobotTask*> TaskList);
 	void Always();
 	void Run();
 	void Disable();
@@ -56,5 +56,5 @@ public:
 	void ControllerUpdate(MaxControl * controls);
 private:
 	void Init();
-	std::vector<MaxTask*> TaskList_;
+	std::vector<RobotTask*> TaskList_;
 };

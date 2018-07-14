@@ -8,13 +8,15 @@
 
 void Robot::RobotInit() 
 {
+	std::cout << "Initializing Robot..." << std::endl;
+
 	MaxLog::InitializeMaxLog();
 
 	MaxAutonomousManagerInstance.RegisterAutonomous(new SampleAutonomous);
 
 	// Task names cannot contain spaces at this time
-	taskschedule.AddTask((MaxTask*)&ControlTaskInstance, "ControlTask", 100);
-	taskschedule.AddTask((MaxTask*)&MaxAutonomousManagerInstance, "AutoManager", 100);
+	taskschedule.AddTask((RobotTask*)&ControlTaskInstance, "ControlTask", 100);
+	taskschedule.AddTask((RobotTask*)&MaxAutonomousManagerInstance, "AutoManager", 100);
 	taskschedule.AddTask(new PowerReportingTask(), "PowerReporting", 20);
 
 	taskschedule.LaunchTasks();

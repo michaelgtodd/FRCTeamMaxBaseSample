@@ -3,7 +3,7 @@
 #include "robotlib/RobotTask.h"
 #include "ControlTask.h"
 
-class SampleTask : public MaxTask
+class SampleTask : public RobotTask
 {
 public:
 	void Always();

@@ -1,4 +1,0 @@
-See file:///C:/Users/Michael/Documents/FRCTeamMaxBase/Robot%20Project/build/tmp/linkFrcUserProgramExecutable/output.txt for all output for linkFrcUserProgramExecutable.
-linking frcUserProgram successful.
-
-Finished linkFrcUserProgramExecutable, see full log file:///C:/Users/Michael/Documents/FRCTeamMaxBase/Robot%20Project/build/tmp/linkFrcUserProgramExecutable/output.txt.

@@ -5,7 +5,7 @@
 #include "WPILib.h"
 #endif
 
-class PowerReportingTask : public MaxTask
+class PowerReportingTask : public RobotTask
 {
 public:
 	void Always();

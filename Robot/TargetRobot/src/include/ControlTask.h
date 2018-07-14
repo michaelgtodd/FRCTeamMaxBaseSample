@@ -22,7 +22,7 @@ class AutonomousControl : public MaxControl
 public:
 };
 
-class ControlTask : public MaxTask
+class ControlTask : public RobotTask
 {
 public:
 	void Always();
