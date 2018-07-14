@@ -3,6 +3,8 @@
 #include "WPILib.h"
 #include "pthread.h"
 #else
+#define NOMINMAX
+#include <Windows.h>
 #include <algorithm>
 #endif
 #include "robotlib/RobotDataStream.h"
@@ -164,7 +166,7 @@ void RobotTask::ThreadProcess()
 #ifndef WIN32
 		double loopStart = Timer::GetFPGATimestamp();
 #else
-		double loopStart = 0;
+		double loopStart = timeGetTime();
 #endif
 		
 		if (RobotState::IsOperatorControl() && RobotState::IsEnabled())
@@ -183,7 +185,7 @@ void RobotTask::ThreadProcess()
 #ifndef WIN32
 		double loopEnd = Timer::GetFPGATimestamp();
 #else
-		double loopEnd = 0;
+		double loopEnd = timeGetTime();
 #endif
 		double loopDuration = loopEnd - loopStart;
 		uint32_t loopExecutionTimeMS = (uint32_t)(loopDuration * 1000);
@@ -215,7 +217,7 @@ void RobotTask::ThreadProcess()
 #ifndef WIN32
 			double currentTime = Timer::GetFPGATimestamp();
 #else
-			double currentTime = 0;
+			double currentTime = timeGetTime();
 #endif
 			uint32_t loopElapsedTimeMS = (uint32_t)((currentTime - loopStart) * 1000);
 			if (loopElapsedTimeMS < (1000 / task_period_))

@@ -15,7 +15,7 @@ void SampleTask::Disable()
 
 void SampleTask::Always()
 {
-
+	std::cout << "I'm a sample task and I'm running" << std::endl;
 }
 
 void SampleTask::Autonomous()

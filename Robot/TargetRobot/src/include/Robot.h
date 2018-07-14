@@ -7,6 +7,8 @@
 #include "SampleTask.h"
 #include "ControlTask.h"
 
+#define CONSOLE_LOG_INFO
+
 class Robot : public frc::SampleRobot 
 {
 public:

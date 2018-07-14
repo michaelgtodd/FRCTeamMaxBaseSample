@@ -108,6 +108,8 @@ namespace MaxLog
 
 		p << osc::BeginMessage("/pass") << error_message.c_str() << osc::EndMessage;
 
+		std::cout << error_message << std::endl;
+
 		transmit(p);
 	}
 
@@ -119,6 +121,8 @@ namespace MaxLog
 
 		p << osc::BeginMessage("/info") << error_message.c_str() << osc::EndMessage;
 
+		std::cout << error_message << std::endl;
+
 		transmit(p);
 	}
 
@@ -129,6 +133,8 @@ namespace MaxLog
 		osc::OutboundPacketStream p(buffer, OUTPUT_BUFFER_SIZE);
 
 		p << osc::BeginMessage("/error") << error_message.c_str() << osc::EndMessage;
+
+		std::cout << error_message << std::endl;
 
 		transmit(p);
 	}
