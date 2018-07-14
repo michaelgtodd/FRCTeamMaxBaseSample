@@ -1,7 +1,11 @@
-Robot Project/.vs/
-Robot Project/build/
-Robot Project/.gradle/
-Robot Project/build/
+Robot Project/Robot/.vs/
+Robot Project/Robot/build/
+Robot Project/Robot/.gradle/
+Robot Project/Robot/build/
+Robot Project/Robot/TargetRobot/.vs/
+Robot Project/Robot/TargetRobot/build/
+Robot Project/Robot/TargetRobot/.gradle/
+Robot Project/Robot/TargetRobot/build/
 DataMonitor/.vs/DataMonitor/v15/Server/sqlite3/db.lock
 DataMonitor/DataMonitor/bin/
 DataMonitor/DataMonitor/obj/
