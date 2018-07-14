@@ -1,0 +1,67 @@
+See file:///C:/Users/Michael/Documents/FRCTeamMaxBase/Robot%20Project/build/tmp/compileFrcUserProgramExecutableFrcUserProgramCpp/output.txt for all output for compileFrcUserProgramExecutableFrcUserProgramCpp.
+compiling ControlTask.cpp failed.
+In file included from C:\Users\Michael\Documents\FRCTeamMaxBase\Robot Project\src\cpp\ControlTask.cpp:1:0:
+C:\Users\Michael\Documents\FRCTeamMaxBase\Robot Project\src\include/ControlTask.h:2:30: fatal error: maxutils/MaxTask.h: No such file or directory
+compilation terminated.
+
+compiling NetworkingUtils.cpp failed.
+C:\Users\Michael\Documents\FRCTeamMaxBase\Robot Project\src\cpp\robotlib\ip\NetworkingUtils.cpp:37:32: fatal error: ip/NetworkingUtils.h: No such file or directory
+compilation terminated.
+
+compiling IpEndpointName.cpp failed.
+C:\Users\Michael\Documents\FRCTeamMaxBase\Robot Project\src\cpp\robotlib\ip\IpEndpointName.cpp:37:31: fatal error: ip/IpEndpointName.h: No such file or directory
+compilation terminated.
+
+compiling OscOutboundPacketStream.cpp failed.
+C:\Users\Michael\Documents\FRCTeamMaxBase\Robot Project\src\cpp\robotlib\osc\OscOutboundPacketStream.cpp:37:41: fatal error: osc/OscOutboundPacketStream.h: No such file or directory
+compilation terminated.
+
+compiling OscPrintReceivedElements.cpp failed.
+C:\Users\Michael\Documents\FRCTeamMaxBase\Robot Project\src\cpp\robotlib\osc\OscPrintReceivedElements.cpp:37:42: fatal error: osc/OscPrintReceivedElements.h: No such file or directory
+compilation terminated.
+
+compiling OscReceivedElements.cpp failed.
+C:\Users\Michael\Documents\FRCTeamMaxBase\Robot Project\src\cpp\robotlib\osc\OscReceivedElements.cpp:37:37: fatal error: osc/OscReceivedElements.h: No such file or directory
+compilation terminated.
+
+compiling RobotDataStream.cpp failed.
+C:\Users\Michael\Documents\FRCTeamMaxBase\Robot Project\src\cpp\robotlib\RobotDataStream.cpp:1:36: fatal error: maxutils/MaxDataStream.h: No such file or directory
+compilation terminated.
+
+compiling OscTypes.cpp failed.
+C:\Users\Michael\Documents\FRCTeamMaxBase\Robot Project\src\cpp\robotlib\osc\OscTypes.cpp:37:26: fatal error: osc/OscTypes.h: No such file or directory
+compilation terminated.
+
+compiling RobotAutonomous.cpp failed.
+C:\Users\Michael\Documents\FRCTeamMaxBase\Robot Project\src\cpp\robotlib\RobotAutonomous.cpp:1:36: fatal error: maxutils\MaxAutonomous.h: No such file or directory
+compilation terminated.
+
+compiling RobotReportingTask.cpp failed.
+C:\Users\Michael\Documents\FRCTeamMaxBase\Robot Project\src\cpp\robotlib\RobotReportingTask.cpp:1:41: fatal error: maxutils/PowerReportingTask.h: No such file or directory
+compilation terminated.
+
+compiling RobotTask.cpp failed.
+C:\Users\Michael\Documents\FRCTeamMaxBase\Robot Project\src\cpp\robotlib\RobotTask.cpp:1:30: fatal error: maxutils/MaxTask.h: No such file or directory
+compilation terminated.
+
+compiling SampleAutonomous.cpp failed.
+In file included from C:\Users\Michael\Documents\FRCTeamMaxBase\Robot Project\src\cpp\SampleAutonomous.cpp:1:0:
+C:\Users\Michael\Documents\FRCTeamMaxBase\Robot Project\src\include/SampleAutonomous.h:2:36: fatal error: maxutils\MaxAutonomous.h: No such file or directory
+compilation terminated.
+
+compiling SampleTask.cpp failed.
+In file included from C:\Users\Michael\Documents\FRCTeamMaxBase\Robot Project\src\cpp\SampleTask.cpp:1:0:
+C:\Users\Michael\Documents\FRCTeamMaxBase\Robot Project\src\include/SampleTask.h:2:30: fatal error: maxutils/MaxTask.h: No such file or directory
+compilation terminated.
+
+compiling UdpSocket.cpp failed.
+C:\Users\Michael\Documents\FRCTeamMaxBase\Robot Project\src\cpp\robotlib\ip\UdpSocket.cpp:37:26: fatal error: ip/UdpSocket.h: No such file or directory
+compilation terminated.
+
+compiling Robot.cpp failed.
+In file included from C:\Users\Michael\Documents\FRCTeamMaxBase\Robot Project\src\include/Robot.h:3:0,
+                 from C:\Users\Michael\Documents\FRCTeamMaxBase\Robot Project\src\cpp\Robot.cpp:1:
+C:\Users\Michael\Documents\FRCTeamMaxBase\Robot Project\src\include/SampleTask.h:2:30: fatal error: maxutils/MaxTask.h: No such file or directory
+compilation terminated.
+
+Finished compileFrcUserProgramExecutableFrcUserProgramCpp, see full log file:///C:/Users/Michael/Documents/FRCTeamMaxBase/Robot%20Project/build/tmp/compileFrcUserProgramExecutableFrcUserProgramCpp/output.txt.
