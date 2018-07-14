@@ -1,8 +1,8 @@
-#include "maxutils/PowerReportingTask.h"
+#include "robotlib/PowerReportingTask.h"
 #include <iostream>
-#include "maxutils/MaxDataStream.h"
+#include "robotlib/RobotDataStream.h"
 #include "ControlTask.h"
-#include "maxutils/MaxDataStream.h"
+#include "robotlib/RobotDataStream.h"
 
 void PowerReportingTask::Run()
 {
@@ -20,7 +20,9 @@ void PowerReportingTask::Always()
 {
 	for (int i = 0; i < 16; i++)
 	{
+#ifndef WIN32
 		AveragePowerValues[i] = (((AveragePowerValues[i] * 20.0) - AveragePowerValues[i]) + PDP->GetCurrent(i)) / 20.0;
+#endif
 	}
 
 	for (int i = 0; i < 16; i++)
@@ -43,7 +45,9 @@ void PowerReportingTask::ControllerUpdate(MaxControl * controls)
 
 void PowerReportingTask::Init()
 {
+#ifndef WIN32
 	PDP = new PowerDistributionPanel();
+#endif
 	for (int i = 0; i < 16; i++)
 	{
 		AveragePowerValues[i] = 0;

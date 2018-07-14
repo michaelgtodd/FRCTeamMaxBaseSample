@@ -13,6 +13,39 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\TargetRobot">
+      <UniqueIdentifier>{4572e63f-1ef3-4bb0-9a4f-076cb5f0cbc9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\TargetRobot">
+      <UniqueIdentifier>{f6d99c07-ed7c-4b0d-aea7-b4e8d9f9f5fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\TargetRobot\robotlib">
+      <UniqueIdentifier>{c81387c8-763a-4cb7-bf2c-67bc71047ff8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\TargetRobot\robotlib">
+      <UniqueIdentifier>{b0ce4481-6123-45f6-8a2e-19115bfea0e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\TargetRobot\robotlib\ip">
+      <UniqueIdentifier>{a2f6f703-1019-4c46-94c7-2d155563ce7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\TargetRobot\robotlib\osc">
+      <UniqueIdentifier>{8fbca77a-db41-489c-9288-aa22107217f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\TargetRobot\robotlib\ip">
+      <UniqueIdentifier>{5afe2e24-4188-430c-bc46-4ef6e83c866c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\TargetRobot\robotlib\osc">
+      <UniqueIdentifier>{ed186cc2-a4b8-4876-934f-55e84dca5eb4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\WindowsRobot">
+      <UniqueIdentifier>{2d4ae164-af7a-4409-9ced-e84240ea9f89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\WindowsRobot">
+      <UniqueIdentifier>{b7f62d7d-bb7b-474c-aa75-4abeb6e5f228}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\WindowsRobot\ip">
+      <UniqueIdentifier>{60da7611-5688-4b72-a3b9-99cf446f178c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -21,6 +54,78 @@
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="TargetRobot\src\include\robotlib\ip\IpEndpointName.h">
+      <Filter>Header Files\TargetRobot\robotlib\ip</Filter>
+    </ClInclude>
+    <ClInclude Include="TargetRobot\src\include\robotlib\ip\NetworkingUtils.h">
+      <Filter>Header Files\TargetRobot\robotlib\ip</Filter>
+    </ClInclude>
+    <ClInclude Include="TargetRobot\src\include\robotlib\ip\PacketListener.h">
+      <Filter>Header Files\TargetRobot\robotlib\ip</Filter>
+    </ClInclude>
+    <ClInclude Include="TargetRobot\src\include\robotlib\ip\TimerListener.h">
+      <Filter>Header Files\TargetRobot\robotlib\ip</Filter>
+    </ClInclude>
+    <ClInclude Include="TargetRobot\src\include\robotlib\ip\UdpSocket.h">
+      <Filter>Header Files\TargetRobot\robotlib\ip</Filter>
+    </ClInclude>
+    <ClInclude Include="TargetRobot\src\include\robotlib\osc\MessageMappingOscPacketListener.h">
+      <Filter>Header Files\TargetRobot\robotlib\osc</Filter>
+    </ClInclude>
+    <ClInclude Include="TargetRobot\src\include\robotlib\osc\OscException.h">
+      <Filter>Header Files\TargetRobot\robotlib\osc</Filter>
+    </ClInclude>
+    <ClInclude Include="TargetRobot\src\include\robotlib\osc\OscHostEndianness.h">
+      <Filter>Header Files\TargetRobot\robotlib\osc</Filter>
+    </ClInclude>
+    <ClInclude Include="TargetRobot\src\include\robotlib\osc\OscOutboundPacketStream.h">
+      <Filter>Header Files\TargetRobot\robotlib\osc</Filter>
+    </ClInclude>
+    <ClInclude Include="TargetRobot\src\include\robotlib\osc\OscPacketListener.h">
+      <Filter>Header Files\TargetRobot\robotlib\osc</Filter>
+    </ClInclude>
+    <ClInclude Include="TargetRobot\src\include\robotlib\osc\OscPrintReceivedElements.h">
+      <Filter>Header Files\TargetRobot\robotlib\osc</Filter>
+    </ClInclude>
+    <ClInclude Include="TargetRobot\src\include\robotlib\osc\OscReceivedElements.h">
+      <Filter>Header Files\TargetRobot\robotlib\osc</Filter>
+    </ClInclude>
+    <ClInclude Include="TargetRobot\src\include\robotlib\osc\OscTypes.h">
+      <Filter>Header Files\TargetRobot\robotlib\osc</Filter>
+    </ClInclude>
+    <ClInclude Include="TargetRobot\src\include\robotlib\PowerReportingTask.h">
+      <Filter>Header Files\TargetRobot\robotlib</Filter>
+    </ClInclude>
+    <ClInclude Include="TargetRobot\src\include\robotlib\RobotAutonomous.h">
+      <Filter>Header Files\TargetRobot\robotlib</Filter>
+    </ClInclude>
+    <ClInclude Include="TargetRobot\src\include\robotlib\RobotControls.h">
+      <Filter>Header Files\TargetRobot\robotlib</Filter>
+    </ClInclude>
+    <ClInclude Include="TargetRobot\src\include\robotlib\RobotDataStream.h">
+      <Filter>Header Files\TargetRobot\robotlib</Filter>
+    </ClInclude>
+    <ClInclude Include="TargetRobot\src\include\robotlib\RobotDefs.h">
+      <Filter>Header Files\TargetRobot\robotlib</Filter>
+    </ClInclude>
+    <ClInclude Include="TargetRobot\src\include\robotlib\RobotTask.h">
+      <Filter>Header Files\TargetRobot\robotlib</Filter>
+    </ClInclude>
+    <ClInclude Include="TargetRobot\src\include\ControlTask.h">
+      <Filter>Header Files\TargetRobot</Filter>
+    </ClInclude>
+    <ClInclude Include="TargetRobot\src\include\Robot.h">
+      <Filter>Header Files\TargetRobot</Filter>
+    </ClInclude>
+    <ClInclude Include="TargetRobot\src\include\SampleAutonomous.h">
+      <Filter>Header Files\TargetRobot</Filter>
+    </ClInclude>
+    <ClInclude Include="TargetRobot\src\include\SampleTask.h">
+      <Filter>Header Files\TargetRobot</Filter>
+    </ClInclude>
+    <ClInclude Include="WindowsRobot\include\FRCWindowsRobot.h">
+      <Filter>Header Files\WindowsRobot</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -28,6 +133,54 @@
     </ClCompile>
     <ClCompile Include="WindowsRobot.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TargetRobot\src\cpp\robotlib\ip\IpEndpointName.cpp">
+      <Filter>Source Files\TargetRobot\robotlib\ip</Filter>
+    </ClCompile>
+    <ClCompile Include="TargetRobot\src\cpp\robotlib\osc\OscOutboundPacketStream.cpp">
+      <Filter>Source Files\TargetRobot\robotlib\osc</Filter>
+    </ClCompile>
+    <ClCompile Include="TargetRobot\src\cpp\robotlib\osc\OscPrintReceivedElements.cpp">
+      <Filter>Source Files\TargetRobot\robotlib\osc</Filter>
+    </ClCompile>
+    <ClCompile Include="TargetRobot\src\cpp\robotlib\osc\OscReceivedElements.cpp">
+      <Filter>Source Files\TargetRobot\robotlib\osc</Filter>
+    </ClCompile>
+    <ClCompile Include="TargetRobot\src\cpp\robotlib\osc\OscTypes.cpp">
+      <Filter>Source Files\TargetRobot\robotlib\osc</Filter>
+    </ClCompile>
+    <ClCompile Include="TargetRobot\src\cpp\robotlib\RobotAutonomous.cpp">
+      <Filter>Source Files\TargetRobot\robotlib</Filter>
+    </ClCompile>
+    <ClCompile Include="TargetRobot\src\cpp\robotlib\RobotDataStream.cpp">
+      <Filter>Source Files\TargetRobot\robotlib</Filter>
+    </ClCompile>
+    <ClCompile Include="TargetRobot\src\cpp\robotlib\RobotReportingTask.cpp">
+      <Filter>Source Files\TargetRobot\robotlib</Filter>
+    </ClCompile>
+    <ClCompile Include="TargetRobot\src\cpp\robotlib\RobotTask.cpp">
+      <Filter>Source Files\TargetRobot\robotlib</Filter>
+    </ClCompile>
+    <ClCompile Include="TargetRobot\src\cpp\ControlTask.cpp">
+      <Filter>Source Files\TargetRobot</Filter>
+    </ClCompile>
+    <ClCompile Include="TargetRobot\src\cpp\Robot.cpp">
+      <Filter>Source Files\TargetRobot</Filter>
+    </ClCompile>
+    <ClCompile Include="TargetRobot\src\cpp\SampleAutonomous.cpp">
+      <Filter>Source Files\TargetRobot</Filter>
+    </ClCompile>
+    <ClCompile Include="TargetRobot\src\cpp\SampleTask.cpp">
+      <Filter>Source Files\TargetRobot</Filter>
+    </ClCompile>
+    <ClCompile Include="WindowsRobot\cpp\FRCWindowsRobot.cpp">
+      <Filter>Source Files\WindowsRobot</Filter>
+    </ClCompile>
+    <ClCompile Include="WindowsRobot\cpp\ip\NetworkingUtils.cpp">
+      <Filter>Source Files\WindowsRobot\ip</Filter>
+    </ClCompile>
+    <ClCompile Include="WindowsRobot\cpp\ip\UdpSocket.cpp">
+      <Filter>Source Files\WindowsRobot\ip</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

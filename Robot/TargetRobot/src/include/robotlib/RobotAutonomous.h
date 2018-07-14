@@ -1,11 +1,13 @@
 #pragma once
 #include <string>
-#include "MaxTask.h"
-#include "MaxControls.h"
+#include "RobotTask.h"
+#include "RobotControls.h"
 #include <thread>
 #include <vector>
-#include "maxutils/MaxControls.h"
+#include "robotlib/RobotControls.h"
+#ifndef WIN32
 #include <pthread.h>
+#endif
 
 class MaxAutonomousTask
 {
@@ -36,7 +38,9 @@ private:
 	MaxAutonomousTask * SelectedAutonomous;
 	bool AutoLocked = false;
 	bool LastStateAutonomous = false;
+#ifndef WIN32
 	pthread_mutex_t AutoMutex;
+#endif
 };
 
 extern MaxAutonomousManager MaxAutonomousManagerInstance;

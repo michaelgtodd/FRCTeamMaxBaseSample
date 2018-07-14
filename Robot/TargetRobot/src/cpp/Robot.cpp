@@ -1,9 +1,9 @@
 #include "Robot.h"
-#include "maxutils/MaxTask.h"
-#include "maxutils/MaxDataStream.h"
-#include "maxutils/MaxAutonomous.h"
+#include "robotlib/RobotTask.h"
+#include "robotlib/RobotDataStream.h"
+#include "robotlib/RobotAutonomous.h"
 #include "SampleAutonomous.h"
-#include "maxutils/PowerReportingTask.h"
+#include "robotlib/PowerReportingTask.h"
 #include "iostream"
 
 void Robot::RobotInit() 
@@ -25,4 +25,6 @@ void Robot::Autonomous() { }
 void Robot::OperatorControl() { }
 void Robot::Test() { }
 
+#ifndef WIN32
 START_ROBOT_CLASS(Robot)
+#endif

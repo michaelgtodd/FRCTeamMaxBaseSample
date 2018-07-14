@@ -1,11 +1,13 @@
 #pragma once
-#include "maxutils/MaxTask.h"
-#include "osc/OscReceivedElements.h"
-#include "osc/OscPacketListener.h"
-#include "ip/UdpSocket.h"
+#ifndef WIN32
 #include "WPILib.h"
+#endif
+#include "robotlib/RobotTask.h"
+#include "robotlib/osc/OscReceivedElements.h"
+#include "robotlib/osc/OscPacketListener.h"
+#include "robotlib/ip/UdpSocket.h"
 #include <string.h>
-#include "maxutils\MaxAutonomous.h"
+#include "robotlib/RobotAutonomous.h"
 
 using namespace std;
 

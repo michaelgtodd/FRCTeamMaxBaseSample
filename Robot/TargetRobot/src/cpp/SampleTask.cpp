@@ -1,6 +1,6 @@
 #include "SampleTask.h"
 #include <iostream>
-#include "maxutils/MaxDataStream.h"
+#include "robotlib/RobotDataStream.h"
 #include "ControlTask.h"
 
 void SampleTask::Run()
@@ -23,7 +23,7 @@ void SampleTask::Autonomous()
 
 }
 
-void SampleTask::ControllerUpdate(MaxControl * controls)
+void SampleTask::ControllerUpdate(RobotControl * controls)
 {
 	RobotControl * controls_ = (RobotControl *)(controls);
 }

@@ -34,55 +34,62 @@
 	requested that these non-binding requests be included whenever the
 	above license is reproduced.
 */
-#include "robotlib/ip/IpEndpointName.h"
-
-#include <cstdio>
-
 #include "robotlib/ip/NetworkingUtils.h"
 
+#include <winsock2.h>   // this must come first to prevent errors with MSVC7
+#include <windows.h>
 
-unsigned long IpEndpointName::GetHostByName( const char *s )
+#include <cstring>
+
+
+static LONG initCount_ = 0;
+static bool winsockInitialized_ = false;
+
+NetworkInitializer::NetworkInitializer()
 {
-	return ::GetHostByName(s);
+    if( InterlockedIncrement( &initCount_ ) == 1 ){
+        // there is a race condition here if one thread tries to access
+        // the library while another is still initializing it. 
+        // i can't think of an easy way to fix it so i'm telling you here
+        // incase you need to init the library from two threads at once.
+        // this is why the header file advises to instantiate one of these 
+        // in main() so that the initialization happens globally
+
+        // initialize winsock
+	    WSAData wsaData;
+	    int nCode = WSAStartup(MAKEWORD(1, 1), &wsaData);
+	    if( nCode != 0 ){
+	        //std::cout << "WSAStartup() failed with error code " << nCode << "\n";
+        }else{
+            winsockInitialized_ = true;
+        }
+    }
 }
 
 
-void IpEndpointName::AddressAsString( char *s ) const
+NetworkInitializer::~NetworkInitializer()
 {
-	if( address == ANY_ADDRESS ){
-		std::sprintf( s, "<any>" );
-	}else{
-		std::sprintf( s, "%d.%d.%d.%d",
-				(int)((address >> 24) & 0xFF),
-				(int)((address >> 16) & 0xFF),
-				(int)((address >> 8) & 0xFF),
-				(int)(address & 0xFF) );
-	}
+    if( InterlockedDecrement( &initCount_ ) == 0 ){
+        if( winsockInitialized_ ){
+            WSACleanup();
+            winsockInitialized_ = false;
+        }
+    }
 }
 
 
-void IpEndpointName::AddressAndPortAsString( char *s ) const
+unsigned long GetHostByName( const char *name )
 {
-	if( port == ANY_PORT ){
-		if( address == ANY_ADDRESS ){
-			std::sprintf( s, "<any>:<any>" );
-		}else{
-			std::sprintf( s, "%d.%d.%d.%d:<any>",
-				(int)((address >> 24) & 0xFF),
-				(int)((address >> 16) & 0xFF),
-				(int)((address >> 8) & 0xFF),
-				(int)(address & 0xFF) );
-		}
-	}else{
-		if( address == ANY_ADDRESS ){
-			std::sprintf( s, "<any>:%d", port );
-		}else{
-			std::sprintf( s, "%d.%d.%d.%d:%d",
-				(int)((address >> 24) & 0xFF),
-				(int)((address >> 16) & 0xFF),
-				(int)((address >> 8) & 0xFF),
-				(int)(address & 0xFF),
-				(int)port );
-		}
-	}	
+    NetworkInitializer networkInitializer;
+
+    unsigned long result = 0;
+
+    struct hostent *h = gethostbyname( name );
+    if( h ){
+        struct in_addr a;
+        std::memcpy( &a, h->h_addr_list[0], h->h_length );
+        result = ntohl(a.s_addr);
+    }
+
+    return result;
 }

@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-#include "MaxTask.h"
+#include "RobotTask.h"
 #include <vector>
 
 namespace MaxLog

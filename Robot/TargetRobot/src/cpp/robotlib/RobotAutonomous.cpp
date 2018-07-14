@@ -1,5 +1,5 @@
-#include "maxutils\MaxAutonomous.h"
-#include "maxutils\MaxDataStream.h"
+#include "robotlib\RobotAutonomous.h"
+#include "robotlib\RobotDataStream.h"
 #include "iostream"
 
 MaxAutonomousManager MaxAutonomousManagerInstance;
@@ -26,6 +26,7 @@ void MaxAutonomousManager::ControllerUpdate(MaxControl * controls)
 
 void MaxAutonomousManager::EndAutonomous()
 {
+#ifndef WIN32
 	pthread_mutex_lock(&AutoMutex);
 	if (LastStateAutonomous)
 	{
@@ -34,10 +35,12 @@ void MaxAutonomousManager::EndAutonomous()
 	LastStateAutonomous = false;
 	AutoLocked = false;
 	pthread_mutex_unlock(&AutoMutex);
+#endif
 }
 
 void MaxAutonomousManager::Autonomous()
 {
+#ifndef WIN32
 	pthread_mutex_lock(&AutoMutex);
 	AutoLocked = true;
 	if (!LastStateAutonomous)
@@ -51,6 +54,7 @@ void MaxAutonomousManager::Autonomous()
 
 	LastStateAutonomous = true;
 	pthread_mutex_unlock(&AutoMutex);
+#endif
 }
 
 void MaxAutonomousManager::RegisterAutonomous(MaxAutonomousTask * AutonomousTask)
@@ -62,6 +66,7 @@ void MaxAutonomousManager::RegisterAutonomous(MaxAutonomousTask * AutonomousTask
 
 void MaxAutonomousManager::SelectAutonomous(std::string AutonomousName)
 {
+#ifndef WIN32
 	pthread_mutex_lock(&AutoMutex);
 	if (!AutoLocked)
 	{
@@ -76,6 +81,7 @@ void MaxAutonomousManager::SelectAutonomous(std::string AutonomousName)
 		}
 	}
 	pthread_mutex_unlock(&AutoMutex);
+#endif
 }
 
 std::vector<std::string> MaxAutonomousManager::GetAutonomousList()
@@ -92,5 +98,7 @@ std::vector<std::string> MaxAutonomousManager::GetAutonomousList()
 
 void MaxAutonomousManager::Init()
 {
+#ifndef WIN32
 	pthread_mutex_init(&AutoMutex, 0);
+#endif
 }

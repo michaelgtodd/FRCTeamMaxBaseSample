@@ -1,6 +1,6 @@
 #include "ControlTask.h"
-#include "maxutils/MaxDataStream.h"
-#include "maxutils/MaxControls.h"
+#include "robotlib/RobotDataStream.h"
+#include "robotlib/RobotControls.h"
 #include <iostream>
 #include <math.h>
 

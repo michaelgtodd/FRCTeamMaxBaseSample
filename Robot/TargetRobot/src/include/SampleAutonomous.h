@@ -1,5 +1,5 @@
 #pragma once
-#include "maxutils\MaxAutonomous.h"
+#include "robotlib/RobotAutonomous.h"
 #include "ControlTask.h"
 
 class SampleAutonomous : public MaxAutonomousTask

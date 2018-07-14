@@ -1,9 +1,9 @@
 #pragma once
 #include <string>
-#include "MaxControls.h"
+#include "RobotControls.h"
 #include <thread>
 #include <vector>
-#include "maxutils/MaxControls.h"
+#include "robotlib/RobotControls.h"
 
 class MaxTask 
 {

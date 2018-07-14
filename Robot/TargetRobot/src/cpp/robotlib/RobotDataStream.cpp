@@ -1,14 +1,17 @@
-#include "maxutils/MaxDataStream.h"
-#include "maxutils/MaxDefs.h"
+#include "robotlib/RobotDataStream.h"
+#include "robotlib/RobotDefs.h"
 #include "Robot.h"
 #include <iostream>
 #include <cerrno>
-#include "pthread.h"
 
-#include "osc/OscOutboundPacketStream.h"
-#include "osc/OscPacketListener.h"
-#include "osc/OscReceivedElements.h"
-#include "ip/UdpSocket.h"
+#ifndef WIN32
+#include "pthread.h"
+#endif
+
+#include "robotlib/osc/OscOutboundPacketStream.h"
+#include "robotlib/osc/OscPacketListener.h"
+#include "robotlib/osc/OscReceivedElements.h"
+#include "robotlib/ip/UdpSocket.h"
 
 #define OUTPUT_BUFFER_SIZE 1024
 
@@ -67,6 +70,7 @@ namespace MaxLog
 
 	void InitializeMaxLog()
 	{
+#ifndef WIN32
 		std::thread * oscReceiveThread =  new std::thread(&RunListener);
 
 		int priority = 97;
@@ -83,6 +87,7 @@ namespace MaxLog
 			std::cout << "Set priority for task: " << "OSCReceive priority: " << priority << std::endl;
 			MaxLog::LogInfo("Set priority for task: OSCReceive priority: " + std::to_string(priority));
 		}
+#endif
 	}
 
 	void transmit(osc::OutboundPacketStream p)

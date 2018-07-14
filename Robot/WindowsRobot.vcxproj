@@ -84,16 +84,18 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions);_WINSOCK_DEPRECATED_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\Users\Michael\Documents\FRCTeamMaxBase\Robot\WindowsRobot\include;C:\Users\Michael\Documents\FRCTeamMaxBase\Robot\TargetRobot\src\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>Ws2_32.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -148,7 +150,31 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="TargetRobot\src\include\ControlTask.h" />
+    <ClInclude Include="TargetRobot\src\include\Robot.h" />
+    <ClInclude Include="TargetRobot\src\include\robotlib\ip\IpEndpointName.h" />
+    <ClInclude Include="TargetRobot\src\include\robotlib\ip\NetworkingUtils.h" />
+    <ClInclude Include="TargetRobot\src\include\robotlib\ip\PacketListener.h" />
+    <ClInclude Include="TargetRobot\src\include\robotlib\ip\TimerListener.h" />
+    <ClInclude Include="TargetRobot\src\include\robotlib\ip\UdpSocket.h" />
+    <ClInclude Include="TargetRobot\src\include\robotlib\osc\MessageMappingOscPacketListener.h" />
+    <ClInclude Include="TargetRobot\src\include\robotlib\osc\OscException.h" />
+    <ClInclude Include="TargetRobot\src\include\robotlib\osc\OscHostEndianness.h" />
+    <ClInclude Include="TargetRobot\src\include\robotlib\osc\OscOutboundPacketStream.h" />
+    <ClInclude Include="TargetRobot\src\include\robotlib\osc\OscPacketListener.h" />
+    <ClInclude Include="TargetRobot\src\include\robotlib\osc\OscPrintReceivedElements.h" />
+    <ClInclude Include="TargetRobot\src\include\robotlib\osc\OscReceivedElements.h" />
+    <ClInclude Include="TargetRobot\src\include\robotlib\osc\OscTypes.h" />
+    <ClInclude Include="TargetRobot\src\include\robotlib\PowerReportingTask.h" />
+    <ClInclude Include="TargetRobot\src\include\robotlib\RobotAutonomous.h" />
+    <ClInclude Include="TargetRobot\src\include\robotlib\RobotControls.h" />
+    <ClInclude Include="TargetRobot\src\include\robotlib\RobotDataStream.h" />
+    <ClInclude Include="TargetRobot\src\include\robotlib\RobotDefs.h" />
+    <ClInclude Include="TargetRobot\src\include\robotlib\RobotTask.h" />
+    <ClInclude Include="TargetRobot\src\include\SampleAutonomous.h" />
+    <ClInclude Include="TargetRobot\src\include\SampleTask.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="WindowsRobot\include\FRCWindowsRobot.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -157,7 +183,35 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="TargetRobot\src\cpp\ControlTask.cpp" />
+    <ClCompile Include="TargetRobot\src\cpp\Robot.cpp" />
+    <ClCompile Include="TargetRobot\src\cpp\robotlib\ip\IpEndpointName.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="TargetRobot\src\cpp\robotlib\osc\OscOutboundPacketStream.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="TargetRobot\src\cpp\robotlib\osc\OscPrintReceivedElements.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="TargetRobot\src\cpp\robotlib\osc\OscReceivedElements.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="TargetRobot\src\cpp\robotlib\osc\OscTypes.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="TargetRobot\src\cpp\robotlib\RobotAutonomous.cpp" />
+    <ClCompile Include="TargetRobot\src\cpp\robotlib\RobotDataStream.cpp" />
+    <ClCompile Include="TargetRobot\src\cpp\robotlib\RobotReportingTask.cpp" />
+    <ClCompile Include="TargetRobot\src\cpp\robotlib\RobotTask.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="TargetRobot\src\cpp\SampleAutonomous.cpp" />
+    <ClCompile Include="TargetRobot\src\cpp\SampleTask.cpp" />
     <ClCompile Include="WindowsRobot.cpp" />
+    <ClCompile Include="WindowsRobot\cpp\FRCWindowsRobot.cpp" />
+    <ClCompile Include="WindowsRobot\cpp\ip\NetworkingUtils.cpp" />
+    <ClCompile Include="WindowsRobot\cpp\ip\UdpSocket.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

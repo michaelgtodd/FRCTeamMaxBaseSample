@@ -1,11 +1,14 @@
-#include "maxutils/MaxTask.h"
+#include "robotlib/RobotTask.h"
+#ifndef WIN32
 #include "WPILib.h"
 #include "pthread.h"
-#include "maxutils/MaxDataStream.h"
+#else
+#include <algorithm>
+#endif
+#include "robotlib/RobotDataStream.h"
 #include <math.h>
 #include <iostream>
 #include "Robot.h"
-#include "RobotState.h"
 
 MaxTaskStatisticsTask::MaxTaskStatisticsTask(std::vector<MaxTask*> TaskList)
 {
@@ -65,7 +68,7 @@ void MaxTaskSchedule::AddTask(MaxTask* task, std::string taskname, uint32_t peri
 void MaxTaskSchedule::LaunchTasks()
 {
 	int priority = 99;
-
+#ifndef WIN32
 	sched_param sch;
 	sch.sched_priority = priority;
 
@@ -78,7 +81,7 @@ void MaxTaskSchedule::LaunchTasks()
 		std::cout << "Set priority for task: " << "DS_Task" << " priority: " << priority << std::endl;
 		MaxLog::LogInfo("Set priority for task: DS_Task priority: " + std::to_string(priority));
 	}
-
+#endif
 	MaxLog::LogInfo("Starting tasks");
 	priority = 80;
 	for (std::vector<MaxTask*>::iterator i = TaskList.begin();
@@ -138,7 +141,7 @@ void MaxTask::Launch(int priority)
 {
 	MaxLog::LogInfo("Launching: " + taskname_);
 	running_thread = std::thread(&MaxTask::ThreadProcess, this);
-
+#ifndef WIN32
 	sched_param sch;
 	sch.sched_priority = priority;
 
@@ -151,13 +154,18 @@ void MaxTask::Launch(int priority)
 		std::cout << "Set priority for task: " << taskname_ << " priority: " << priority << std::endl;
 		MaxLog::LogInfo("Set priority for task: " + taskname_ + " priority: " + std::to_string(priority));
 	}
+#endif
 }
 
 void MaxTask::ThreadProcess()
 {
 	while (true)
 	{
+#ifndef WIN32
 		double loopStart = Timer::GetFPGATimestamp();
+#else
+		double loopStart = 0;
+#endif
 		
 		if (RobotState::IsOperatorControl() && RobotState::IsEnabled())
 		{
@@ -172,8 +180,11 @@ void MaxTask::ThreadProcess()
 			Disable();
 		}
 		Always();
-
+#ifndef WIN32
 		double loopEnd = Timer::GetFPGATimestamp();
+#else
+		double loopEnd = 0;
+#endif
 		double loopDuration = loopEnd - loopStart;
 		uint32_t loopExecutionTimeMS = (uint32_t)(loopDuration * 1000);
 		if (task_period_ > 1)
@@ -201,7 +212,11 @@ void MaxTask::ThreadProcess()
 
 		bool slept = false;
 		do {
+#ifndef WIN32
 			double currentTime = Timer::GetFPGATimestamp();
+#else
+			double currentTime = 0;
+#endif
 			uint32_t loopElapsedTimeMS = (uint32_t)((currentTime - loopStart) * 1000);
 			if (loopElapsedTimeMS < (1000 / task_period_))
 			{
