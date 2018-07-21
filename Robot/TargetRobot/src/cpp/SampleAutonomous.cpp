@@ -18,7 +18,7 @@ void SampleAutonomous::Init()
 	LastMessage = 0;
 }
 
-void SampleAutonomous::ControllerUpdate(MaxControl * controls)
+void SampleAutonomous::ControllerUpdate(RobotControl * controls)
 {
 	// can get controller data here
 }
@@ -37,9 +37,6 @@ void SampleAutonomous::Autonomous()
 		std::cout << "Running at " << std::to_string(LastMessage) << " seconds" << std::endl;
 		MaxLog::LogInfo("Running at " + std::to_string(LastMessage) + " seconds");
 	}
-
-	// Send data to the control task to send to other tasks
-	ControlTaskInstance.UpdateAutonomousData(control);
 }
 
 void SampleAutonomous::End()

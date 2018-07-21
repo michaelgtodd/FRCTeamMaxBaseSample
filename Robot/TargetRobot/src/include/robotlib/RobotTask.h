@@ -1,9 +1,8 @@
 #pragma once
 #include <string>
-#include "RobotControls.h"
 #include <thread>
 #include <vector>
-#include "robotlib/RobotControls.h"
+#include "RobotControl.h"
 
 class RobotTask 
 {
@@ -11,7 +10,7 @@ public:
 	void virtual Run() = 0;
 	void virtual Disable() = 0;
 	void virtual Always() = 0;
-	void virtual ControllerUpdate(MaxControl * controls) = 0;
+	void virtual ControllerUpdate(RobotControl * controls) = 0;
 	void virtual Autonomous() = 0;
 
 	std::string GetTaskName();
@@ -35,25 +34,25 @@ private:
 	double max_task_period = 0;
 };
 
-class MaxTaskSchedule
+class TaskSchedule
 {
 public:
 	void AddTask(RobotTask* task, std::string taskname, uint32_t period);
 	void LaunchTasks();
-	void DispatchControl(MaxControl * ControlUpdate);
+	void DispatchControl(RobotControl * ControlUpdate);
 private:
 	std::vector<RobotTask*> TaskList;
 };
 
-class MaxTaskStatisticsTask : public RobotTask
+class TaskStatisticsTask : public RobotTask
 {
 public:
-	MaxTaskStatisticsTask(std::vector<RobotTask*> TaskList);
+	TaskStatisticsTask(std::vector<RobotTask*> TaskList);
 	void Always();
 	void Run();
 	void Disable();
 	void Autonomous();
-	void ControllerUpdate(MaxControl * controls);
+	void ControllerUpdate(RobotControl * controls);
 private:
 	void Init();
 	std::vector<RobotTask*> TaskList_;

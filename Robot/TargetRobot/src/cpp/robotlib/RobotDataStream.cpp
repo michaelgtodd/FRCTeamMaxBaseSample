@@ -20,7 +20,7 @@ namespace MaxLog
 
 	static bool Initialized = false;
 
-	class MaxPacketListener : public osc::OscPacketListener {
+	class PacketListener : public osc::OscPacketListener {
 	protected:
 
 		virtual void ProcessMessage(const osc::ReceivedMessage& m,
@@ -31,7 +31,7 @@ namespace MaxLog
 			try {
 				ControlTaskInstance.ProcessOscData(m);
 			}
-			catch (osc::Exception& e) {
+			catch (...) {
 				LogError("Failed to parse OSC message");
 			}
 		}
@@ -42,7 +42,7 @@ namespace MaxLog
 
 	void RunListener()
 	{
-		MaxPacketListener listener;
+		PacketListener listener;
 		UdpListeningReceiveSocket s(
 			IpEndpointName(IpEndpointName::ANY_ADDRESS, BROADCASTPORT),
 			&listener);

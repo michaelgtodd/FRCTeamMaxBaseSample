@@ -12,12 +12,12 @@
 #include <iostream>
 #include "Robot.h"
 
-MaxTaskStatisticsTask::MaxTaskStatisticsTask(std::vector<RobotTask*> TaskList)
+TaskStatisticsTask::TaskStatisticsTask(std::vector<RobotTask*> TaskList)
 {
 	TaskList_ = TaskList;
 }
 
-void MaxTaskStatisticsTask::Always()
+void TaskStatisticsTask::Always()
 {
 	int j = 1;
 	for (std::vector<RobotTask*>::iterator i = TaskList_.begin();
@@ -36,38 +36,38 @@ void MaxTaskStatisticsTask::Always()
 	//MaxLog::TransmitInt(baselabel + "/Duration", GetAverageTaskDuration());
 }
 
-void MaxTaskStatisticsTask::Run()
+void TaskStatisticsTask::Run()
 {
 
 }
 
-void MaxTaskStatisticsTask::Disable()
+void TaskStatisticsTask::Disable()
 {
 
 }
 
-void MaxTaskStatisticsTask::Autonomous()
+void TaskStatisticsTask::Autonomous()
 {
 
 }
 
-void MaxTaskStatisticsTask::ControllerUpdate(MaxControl * controls)
+void TaskStatisticsTask::ControllerUpdate(RobotControl * controls)
 {
 
 }
 
-void MaxTaskStatisticsTask::Init()
+void TaskStatisticsTask::Init()
 {
 
 }
 
-void MaxTaskSchedule::AddTask(RobotTask* task, std::string taskname, uint32_t period)
+void TaskSchedule::AddTask(RobotTask* task, std::string taskname, uint32_t period)
 {
 	TaskList.push_back(task);
 	task->ExecInit(taskname, period);
 }
 
-void MaxTaskSchedule::LaunchTasks()
+void TaskSchedule::LaunchTasks()
 {
 	int priority = 99;
 #ifndef WIN32
@@ -94,12 +94,12 @@ void MaxTaskSchedule::LaunchTasks()
 		priority--;
 	}
 
-	RobotTask * stats_task = new MaxTaskStatisticsTask(TaskList);
+	RobotTask * stats_task = new TaskStatisticsTask(TaskList);
 	stats_task->ExecInit("StatsTask", 1);
 	stats_task->Launch(98);
 }
 
-void MaxTaskSchedule::DispatchControl(MaxControl * ControlUpdate)
+void TaskSchedule::DispatchControl(RobotControl * ControlUpdate)
 {
 	for (std::vector<RobotTask*>::iterator i = TaskList.begin();
 		i != TaskList.end();
@@ -236,4 +236,4 @@ void RobotTask::ThreadProcess()
 	}
 }
 
-MaxTaskSchedule taskschedule;
+TaskSchedule taskschedule;

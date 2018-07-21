@@ -38,7 +38,7 @@ void PowerReportingTask::Autonomous()
 
 }
 
-void PowerReportingTask::ControllerUpdate(MaxControl * controls)
+void PowerReportingTask::ControllerUpdate(RobotControl * controls)
 {
 
 }

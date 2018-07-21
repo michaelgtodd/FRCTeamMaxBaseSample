@@ -99,9 +99,6 @@
     <ClInclude Include="TargetRobot\src\include\robotlib\RobotAutonomous.h">
       <Filter>Header Files\TargetRobot\robotlib</Filter>
     </ClInclude>
-    <ClInclude Include="TargetRobot\src\include\robotlib\RobotControls.h">
-      <Filter>Header Files\TargetRobot\robotlib</Filter>
-    </ClInclude>
     <ClInclude Include="TargetRobot\src\include\robotlib\RobotDataStream.h">
       <Filter>Header Files\TargetRobot\robotlib</Filter>
     </ClInclude>
@@ -125,6 +122,9 @@
     </ClInclude>
     <ClInclude Include="WindowsRobot\include\FRCWindowsRobot.h">
       <Filter>Header Files\WindowsRobot</Filter>
+    </ClInclude>
+    <ClInclude Include="TargetRobot\src\include\RobotControl.h">
+      <Filter>Header Files\TargetRobot\robotlib\osc</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

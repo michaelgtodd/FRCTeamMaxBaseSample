@@ -2,29 +2,29 @@
 #include "robotlib\RobotDataStream.h"
 #include "iostream"
 
-MaxAutonomousManager MaxAutonomousManagerInstance;
+AutonomousManager AutonomousManagerInstance;
 
-void MaxAutonomousManager::Run()
+void AutonomousManager::Run()
 {
 	EndAutonomous();
 }
 
-void MaxAutonomousManager::Always()
+void AutonomousManager::Always()
 {
 
 }
 
-void MaxAutonomousManager::Disable()
+void AutonomousManager::Disable()
 {
 	EndAutonomous();
 }
 
-void MaxAutonomousManager::ControllerUpdate(MaxControl * controls)
+void AutonomousManager::ControllerUpdate(RobotControl * controls)
 {
 	SelectedAutonomous->ControllerUpdate(controls);
 }
 
-void MaxAutonomousManager::EndAutonomous()
+void AutonomousManager::EndAutonomous()
 {
 #ifndef WIN32
 	pthread_mutex_lock(&AutoMutex);
@@ -38,7 +38,7 @@ void MaxAutonomousManager::EndAutonomous()
 #endif
 }
 
-void MaxAutonomousManager::Autonomous()
+void AutonomousManager::Autonomous()
 {
 #ifndef WIN32
 	pthread_mutex_lock(&AutoMutex);
@@ -57,20 +57,20 @@ void MaxAutonomousManager::Autonomous()
 #endif
 }
 
-void MaxAutonomousManager::RegisterAutonomous(MaxAutonomousTask * AutonomousTask)
+void AutonomousManager::RegisterAutonomous(AutonomousTask * AutonomousTask)
 {
 	AutoList.push_back(AutonomousTask);
 	if (AutoList.size() == 1)
 		SelectedAutonomous = AutonomousTask;
 }
 
-void MaxAutonomousManager::SelectAutonomous(std::string AutonomousName)
+void AutonomousManager::SelectAutonomous(std::string AutonomousName)
 {
 #ifndef WIN32
 	pthread_mutex_lock(&AutoMutex);
 	if (!AutoLocked)
 	{
-		for (std::vector<MaxAutonomousTask *>::iterator i = AutoList.begin();
+		for (std::vector<AutonomousTask *>::iterator i = AutoList.begin();
 			i != AutoList.end();
 			i++)
 		{
@@ -84,10 +84,10 @@ void MaxAutonomousManager::SelectAutonomous(std::string AutonomousName)
 #endif
 }
 
-std::vector<std::string> MaxAutonomousManager::GetAutonomousList()
+std::vector<std::string> AutonomousManager::GetAutonomousList()
 {
 	std::vector<std::string> result;
-	for (std::vector<MaxAutonomousTask *>::iterator i = AutoList.begin();
+	for (std::vector<AutonomousTask *>::iterator i = AutoList.begin();
 		i != AutoList.end();
 		i++)
 	{
@@ -96,7 +96,7 @@ std::vector<std::string> MaxAutonomousManager::GetAutonomousList()
 	return result;
 }
 
-void MaxAutonomousManager::Init()
+void AutonomousManager::Init()
 {
 #ifndef WIN32
 	pthread_mutex_init(&AutoMutex, 0);

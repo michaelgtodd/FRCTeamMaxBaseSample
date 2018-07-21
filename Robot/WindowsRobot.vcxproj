@@ -152,6 +152,7 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="TargetRobot\src\include\ControlTask.h" />
     <ClInclude Include="TargetRobot\src\include\Robot.h" />
+    <ClInclude Include="TargetRobot\src\include\RobotControl.h" />
     <ClInclude Include="TargetRobot\src\include\robotlib\ip\IpEndpointName.h" />
     <ClInclude Include="TargetRobot\src\include\robotlib\ip\NetworkingUtils.h" />
     <ClInclude Include="TargetRobot\src\include\robotlib\ip\PacketListener.h" />
@@ -167,7 +168,6 @@
     <ClInclude Include="TargetRobot\src\include\robotlib\osc\OscTypes.h" />
     <ClInclude Include="TargetRobot\src\include\robotlib\PowerReportingTask.h" />
     <ClInclude Include="TargetRobot\src\include\robotlib\RobotAutonomous.h" />
-    <ClInclude Include="TargetRobot\src\include\robotlib\RobotControls.h" />
     <ClInclude Include="TargetRobot\src\include\robotlib\RobotDataStream.h" />
     <ClInclude Include="TargetRobot\src\include\robotlib\RobotDefs.h" />
     <ClInclude Include="TargetRobot\src\include\robotlib\RobotTask.h" />

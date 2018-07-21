@@ -1,17 +1,12 @@
 #include "ControlTask.h"
 #include "robotlib/RobotDataStream.h"
-#include "robotlib/RobotControls.h"
+#include "RobotControl.h"
 #include <iostream>
 #include <math.h>
 
 using namespace std;
 
 ControlTask ControlTaskInstance;
-
-RobotControl::RobotControl()
-{
-
-}
 
 void ControlTask::Run()
 {
@@ -28,17 +23,12 @@ void ControlTask::Disable()
 
 }
 
-void ControlTask::ControllerUpdate(MaxControl * controls)
+void ControlTask::ControllerUpdate(RobotControl * controls)
 {
 
 }
 
 void ControlTask::Autonomous()
-{
-
-}
-
-void ControlTask::UpdateAutonomousData(AutonomousControl AutoControlInput)
 {
 
 }

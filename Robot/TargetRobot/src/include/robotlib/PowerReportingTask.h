@@ -12,7 +12,7 @@ public:
 	void Run();
 	void Disable();
 	void Autonomous();
-	void ControllerUpdate(MaxControl * controls);
+	void ControllerUpdate(RobotControl * controls);
 private:
 	void Init();
 #ifndef WIN32

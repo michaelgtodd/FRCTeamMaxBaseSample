@@ -2,16 +2,15 @@
 #include "robotlib/RobotAutonomous.h"
 #include "ControlTask.h"
 
-class SampleAutonomous : public MaxAutonomousTask
+class SampleAutonomous : public AutonomousTask
 {
 public:
 	void Init();
-	void ControllerUpdate(MaxControl * controls);
+	void ControllerUpdate(RobotControl * controls);
 	void Autonomous();
 	void End();
 	std::string GetName();
 private:
-	AutonomousControl control;
 	double StartTime = 0;
 	double RunTime = 0;
 	int LastMessage = 0;
