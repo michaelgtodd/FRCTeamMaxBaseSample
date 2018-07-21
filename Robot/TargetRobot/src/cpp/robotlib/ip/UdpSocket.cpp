@@ -57,8 +57,8 @@
 #include <stdexcept>
 #include <vector>
 
-#include "ip/PacketListener.h"
-#include "ip/TimerListener.h"
+#include "robotlib/ip/PacketListener.h"
+#include "robotlib/ip/TimerListener.h"
 
 
 #if defined(__APPLE__) && !defined(_SOCKLEN_T)
