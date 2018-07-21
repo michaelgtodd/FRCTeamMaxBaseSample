@@ -3,9 +3,9 @@
 #include "RobotTask.h"
 #include <vector>
 
-namespace MaxLog
+namespace RobotLog
 {
-	void InitializeMaxLog();
+	void InitializeRobotLog();
 	void LogPass(std::string error_message);
 	void LogInfo(std::string error_message);
 	void LogError(std::string error_message);

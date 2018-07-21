@@ -25,15 +25,15 @@ void TaskStatisticsTask::Always()
 		i++)
 	{
 		std::string baselabel = "/TaskStats/" + std::to_string(j);
-		//MaxLog::TransmitString(baselabel + "/Name", (*i)->GetTaskName());
-		//MaxLog::TransmitInt(baselabel + "/Period", (*i)->GetAverageTaskPeriod());
-		//MaxLog::TransmitInt(baselabel + "/Duration", (*i)->GetAverageTaskDuration());
+		//RobotLog::TransmitString(baselabel + "/Name", (*i)->GetTaskName());
+		//RobotLog::TransmitInt(baselabel + "/Period", (*i)->GetAverageTaskPeriod());
+		//RobotLog::TransmitInt(baselabel + "/Duration", (*i)->GetAverageTaskDuration());
 		j++;
 	}
 	std::string baselabel = "/TaskStats/" + std::to_string(j);
-	//MaxLog::TransmitString(baselabel + "/Name", "TaskStatsTask");
-	//MaxLog::TransmitInt(baselabel + "/Period", GetAverageTaskPeriod());
-	//MaxLog::TransmitInt(baselabel + "/Duration", GetAverageTaskDuration());
+	//RobotLog::TransmitString(baselabel + "/Name", "TaskStatsTask");
+	//RobotLog::TransmitInt(baselabel + "/Period", GetAverageTaskPeriod());
+	//RobotLog::TransmitInt(baselabel + "/Duration", GetAverageTaskDuration());
 }
 
 void TaskStatisticsTask::Run()
@@ -77,14 +77,14 @@ void TaskSchedule::LaunchTasks()
 	if (pthread_setschedparam(pthread_self(), SCHED_FIFO, &sch) != 0)
 	{
 		std::cout << "Failed to set task: " << "DS_Task" << " priority: " << priority << " Error: " << " " << strerror(errno) << std::endl;
-		MaxLog::LogError("Failed to set task: DS_Task priority: " + std::to_string(priority) + " Error: " + strerror(errno));
+		RobotLog::LogError("Failed to set task: DS_Task priority: " + std::to_string(priority) + " Error: " + strerror(errno));
 	}
 	else {
 		std::cout << "Set priority for task: " << "DS_Task" << " priority: " << priority << std::endl;
-		MaxLog::LogInfo("Set priority for task: DS_Task priority: " + std::to_string(priority));
+		RobotLog::LogInfo("Set priority for task: DS_Task priority: " + std::to_string(priority));
 	}
 #endif
-	MaxLog::LogInfo("Starting tasks");
+	RobotLog::LogInfo("Starting tasks");
 	priority = 80;
 	for (std::vector<RobotTask*>::iterator i = TaskList.begin();
 		i != TaskList.end();
@@ -141,7 +141,7 @@ void RobotTask::ExecInit(std::string taskname, uint32_t task_period)
 
 void RobotTask::Launch(int priority)
 {
-	MaxLog::LogInfo("Launching: " + taskname_);
+	RobotLog::LogInfo("Launching: " + taskname_);
 	running_thread = std::thread(&RobotTask::ThreadProcess, this);
 #ifndef WIN32
 	sched_param sch;
@@ -150,11 +150,11 @@ void RobotTask::Launch(int priority)
 	if (pthread_setschedparam(running_thread.native_handle(), SCHED_FIFO, &sch) != 0)
 	{
 		std::cout << "Failed to set task: " << taskname_ << " priority: " << priority << " Error: " << " " << strerror(errno) << std::endl;
-		MaxLog::LogError("Failed to set task: " + taskname_ + " priority: " + std::to_string(priority) + " Error: " + strerror(errno));
+		RobotLog::LogError("Failed to set task: " + taskname_ + " priority: " + std::to_string(priority) + " Error: " + strerror(errno));
 	}
 	else {
 		std::cout << "Set priority for task: " << taskname_ << " priority: " << priority << std::endl;
-		MaxLog::LogInfo("Set priority for task: " + taskname_ + " priority: " + std::to_string(priority));
+		RobotLog::LogInfo("Set priority for task: " + taskname_ + " priority: " + std::to_string(priority));
 	}
 #endif
 }
@@ -166,7 +166,7 @@ void RobotTask::ThreadProcess()
 #ifndef WIN32
 		double loopStart = Timer::GetFPGATimestamp();
 #else
-		double loopStart = timeGetTime();
+		double loopStart = timeGetTime() / 1000.0;
 #endif
 		
 		if (RobotState::IsOperatorControl() && RobotState::IsEnabled())
@@ -185,10 +185,11 @@ void RobotTask::ThreadProcess()
 #ifndef WIN32
 		double loopEnd = Timer::GetFPGATimestamp();
 #else
-		double loopEnd = timeGetTime();
+		double loopEnd = timeGetTime() / 1000.0;
 #endif
 		double loopDuration = loopEnd - loopStart;
-		uint32_t loopExecutionTimeMS = (uint32_t)(loopDuration * 1000);
+
+		uint32_t loopExecutionTimeMS = (uint32_t) loopDuration;
 		if (task_period_ > 1)
 		{
 			average_task_duration =
@@ -198,7 +199,7 @@ void RobotTask::ThreadProcess()
 		{
 			average_task_duration = loopExecutionTimeMS;
 		}
-		double current_loop_difference = (loopEnd - last_loop_end) * 1000;
+		double current_loop_difference = (loopEnd - last_loop_end) * 1000.0;
 		last_loop_end = loopEnd;
 
 		if (task_period_ > 1)
@@ -210,17 +211,17 @@ void RobotTask::ThreadProcess()
 		{
 			average_task_differential = current_loop_difference;
 		}
-		average_task_period = (1000 / average_task_differential);
+		average_task_period = (1000.0 / average_task_differential);
 
 		bool slept = false;
 		do {
 #ifndef WIN32
 			double currentTime = Timer::GetFPGATimestamp();
 #else
-			double currentTime = timeGetTime();
+			double currentTime = timeGetTime() / 1000.0;
 #endif
-			uint32_t loopElapsedTimeMS = (uint32_t)((currentTime - loopStart) * 1000);
-			if (loopElapsedTimeMS < (1000 / task_period_))
+			uint32_t loopElapsedTimeMS = (uint32_t)((currentTime - loopStart) * 1000.0);
+			if (loopElapsedTimeMS < (1000.0 / task_period_))
 			{
 				slept = true;
 				uint32_t minsleep = std::min(((uint32_t)1000 / task_period_) - loopElapsedTimeMS, (uint32_t) 5);

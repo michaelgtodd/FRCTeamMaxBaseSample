@@ -11,7 +11,7 @@ void Robot::RobotInit()
 {
 	std::cout << "Initializing Robot..." << std::endl;
 
-	MaxLog::InitializeMaxLog();
+	RobotLog::InitializeRobotLog();
 
 	AutonomousManagerInstance.RegisterAutonomous(new SampleAutonomous);
 

@@ -15,7 +15,7 @@
 
 #define OUTPUT_BUFFER_SIZE 1024
 
-namespace MaxLog
+namespace RobotLog
 {
 
 	static bool Initialized = false;
@@ -68,7 +68,7 @@ namespace MaxLog
 		}
 	}
 
-	void InitializeMaxLog()
+	void InitializeRobotLog()
 	{
 #ifndef WIN32
 		std::thread * oscReceiveThread =  new std::thread(&RunListener);
@@ -81,11 +81,11 @@ namespace MaxLog
 		if (pthread_setschedparam(oscReceiveThread->native_handle(), SCHED_FIFO, &sch) != 0)
 		{
 			std::cout << "Failed to set task: " << "OSCReceive priority: " << priority << " Error: " << " " << strerror(errno) << std::endl;
-			MaxLog::LogError("Failed to set task: OSCReceive priority: " + std::to_string(priority) + " Error: " + strerror(errno));
+			RobotLog::LogError("Failed to set task: OSCReceive priority: " + std::to_string(priority) + " Error: " + strerror(errno));
 		}
 		else {
 			std::cout << "Set priority for task: " << "OSCReceive priority: " << priority << std::endl;
-			MaxLog::LogInfo("Set priority for task: OSCReceive priority: " + std::to_string(priority));
+			RobotLog::LogInfo("Set priority for task: OSCReceive priority: " + std::to_string(priority));
 		}
 #endif
 	}

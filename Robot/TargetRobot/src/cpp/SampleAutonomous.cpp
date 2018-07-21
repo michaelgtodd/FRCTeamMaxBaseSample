@@ -6,7 +6,7 @@
 
 void SampleAutonomous::Init()
 {
-	MaxLog::LogInfo("Starting Auto");
+	RobotLog::LogInfo("Starting Auto");
 
 	std::cout << "Auto Init" << std::endl;
 
@@ -35,7 +35,7 @@ void SampleAutonomous::Autonomous()
 	{
 		LastMessage = (int) floor(RunTime);
 		std::cout << "Running at " << std::to_string(LastMessage) << " seconds" << std::endl;
-		MaxLog::LogInfo("Running at " + std::to_string(LastMessage) + " seconds");
+		RobotLog::LogInfo("Running at " + std::to_string(LastMessage) + " seconds");
 	}
 }
 
@@ -48,7 +48,7 @@ void SampleAutonomous::End()
 #endif
 	RunTime = CurrentTime - StartTime;
 	LastMessage = (int) floor(RunTime);
-	MaxLog::LogInfo("Ending Auto after " + std::to_string(LastMessage) + " seconds");
+	RobotLog::LogInfo("Ending Auto after " + std::to_string(LastMessage) + " seconds");
 }
 
 std::string SampleAutonomous::GetName()

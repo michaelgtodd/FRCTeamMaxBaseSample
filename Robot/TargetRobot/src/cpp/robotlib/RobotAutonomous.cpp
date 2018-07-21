@@ -45,7 +45,7 @@ void AutonomousManager::Autonomous()
 	AutoLocked = true;
 	if (!LastStateAutonomous)
 	{
-		MaxLog::LogInfo("Starting Autonomous: " + SelectedAutonomous->GetName());
+		RobotLog::LogInfo("Starting Autonomous: " + SelectedAutonomous->GetName());
 		std::cout << "Starting auto..." << std::endl;
 		SelectedAutonomous->Init();
 	}
