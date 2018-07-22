@@ -17,6 +17,9 @@ bool ParallelAction::isFinished()
 
 void ParallelAction::update()
 {
+	if (ActionList.empty())
+		return;
+
 	std::vector<RobotAction *>::iterator i = ActionList.begin();
 	while (i != ActionList.end())
 	{
@@ -47,6 +50,9 @@ void ParallelAction::done()
 
 void ParallelAction::start()
 {
+	if (ActionList.empty())
+		return;
+
 	for (std::vector<RobotAction *>::iterator i = ActionList.begin();
 		i != ActionList.end();
 		i++)
@@ -110,3 +116,118 @@ void SerialAction::start()
 	std::vector<RobotAction *>::iterator i = ActionList.begin();
 	(*i)->start();
 }
+
+ActionRunner::ActionRunner()
+{
+#ifdef WIN32
+	mutex = CreateMutex(NULL, FALSE, NULL);
+#else
+	mutex = PTHREAD_MUTEX_INITIALIZER;
+#endif
+}
+
+void ActionRunner::Lock()
+{
+#ifdef WIN32
+	WaitForSingleObject(mutex, INFINITE);
+#else
+	pthread_mutex_lock(&mutex);
+#endif
+}
+
+void ActionRunner::Unlock()
+{
+#ifdef WIN32
+	ReleaseMutex(mutex);
+#else
+	pthread_mutex_unlock(&mutex);
+#endif
+}
+
+ActionRunner::~ActionRunner()
+{
+#ifdef WIN32
+	CloseHandle(mutex);
+#endif
+}
+
+SerialActionRunner::~SerialActionRunner()
+{
+	ActionRunner::Lock();
+	baseAction.done();
+	ActionRunner::~ActionRunner();
+}
+
+void SerialActionRunner::Run()
+{
+	ActionRunner::Lock();
+	baseAction.update();
+	ActionRunner::Unlock();
+}
+
+void SerialActionRunner::queueAction(RobotAction * Action)
+{
+	ActionRunner::Lock();
+	if (baseAction.isFinished())
+	{
+		Action->start();
+	}
+	baseAction.AddAction(Action);
+	ActionRunner::Unlock();
+}
+
+void SerialActionRunner::queueActions(std::vector<RobotAction *> Actions)
+{
+	ActionRunner::Lock();
+	
+	if (baseAction.isFinished())
+	{
+		Actions[0]->start();
+	}
+	baseAction.AddActions(Actions);
+
+	ActionRunner::Unlock();
+}
+
+void ParallelActionRunner::queueAction(RobotAction * Action)
+{
+	ActionRunner::Lock();
+
+	Action->start();
+	baseAction.AddAction(Action);
+
+	ActionRunner::Unlock();
+}
+
+void ParallelActionRunner::queueActions(std::vector<RobotAction *> Actions)
+{
+	ActionRunner::Lock();
+
+	for (std::vector<RobotAction *>::iterator i = Actions.begin();
+		i != Actions.end();
+		i++)
+	{
+		(*i)->start();
+	}
+	baseAction.AddActions(Actions);
+
+	ActionRunner::Unlock();
+}
+
+void ParallelActionRunner::Run()
+{
+	ActionRunner::Lock();
+
+	baseAction.update();
+
+	ActionRunner::Unlock();
+}
+
+ParallelActionRunner::~ParallelActionRunner()
+{
+	ActionRunner::Lock();
+
+	baseAction.done();
+	ActionRunner::~ActionRunner();
+}
+

@@ -5,3 +5,4 @@ Robot/TargetRobot/build/
 Robot/TargetRobot/.gradle/
 Robot/TargetRobot/Debug/
 Robot/TargetRobot/packages
+*.user

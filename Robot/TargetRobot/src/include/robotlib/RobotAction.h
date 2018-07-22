@@ -1,5 +1,10 @@
 #pragma once
 #include <vector>
+#ifndef WIN32
+#include "pthread.h"
+#else
+#include <Windows.h>
+#endif
 
 class RobotAction
 {
@@ -21,7 +26,7 @@ private:
 	uint32_t expired_time;
 };
 
-class ParallelAction : RobotAction
+class ParallelAction : public RobotAction
 {
 public:
 	void AddAction(RobotAction * Action);
@@ -36,10 +41,9 @@ private:
 	std::vector<RobotAction *> ActionList;
 };
 
-class SerialAction : RobotAction
+class SerialAction : public RobotAction
 {
-	std::vector<RobotAction *> ActionList;
-
+public:
 	void AddAction(RobotAction * Action);
 	void AddActions(std::vector<RobotAction *> Actions);
 
@@ -47,4 +51,47 @@ class SerialAction : RobotAction
 	void update();
 	void done();
 	void start();
+private:
+	std::vector<RobotAction *> ActionList;
+};
+
+class ActionRunner
+{
+public:
+	ActionRunner();
+	virtual ~ActionRunner();
+	void virtual Run() = 0;
+	void virtual queueAction(RobotAction * Action) = 0;
+	void virtual queueActions(std::vector<RobotAction *> Actions) = 0;
+protected:
+	void Lock();
+	void Unlock();
+private:
+#ifdef WIN32
+	HANDLE mutex;
+#else
+	pthread_mutex_t mutex;
+#endif
+};
+
+class SerialActionRunner : public ActionRunner
+{
+public:
+	void queueAction(RobotAction * Action);
+	void queueActions(std::vector<RobotAction *> Actions);
+	void Run();
+	~SerialActionRunner();
+private:
+	SerialAction baseAction;
+};
+
+class ParallelActionRunner : ActionRunner
+{
+public:
+	void queueAction(RobotAction * Action);
+	void queueActions(std::vector<RobotAction *> Actions);
+	void Run();
+	~ParallelActionRunner();
+private:
+	ParallelAction baseAction;
 };
