@@ -17,6 +17,7 @@ public:
 	void virtual update() = 0;
 	void virtual done() = 0;
 	void virtual start() = 0;
+	void baseStart();
 
 	std::vector<std::string> virtual getName() = 0;
 
@@ -24,11 +25,8 @@ public:
 	bool isTimeoutExpired();
 
 private:
-#ifdef WIN32
-	DWORD expired_time = 0;
-#else
-	double expired_time = 0.0;
-#endif
+	uint32_t timeoutTime = 0;
+	uint32_t expiredTime = 0;
 };
 
 class ParallelAction : public RobotAction

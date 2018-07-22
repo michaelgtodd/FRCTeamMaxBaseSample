@@ -8,20 +8,31 @@ uint32_t RobotAction::getCount()
 
 void RobotAction::setTimeout(uint32_t milliseconds)
 {
-#ifdef WIN32
-	expired_time = timeGetTime() + milliseconds;
-#else
-	expired_time = (Timer::GetFPGATimeStamp() * 1000) + milliseconds
-#endif
+	timeoutTime = milliseconds;
 }
 
 bool RobotAction::isTimeoutExpired()
 {
+	if (expiredTime != 0)
+	{
 #ifdef WIN32
-	return expired_time < timeGetTime();
+		return expiredTime < timeGetTime();
 #else
-	return expired_time < (Timer::GetFPGATimeStamp() * 1000);
+		return expiredTime < (uint32_t)(Timer::GetFPGATimeStamp() * 1000.0);
 #endif
+	}
+
+	return false;
+}
+
+void RobotAction::baseStart()
+{
+#ifdef WIN32
+	expiredTime = timeGetTime() + timeoutTime;
+#else
+	expiredTime = (Timer::GetFPGATimeStamp() * 1000) + timeoutTime;
+#endif
+	this->start();	
 }
 
 void ParallelAction::AddAction(RobotAction * Action)
@@ -53,7 +64,7 @@ void ParallelAction::update()
 	while (i != ActionList.end())
 	{
 		(*i)->update();
-		if ((*i)->isFinished())
+		if ((*i)->isFinished() || (*i)->isTimeoutExpired())
 		{
 			(*i)->done();
 			delete (*i);
@@ -86,7 +97,7 @@ void ParallelAction::start()
 		i != ActionList.end();
 		i++)
 	{
-		(*i)->start();
+		(*i)->baseStart();
 	}
 }
 
@@ -130,7 +141,7 @@ void SerialAction::update()
 		return;
 
 	std::vector<RobotAction *>::iterator i = ActionList.begin();
-	if ((*i)->isFinished())
+	if ((*i)->isFinished() || (*i)->isTimeoutExpired())
 	{
 		do 
 		{
@@ -141,10 +152,10 @@ void SerialAction::update()
 			if (ActionList.empty())
 				return;
 
-			(*i)->start();
+			(*i)->baseStart();
 
 			(*i)->update();
-		} while ((*i)->isFinished());
+		} while ((*i)->isFinished() || (*i)->isTimeoutExpired());
 	}
 	else {
 		(*i)->update();
@@ -168,7 +179,7 @@ void SerialAction::start()
 		return;
 
 	std::vector<RobotAction *>::iterator i = ActionList.begin();
-	(*i)->start();
+	(*i)->baseStart();
 }
 
 std::vector<std::string> SerialAction::getName()
@@ -246,7 +257,7 @@ void SerialActionRunner::queueAction(RobotAction * Action)
 	{
 		if (baseAction.isFinished())
 		{
-			Action->start();
+			Action->baseStart();
 		}
 		baseAction.AddAction(Action);
 
@@ -265,7 +276,7 @@ void SerialActionRunner::queueActions(std::vector<RobotAction *> Actions)
 	{
 		if (baseAction.isFinished())
 		{
-			Actions[0]->start();
+			Actions[0]->baseStart();
 		}
 		baseAction.AddActions(Actions);
 	}
@@ -282,7 +293,7 @@ void ParallelActionRunner::queueAction(RobotAction * Action)
 	ActionRunner::Lock();
 	if (baseAction.getCount() < ActionRunner::actionLimit_)
 	{
-		Action->start();
+		Action->baseStart();
 		baseAction.AddAction(Action);
 	}
 	else
@@ -301,7 +312,7 @@ void ParallelActionRunner::queueActions(std::vector<RobotAction *> Actions)
 			i != Actions.end();
 			i++)
 		{
-			(*i)->start();
+			(*i)->baseStart();
 		}
 		baseAction.AddActions(Actions);
 	}
