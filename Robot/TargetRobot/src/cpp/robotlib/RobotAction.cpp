@@ -84,17 +84,23 @@ void SerialAction::update()
 	std::vector<RobotAction *>::iterator i = ActionList.begin();
 	if ((*i)->isFinished())
 	{
-		(*i)->done();
-		delete (*i);
-		i = ActionList.erase(i);
+		do 
+		{
+			(*i)->done();
+			delete (*i);
+			i = ActionList.erase(i);
 
-		if (ActionList.empty())
-			return;
+			if (ActionList.empty())
+				return;
 
-		(*i)->start();
+			(*i)->start();
+
+			(*i)->update();
+		} while ((*i)->isFinished());
 	}
-
-	(*i)->update();
+	else {
+		(*i)->update();
+	}
 }
 
 void SerialAction::done()
