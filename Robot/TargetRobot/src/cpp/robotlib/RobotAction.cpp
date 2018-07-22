@@ -32,12 +32,20 @@ bool RobotAction::isTimeoutExpired()
 
 void RobotAction::baseStart()
 {
+	if (timeoutTime != 0)
+	{
 #ifdef WIN32
-	expiredTime = timeGetTime() + timeoutTime;
+		expiredTime = timeGetTime() + timeoutTime;
 #else
-	expiredTime = (Timer::GetFPGATimeStamp() * 1000) + timeoutTime;
+		expiredTime = (Timer::GetFPGATimeStamp() * 1000) + timeoutTime;
 #endif
+	}
 	this->start();	
+}
+
+ParallelAction::ParallelAction(std::vector<RobotAction *> Actions)
+{
+	this->AddActions(Actions);
 }
 
 void ParallelAction::AddAction(RobotAction * Action)
@@ -118,6 +126,11 @@ std::vector<std::string> ParallelAction::getName()
 		namelist.insert(namelist.end(), childNames.begin(), childNames.end());
 	}
 	return namelist;
+}
+
+SerialAction::SerialAction(std::vector<RobotAction *> Actions)
+{
+	this->AddActions(Actions);
 }
 
 void SerialAction::AddAction(RobotAction * Action)

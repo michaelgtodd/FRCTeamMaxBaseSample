@@ -173,6 +173,8 @@
     <ClInclude Include="TargetRobot\src\include\robotlib\RobotDataStream.h" />
     <ClInclude Include="TargetRobot\src\include\robotlib\RobotDefs.h" />
     <ClInclude Include="TargetRobot\src\include\robotlib\RobotTask.h" />
+    <ClInclude Include="TargetRobot\src\include\SampleActions\PrintAction.h" />
+    <ClInclude Include="TargetRobot\src\include\SampleActions\TimeoutPrintAction.h" />
     <ClInclude Include="TargetRobot\src\include\SampleAutonomous.h" />
     <ClInclude Include="TargetRobot\src\include\SampleTask.h" />
     <ClInclude Include="targetver.h" />
@@ -209,6 +211,8 @@
     <ClCompile Include="TargetRobot\src\cpp\robotlib\RobotTask.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="TargetRobot\src\cpp\SampleActions\PrintAction.cpp" />
+    <ClCompile Include="TargetRobot\src\cpp\SampleActions\TimeoutPrintAction.cpp" />
     <ClCompile Include="TargetRobot\src\cpp\SampleAutonomous.cpp" />
     <ClCompile Include="TargetRobot\src\cpp\SampleTask.cpp" />
     <ClCompile Include="WindowsRobot.cpp" />

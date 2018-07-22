@@ -46,6 +46,12 @@
     <Filter Include="Source Files\WindowsRobot\ip">
       <UniqueIdentifier>{60da7611-5688-4b72-a3b9-99cf446f178c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\TargetRobot\SampleActions">
+      <UniqueIdentifier>{5faf28e6-9f06-45cc-8cc4-8c337b2b168f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\TargetRobot\SampleActions">
+      <UniqueIdentifier>{0e2357a3-802e-4c3e-8912-905bb752bd00}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -129,6 +135,12 @@
     <ClInclude Include="TargetRobot\src\include\robotlib\RobotAction.h">
       <Filter>Header Files\TargetRobot\robotlib</Filter>
     </ClInclude>
+    <ClInclude Include="TargetRobot\src\include\SampleActions\PrintAction.h">
+      <Filter>Header Files\TargetRobot\SampleActions</Filter>
+    </ClInclude>
+    <ClInclude Include="TargetRobot\src\include\SampleActions\TimeoutPrintAction.h">
+      <Filter>Header Files\TargetRobot\SampleActions</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -187,6 +199,12 @@
     </ClCompile>
     <ClCompile Include="TargetRobot\src\cpp\robotlib\RobotAction.cpp">
       <Filter>Source Files\TargetRobot\robotlib</Filter>
+    </ClCompile>
+    <ClCompile Include="TargetRobot\src\cpp\SampleActions\TimeoutPrintAction.cpp">
+      <Filter>Source Files\TargetRobot\SampleActions</Filter>
+    </ClCompile>
+    <ClCompile Include="TargetRobot\src\cpp\SampleActions\PrintAction.cpp">
+      <Filter>Source Files\TargetRobot\SampleActions</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

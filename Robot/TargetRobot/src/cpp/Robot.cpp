@@ -19,7 +19,7 @@ void Robot::RobotInit()
 	taskschedule.AddTask((RobotTask*)&ControlTaskInstance, "ControlTask", 100);
 	taskschedule.AddTask((RobotTask*)&AutonomousManagerInstance, "AutoManager", 100);
 	taskschedule.AddTask(new PowerReportingTask(), "PowerReporting", 20);
-	taskschedule.AddTask(new SampleTask(), "Sampletask", 1);
+	taskschedule.AddTask(new SampleTask(), "Sampletask", 100);
 
 	taskschedule.LaunchTasks();
 }

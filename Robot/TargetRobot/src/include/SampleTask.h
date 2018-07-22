@@ -2,6 +2,7 @@
 
 #include "robotlib/RobotTask.h"
 #include "ControlTask.h"
+#include "robotlib/RobotAction.h"
 
 class SampleTask : public RobotTask
 {
@@ -13,4 +14,7 @@ public:
 	void ControllerUpdate(RobotControl * controls);
 private:
 	void Init();
+	SerialActionRunner ActionRunner;
+public:
+	SampleTask() : ActionRunner("Sample Runner", 15) {}
 };

@@ -32,6 +32,8 @@ private:
 class ParallelAction : public RobotAction
 {
 public:
+	ParallelAction() = default;
+	ParallelAction(std::vector<RobotAction *> Actions);
 	void AddAction(RobotAction * Action);
 	void AddActions(std::vector<RobotAction *> Actions);
 
@@ -50,6 +52,8 @@ private:
 class SerialAction : public RobotAction
 {
 public:
+	SerialAction() = default;
+	SerialAction(std::vector<RobotAction *> Actions);
 	void AddAction(RobotAction * Action);
 	void AddActions(std::vector<RobotAction *> Actions);
 
