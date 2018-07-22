@@ -13,16 +13,21 @@ void RobotAction::setTimeout(uint32_t milliseconds)
 
 bool RobotAction::isTimeoutExpired()
 {
+	bool timedOut = false;
 	if (expiredTime != 0)
 	{
 #ifdef WIN32
-		return expiredTime < timeGetTime();
+		timedOut = expiredTime < timeGetTime();
 #else
-		return expiredTime < (uint32_t)(Timer::GetFPGATimeStamp() * 1000.0);
+		timedOut = expiredTime < (uint32_t)(Timer::GetFPGATimeStamp() * 1000.0);
 #endif
 	}
+	if (timedOut)
+	{
+		std::cout << "Hey I'm a " << this->getName()[0] << " and I timed out after " << RobotAction::timeoutTime << " milliseconds." << std::endl;
+	}
 
-	return false;
+	return timedOut;
 }
 
 void RobotAction::baseStart()
