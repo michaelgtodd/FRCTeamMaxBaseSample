@@ -126,6 +126,9 @@
     <ClInclude Include="TargetRobot\src\include\RobotControl.h">
       <Filter>Header Files\TargetRobot\robotlib\osc</Filter>
     </ClInclude>
+    <ClInclude Include="TargetRobot\src\include\robotlib\RobotAction.h">
+      <Filter>Header Files\TargetRobot\robotlib</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -181,6 +184,9 @@
     </ClCompile>
     <ClCompile Include="WindowsRobot\cpp\ip\UdpSocket.cpp">
       <Filter>Source Files\WindowsRobot\ip</Filter>
+    </ClCompile>
+    <ClCompile Include="TargetRobot\src\cpp\robotlib\RobotAction.cpp">
+      <Filter>Source Files\TargetRobot\robotlib</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

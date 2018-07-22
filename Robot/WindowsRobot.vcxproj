@@ -167,6 +167,7 @@
     <ClInclude Include="TargetRobot\src\include\robotlib\osc\OscReceivedElements.h" />
     <ClInclude Include="TargetRobot\src\include\robotlib\osc\OscTypes.h" />
     <ClInclude Include="TargetRobot\src\include\robotlib\PowerReportingTask.h" />
+    <ClInclude Include="TargetRobot\src\include\robotlib\RobotAction.h" />
     <ClInclude Include="TargetRobot\src\include\robotlib\RobotAutonomous.h" />
     <ClInclude Include="TargetRobot\src\include\robotlib\RobotDataStream.h" />
     <ClInclude Include="TargetRobot\src\include\robotlib\RobotDefs.h" />
@@ -200,6 +201,7 @@
     <ClCompile Include="TargetRobot\src\cpp\robotlib\osc\OscTypes.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="TargetRobot\src\cpp\robotlib\RobotAction.cpp" />
     <ClCompile Include="TargetRobot\src\cpp\robotlib\RobotAutonomous.cpp" />
     <ClCompile Include="TargetRobot\src\cpp\robotlib\RobotDataStream.cpp" />
     <ClCompile Include="TargetRobot\src\cpp\robotlib\RobotReportingTask.cpp" />
