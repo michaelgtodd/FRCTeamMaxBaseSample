@@ -306,6 +306,12 @@ void SerialActionRunner::queueActions(std::vector<RobotAction *> Actions)
 	ActionRunner::Unlock();
 }
 
+ParallelActionRunner::ParallelActionRunner(std::string name, uint32_t actionLimit)
+{
+	ActionRunner::name_ = name;
+	ActionRunner::actionLimit_ = actionLimit;
+}
+
 void ParallelActionRunner::queueAction(RobotAction * Action)
 {
 	ActionRunner::Lock();
