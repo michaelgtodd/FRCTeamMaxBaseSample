@@ -12,55 +12,6 @@
 #include <iostream>
 #include "Robot.h"
 
-TaskStatisticsTask::TaskStatisticsTask(std::vector<RobotTask*> TaskList)
-{
-	TaskList_ = TaskList;
-}
-
-void TaskStatisticsTask::Always()
-{
-	int j = 1;
-	for (std::vector<RobotTask*>::iterator i = TaskList_.begin();
-		i != TaskList_.end();
-		i++)
-	{
-		std::string baselabel = "/TaskStats/" + std::to_string(j);
-		//RobotLog::TransmitString(baselabel + "/Name", (*i)->GetTaskName());
-		//RobotLog::TransmitInt(baselabel + "/Period", (*i)->GetAverageTaskPeriod());
-		//RobotLog::TransmitInt(baselabel + "/Duration", (*i)->GetAverageTaskDuration());
-		j++;
-	}
-	std::string baselabel = "/TaskStats/" + std::to_string(j);
-	//RobotLog::TransmitString(baselabel + "/Name", "TaskStatsTask");
-	//RobotLog::TransmitInt(baselabel + "/Period", GetAverageTaskPeriod());
-	//RobotLog::TransmitInt(baselabel + "/Duration", GetAverageTaskDuration());
-}
-
-void TaskStatisticsTask::Run()
-{
-
-}
-
-void TaskStatisticsTask::Disable()
-{
-
-}
-
-void TaskStatisticsTask::Autonomous()
-{
-
-}
-
-void TaskStatisticsTask::ControllerUpdate(RobotControl * controls)
-{
-
-}
-
-void TaskStatisticsTask::Init()
-{
-
-}
-
 void TaskSchedule::AddTask(RobotTask* task, std::string taskname, uint32_t period)
 {
 	TaskList.push_back(task);
@@ -93,20 +44,6 @@ void TaskSchedule::LaunchTasks()
 		(*i)->Launch(priority);
 		priority--;
 	}
-
-	RobotTask * stats_task = new TaskStatisticsTask(TaskList);
-	stats_task->ExecInit("StatsTask", 1);
-	stats_task->Launch(98);
-}
-
-void TaskSchedule::DispatchControl(RobotControl * ControlUpdate)
-{
-	for (std::vector<RobotTask*>::iterator i = TaskList.begin();
-		i != TaskList.end();
-		i++)
-	{
-		(*i)->ControllerUpdate(ControlUpdate);
-	}
 }
 
 std::string RobotTask::GetTaskName()
@@ -117,16 +54,6 @@ std::string RobotTask::GetTaskName()
 uint32_t RobotTask::GetTaskPeriod()
 {
 	return task_period_;
-}
-
-uint32_t RobotTask::GetAverageTaskPeriod()
-{
-	return (uint32_t)ceil(average_task_period);
-}
-
-uint32_t RobotTask::GetAverageTaskDuration()
-{
-	return (uint32_t)ceil(average_task_duration);
 }
 
 void RobotTask::ExecInit(std::string taskname, uint32_t task_period)
@@ -190,28 +117,9 @@ void RobotTask::ThreadProcess()
 		double loopDuration = loopEnd - loopStart;
 
 		uint32_t loopExecutionTimeMS = (uint32_t) loopDuration;
-		if (task_period_ > 1)
-		{
-			average_task_duration =
-				((average_task_duration * task_period_) - average_task_duration + loopExecutionTimeMS) / task_period_;
-		}
-		else
-		{
-			average_task_duration = loopExecutionTimeMS;
-		}
+
 		double current_loop_difference = (loopEnd - last_loop_end) * 1000.0;
 		last_loop_end = loopEnd;
-
-		if (task_period_ > 1)
-		{
-			average_task_differential =
-				((average_task_differential * task_period_) - average_task_differential + current_loop_difference) / task_period_;
-		}
-		else
-		{
-			average_task_differential = current_loop_difference;
-		}
-		average_task_period = (1000.0 / average_task_differential);
 
 		bool slept = false;
 		do {

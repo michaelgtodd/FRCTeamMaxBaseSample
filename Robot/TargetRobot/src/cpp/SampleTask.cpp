@@ -1,7 +1,6 @@
 #include "SampleTask.h"
 #include <iostream>
 #include "robotlib/RobotDataStream.h"
-#include "ControlTask.h"
 #include "SampleActions/PrintAction.h"
 #include "SampleActions/TimeoutPrintAction.h"
 

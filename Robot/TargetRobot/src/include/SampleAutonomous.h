@@ -1,6 +1,5 @@
 #pragma once
 #include "robotlib/RobotAutonomous.h"
-#include "ControlTask.h"
 
 class SampleAutonomous : public AutonomousTask
 {

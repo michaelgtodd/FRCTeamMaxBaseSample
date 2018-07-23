@@ -99,9 +99,6 @@
     <ClInclude Include="TargetRobot\src\include\robotlib\osc\OscTypes.h">
       <Filter>Header Files\TargetRobot\robotlib\osc</Filter>
     </ClInclude>
-    <ClInclude Include="TargetRobot\src\include\robotlib\PowerReportingTask.h">
-      <Filter>Header Files\TargetRobot\robotlib</Filter>
-    </ClInclude>
     <ClInclude Include="TargetRobot\src\include\robotlib\RobotAutonomous.h">
       <Filter>Header Files\TargetRobot\robotlib</Filter>
     </ClInclude>
@@ -113,9 +110,6 @@
     </ClInclude>
     <ClInclude Include="TargetRobot\src\include\robotlib\RobotTask.h">
       <Filter>Header Files\TargetRobot\robotlib</Filter>
-    </ClInclude>
-    <ClInclude Include="TargetRobot\src\include\ControlTask.h">
-      <Filter>Header Files\TargetRobot</Filter>
     </ClInclude>
     <ClInclude Include="TargetRobot\src\include\Robot.h">
       <Filter>Header Files\TargetRobot</Filter>
@@ -176,14 +170,8 @@
     <ClCompile Include="TargetRobot\src\cpp\robotlib\RobotDataStream.cpp">
       <Filter>Source Files\TargetRobot\robotlib</Filter>
     </ClCompile>
-    <ClCompile Include="TargetRobot\src\cpp\robotlib\RobotReportingTask.cpp">
-      <Filter>Source Files\TargetRobot\robotlib</Filter>
-    </ClCompile>
     <ClCompile Include="TargetRobot\src\cpp\robotlib\RobotTask.cpp">
       <Filter>Source Files\TargetRobot\robotlib</Filter>
-    </ClCompile>
-    <ClCompile Include="TargetRobot\src\cpp\ControlTask.cpp">
-      <Filter>Source Files\TargetRobot</Filter>
     </ClCompile>
     <ClCompile Include="TargetRobot\src\cpp\Robot.cpp">
       <Filter>Source Files\TargetRobot</Filter>

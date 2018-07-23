@@ -1,7 +1,6 @@
 #pragma once
 
 #include "robotlib/RobotTask.h"
-#include "ControlTask.h"
 #include "robotlib/RobotAction.h"
 
 class SampleTask : public RobotTask

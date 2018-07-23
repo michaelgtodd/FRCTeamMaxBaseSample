@@ -29,7 +29,7 @@ namespace RobotLog
 			(void)remoteEndpoint;
 
 			try {
-				ControlTaskInstance.ProcessOscData(m);
+				//TODO - what do I do
 			}
 			catch (...) {
 				LogError("Failed to parse OSC message");

@@ -1,6 +1,5 @@
 #include "SampleAutonomous.h"
 #include "robotlib/RobotDataStream.h"
-#include "ControlTask.h"
 #include "iostream"
 #include <math.h>
 

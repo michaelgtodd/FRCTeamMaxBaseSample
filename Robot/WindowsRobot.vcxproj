@@ -151,7 +151,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
-    <ClInclude Include="TargetRobot\src\include\ControlTask.h" />
     <ClInclude Include="TargetRobot\src\include\Robot.h" />
     <ClInclude Include="TargetRobot\src\include\RobotControl.h" />
     <ClInclude Include="TargetRobot\src\include\robotlib\ip\IpEndpointName.h" />
@@ -167,7 +166,6 @@
     <ClInclude Include="TargetRobot\src\include\robotlib\osc\OscPrintReceivedElements.h" />
     <ClInclude Include="TargetRobot\src\include\robotlib\osc\OscReceivedElements.h" />
     <ClInclude Include="TargetRobot\src\include\robotlib\osc\OscTypes.h" />
-    <ClInclude Include="TargetRobot\src\include\robotlib\PowerReportingTask.h" />
     <ClInclude Include="TargetRobot\src\include\robotlib\RobotAction.h" />
     <ClInclude Include="TargetRobot\src\include\robotlib\RobotAutonomous.h" />
     <ClInclude Include="TargetRobot\src\include\robotlib\RobotDataStream.h" />
@@ -189,7 +187,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="TargetRobot\src\cpp\ControlTask.cpp" />
     <ClCompile Include="TargetRobot\src\cpp\Robot.cpp" />
     <ClCompile Include="TargetRobot\src\cpp\robotlib\ip\IpEndpointName.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
@@ -209,7 +206,6 @@
     <ClCompile Include="TargetRobot\src\cpp\robotlib\RobotAction.cpp" />
     <ClCompile Include="TargetRobot\src\cpp\robotlib\RobotAutonomous.cpp" />
     <ClCompile Include="TargetRobot\src\cpp\robotlib\RobotDataStream.cpp" />
-    <ClCompile Include="TargetRobot\src\cpp\robotlib\RobotReportingTask.cpp" />
     <ClCompile Include="TargetRobot\src\cpp\robotlib\RobotTask.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>

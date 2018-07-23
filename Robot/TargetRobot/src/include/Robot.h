@@ -5,7 +5,6 @@
 #include "WPILib.h"
 #endif
 #include "SampleTask.h"
-#include "ControlTask.h"
 
 #define CONSOLE_LOG_INFO
 
