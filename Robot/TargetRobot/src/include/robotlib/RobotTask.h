@@ -29,10 +29,12 @@ private:
 class TaskSchedule
 {
 public:
-	void AddTask(RobotTask* task, std::string taskname, uint32_t period);
-	void LaunchTasks();
+	static void AddTask(RobotTask* task, std::string taskname, uint32_t period);
+	static void LaunchTasks();
 private:
-	std::vector<RobotTask*> TaskList;
+	static void initializeTaskSchedule();
+	static std::vector<RobotTask*> TaskList;
+	static TaskSchedule * instance;
+	TaskSchedule() = default;
 };
 
-extern TaskSchedule taskschedule;

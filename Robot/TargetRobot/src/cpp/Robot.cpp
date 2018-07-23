@@ -16,11 +16,11 @@ void Robot::RobotInit()
 	AutonomousManagerInstance.RegisterAutonomous(new SampleAutonomous);
 
 	// Task names cannot contain spaces at this time
-	taskschedule.AddTask((RobotTask*)&AutonomousManagerInstance, "AutoManager", 100);
+	TaskSchedule::AddTask((RobotTask*)&AutonomousManagerInstance, "AutoManager", 100);
 	// taskschedule.AddTask(new SampleTask(), "Sampletask", 100);
-	taskschedule.AddTask(new ParallelCounterSampleTask(), "ParallelCounterSampletask", 100);
+	TaskSchedule::AddTask(new ParallelCounterSampleTask(), "ParallelCounterSampletask", 100);
 
-	taskschedule.LaunchTasks();
+	TaskSchedule::LaunchTasks();
 }
 
 void Robot::Disabled() { }
