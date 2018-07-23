@@ -23,7 +23,7 @@ void TimeoutPrintAction::update()
 
 void TimeoutPrintAction::done()
 {
-
+	std::cout << printText_ << std::endl;
 }
 
 void TimeoutPrintAction::start()

@@ -141,6 +141,12 @@
     <ClInclude Include="TargetRobot\src\include\SampleActions\TimeoutPrintAction.h">
       <Filter>Header Files\TargetRobot\SampleActions</Filter>
     </ClInclude>
+    <ClInclude Include="TargetRobot\src\include\SampleActions\CounterAction.h">
+      <Filter>Header Files\TargetRobot\SampleActions</Filter>
+    </ClInclude>
+    <ClInclude Include="TargetRobot\src\include\ParallelCounterSampleTask.h">
+      <Filter>Header Files\TargetRobot</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -205,6 +211,12 @@
     </ClCompile>
     <ClCompile Include="TargetRobot\src\cpp\SampleActions\PrintAction.cpp">
       <Filter>Source Files\TargetRobot\SampleActions</Filter>
+    </ClCompile>
+    <ClCompile Include="TargetRobot\src\cpp\SampleActions\CounterAction.cpp">
+      <Filter>Source Files\TargetRobot\SampleActions</Filter>
+    </ClCompile>
+    <ClCompile Include="TargetRobot\src\cpp\ParallelCounterSampleTask.cpp">
+      <Filter>Source Files\TargetRobot</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
