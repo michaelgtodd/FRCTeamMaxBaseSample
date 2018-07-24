@@ -34,9 +34,7 @@ public:
 	static void LaunchTasks();
 	static void SetTaskPriorty(int priority, std::string taskname);
 private:
-	static void initializeTaskSchedule();
 	static std::vector<RobotTask*> TaskList;
-	static TaskSchedule * instance;
 	TaskSchedule() = default;
 };
 

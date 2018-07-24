@@ -12,20 +12,10 @@
 #include <iostream>
 #include "Robot.h"
 
-TaskSchedule* TaskSchedule::instance = NULL;
 std::vector<RobotTask*> TaskSchedule::TaskList;
-
-void TaskSchedule::initializeTaskSchedule()
-{
-	if (instance == NULL)
-	{
-		instance = new TaskSchedule();
-	}
-}
 
 void TaskSchedule::AddTask(RobotTask* task, std::string taskname, uint32_t period)
 {
-	initializeTaskSchedule();
 	TaskList.push_back(task);
 	task->ExecInit(taskname, period);
 }
@@ -48,8 +38,6 @@ void TaskSchedule::SetTaskPriorty(int priority, std::string taskname)
 
 void TaskSchedule::LaunchTasks()
 {
-	initializeTaskSchedule();
-
 	TaskSchedule::SetTaskPriorty(99, "DS_Task");
 
 	RobotLog::LogInfo("Starting tasks");
