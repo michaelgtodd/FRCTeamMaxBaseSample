@@ -24,11 +24,6 @@ void SampleTask::Autonomous()
 
 }
 
-void SampleTask::ControllerUpdate(RobotControl * controls)
-{
-	RobotControl * controls_ = (RobotControl *)(controls);
-}
-
 void SampleTask::Init()
 {
 	ActionRunner.queueAction(new PrintAction("I'm getting started"));

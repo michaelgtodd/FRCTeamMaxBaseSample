@@ -10,7 +10,6 @@ public:
 	void Run();
 	void Disable();
 	void Autonomous();
-	void ControllerUpdate(RobotControl * controls);
 	void Init();
 private:
 	SerialActionRunner ActionRunner;

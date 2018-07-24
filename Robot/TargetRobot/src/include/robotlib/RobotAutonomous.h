@@ -4,14 +4,15 @@
 #include <thread>
 #include <vector>
 #ifndef WIN32
-#include <pthread.h>
+#include "pthread.h"
+#else
+#include <Windows.h>
 #endif
 
 class AutonomousTask
 {
 public:
 	void virtual Init() = 0;
-	void virtual ControllerUpdate(RobotControl * controls) = 0;
 	void virtual Autonomous() = 0;
 	void virtual End() = 0;
 	std::string virtual GetName() = 0;
@@ -23,7 +24,6 @@ public:
 	void Run();
 	void Always();
 	void Disable();
-	void ControllerUpdate(RobotControl * controls);
 	void Autonomous();
 
 	void RegisterAutonomous(AutonomousTask * AutonomousTask);
@@ -32,12 +32,16 @@ public:
 private:
 	void Init();
 	void EndAutonomous();
+	void Lock();
+	void Unlock();
 	std::vector<AutonomousTask *> AutoList;
 	AutonomousTask * SelectedAutonomous;
 	bool AutoLocked = false;
 	bool LastStateAutonomous = false;
-#ifndef WIN32
-	pthread_mutex_t AutoMutex;
+#ifdef WIN32
+	HANDLE mutex;
+#else
+	pthread_mutex_t mutex;
 #endif
 };
 

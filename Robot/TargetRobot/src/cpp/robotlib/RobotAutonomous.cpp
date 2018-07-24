@@ -19,29 +19,39 @@ void AutonomousManager::Disable()
 	EndAutonomous();
 }
 
-void AutonomousManager::ControllerUpdate(RobotControl * controls)
+void AutonomousManager::Lock()
 {
-	SelectedAutonomous->ControllerUpdate(controls);
+#ifdef WIN32
+	WaitForSingleObject(mutex, INFINITE);
+#else
+	pthread_mutex_lock(&mutex);
+#endif
+}
+
+void AutonomousManager::Unlock()
+{
+#ifdef WIN32
+	ReleaseMutex(mutex);
+#else
+	pthread_mutex_unlock(&mutex);
+#endif
 }
 
 void AutonomousManager::EndAutonomous()
 {
-#ifndef WIN32
-	pthread_mutex_lock(&AutoMutex);
+	Lock();
 	if (LastStateAutonomous)
 	{
 		SelectedAutonomous->End();
 	}
 	LastStateAutonomous = false;
 	AutoLocked = false;
-	pthread_mutex_unlock(&AutoMutex);
-#endif
+	Unlock();
 }
 
 void AutonomousManager::Autonomous()
 {
-#ifndef WIN32
-	pthread_mutex_lock(&AutoMutex);
+	Lock();
 	AutoLocked = true;
 	if (!LastStateAutonomous)
 	{
@@ -53,21 +63,21 @@ void AutonomousManager::Autonomous()
 	SelectedAutonomous->Autonomous();
 
 	LastStateAutonomous = true;
-	pthread_mutex_unlock(&AutoMutex);
-#endif
+	Unlock();
 }
 
 void AutonomousManager::RegisterAutonomous(AutonomousTask * AutonomousTask)
 {
+	Lock();
 	AutoList.push_back(AutonomousTask);
 	if (AutoList.size() == 1)
 		SelectedAutonomous = AutonomousTask;
+	Unlock();
 }
 
 void AutonomousManager::SelectAutonomous(std::string AutonomousName)
 {
-#ifndef WIN32
-	pthread_mutex_lock(&AutoMutex);
+	Lock();
 	if (!AutoLocked)
 	{
 		for (std::vector<AutonomousTask *>::iterator i = AutoList.begin();
@@ -80,12 +90,12 @@ void AutonomousManager::SelectAutonomous(std::string AutonomousName)
 			}
 		}
 	}
-	pthread_mutex_unlock(&AutoMutex);
-#endif
+	Unlock();
 }
 
 std::vector<std::string> AutonomousManager::GetAutonomousList()
 {
+	Lock();
 	std::vector<std::string> result;
 	for (std::vector<AutonomousTask *>::iterator i = AutoList.begin();
 		i != AutoList.end();
@@ -94,11 +104,14 @@ std::vector<std::string> AutonomousManager::GetAutonomousList()
 		result.push_back((*i)->GetName());
 	}
 	return result;
+	Unlock();
 }
 
 void AutonomousManager::Init()
 {
-#ifndef WIN32
-	pthread_mutex_init(&AutoMutex, 0);
+#ifdef WIN32
+	mutex = CreateMutex(NULL, FALSE, NULL);
+#else
+	mutex = PTHREAD_MUTEX_INITIALIZER;
 #endif
 }
