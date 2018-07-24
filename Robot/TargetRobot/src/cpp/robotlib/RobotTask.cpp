@@ -162,7 +162,6 @@ void TaskContainer::Autonomous()
 
 void TaskContainer::Init()
 {
-
 	for (std::vector<RobotTask *>::iterator i = TaskList.begin();
 		i != TaskList.end();
 		i++)
