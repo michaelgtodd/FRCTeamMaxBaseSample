@@ -18,12 +18,13 @@ public:
 	void ExecInit(std::string taskname, uint32_t task_period);
 	void Launch(int priority);
 private:
+	uint32_t getTimeMS();
 	void virtual Init() = 0;
 	void ThreadProcess();
 	uint32_t task_period_;
 	std::string taskname_;
 	std::thread running_thread;
-	double last_loop_end = 0;
+	double lastLoopEndMS = 0;
 };
 
 class TaskSchedule
@@ -31,6 +32,7 @@ class TaskSchedule
 public:
 	static void AddTask(RobotTask* task, std::string taskname, uint32_t period);
 	static void LaunchTasks();
+	static void SetTaskPriorty(int priority, std::string taskname);
 private:
 	static void initializeTaskSchedule();
 	static std::vector<RobotTask*> TaskList;
