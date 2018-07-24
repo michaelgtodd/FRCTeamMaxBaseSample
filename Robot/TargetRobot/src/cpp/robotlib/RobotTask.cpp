@@ -116,3 +116,57 @@ void RobotTask::ThreadProcess()
 		std::this_thread::sleep_for(std::chrono::milliseconds(minsleep));
 	}
 }
+
+void TaskContainer::AddTask(RobotTask * Task)
+{
+	TaskList.push_back(Task);
+}
+
+void TaskContainer::Run()
+{
+	for (std::vector<RobotTask *>::iterator i = TaskList.begin();
+		i != TaskList.end();
+		i++)
+	{
+		(*i)->Run();
+		(*i)->Always();
+	}
+}
+
+void TaskContainer::Disable()
+{
+	for (std::vector<RobotTask *>::iterator i = TaskList.begin();
+		i != TaskList.end();
+		i++)
+	{
+		(*i)->Disable();
+		(*i)->Always();
+	}
+}
+
+void TaskContainer::Always()
+{
+
+}
+
+void TaskContainer::Autonomous()
+{
+	for (std::vector<RobotTask *>::iterator i = TaskList.begin();
+		i != TaskList.end();
+		i++)
+	{
+		(*i)->Autonomous();
+		(*i)->Always();
+	}
+}
+
+void TaskContainer::Init()
+{
+
+	for (std::vector<RobotTask *>::iterator i = TaskList.begin();
+		i != TaskList.end();
+		i++)
+	{
+		(*i)->Init();
+	}
+}

@@ -17,9 +17,10 @@ public:
 
 	void ExecInit(std::string taskname, uint32_t task_period);
 	void Launch(int priority);
+	void virtual Init() = 0;
+
 private:
 	uint32_t getTimeMS();
-	void virtual Init() = 0;
 	void ThreadProcess();
 	uint32_t task_period_;
 	std::string taskname_;
@@ -38,3 +39,17 @@ private:
 	TaskSchedule() = default;
 };
 
+class TaskContainer : public RobotTask
+{
+public:
+	void AddTask(RobotTask * Task);
+
+	void Run();
+	void Disable();
+	void Always();
+	void Autonomous();
+	void Init();
+
+private:
+	std::vector<RobotTask*> TaskList;
+};

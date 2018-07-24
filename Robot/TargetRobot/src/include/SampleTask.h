@@ -11,8 +11,8 @@ public:
 	void Disable();
 	void Autonomous();
 	void ControllerUpdate(RobotControl * controls);
-private:
 	void Init();
+private:
 	SerialActionRunner ActionRunner;
 public:
 	SampleTask() : ActionRunner("Sample Runner", 15) {}

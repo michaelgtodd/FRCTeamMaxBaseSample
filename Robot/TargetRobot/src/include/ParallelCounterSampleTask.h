@@ -11,8 +11,8 @@ public:
 	void Disable();
 	void Autonomous();
 	void ControllerUpdate(RobotControl * controls);
-private:
 	void Init();
+private:
 	ParallelActionRunner ActionRunner;
 public:
 	ParallelCounterSampleTask() : ActionRunner("Tom's Sample Runner", 15) {}
