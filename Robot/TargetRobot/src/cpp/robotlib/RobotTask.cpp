@@ -64,7 +64,7 @@ uint32_t RobotTask::GetTaskPeriod()
 void RobotTask::ExecInit(std::string taskname, uint32_t task_period)
 {
 	taskname_ = taskname;
-	uint32_t capped_period = std::min(task_period, (uint32_t) 200);
+	uint32_t capped_period = std::min(task_period, (uint32_t) 1000);
 	capped_period = std::max((uint32_t) 1, capped_period);
 	task_period_ = capped_period;
 
@@ -117,8 +117,9 @@ void RobotTask::ThreadProcess()
 	}
 }
 
-void TaskContainer::AddTask(RobotTask * Task)
+void TaskContainer::AddTask(RobotTask * Task, std::string taskname)
 {
+	Task->ExecInit(taskname, 1);
 	TaskList.push_back(Task);
 }
 

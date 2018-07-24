@@ -42,7 +42,7 @@ private:
 class TaskContainer : public RobotTask
 {
 public:
-	void AddTask(RobotTask * Task);
+	void AddTask(RobotTask * Task, std::string taskname);
 
 	void Run();
 	void Disable();
