@@ -3,6 +3,9 @@
 #include <thread>
 #include <vector>
 #include "RobotControl.h"
+#include "DataStore.h"
+#include "BaseDataStoreTypes.h"
+#include "RobotLibConfig.h"
 
 class RobotTask 
 {
@@ -26,6 +29,9 @@ private:
 	std::string taskname_;
 	std::thread running_thread;
 	double lastLoopEndMS = 0;
+#ifdef TASK_METRICS
+	DataItemCounter * runCounter;
+#endif
 };
 
 class TaskSchedule

@@ -68,6 +68,10 @@ void RobotTask::ExecInit(std::string taskname, uint32_t task_period)
 	capped_period = std::max((uint32_t) 1, capped_period);
 	task_period_ = capped_period;
 
+#ifdef TASK_METRICS
+	runCounter = new DataItemCounter();
+	DataStore::RegisterDataItem("/taskmetricsruns/" + taskname, runCounter);
+#endif
 	Init();
 }
 
@@ -106,6 +110,10 @@ void RobotTask::ThreadProcess()
 			Disable();
 		}
 		Always();
+
+#ifdef TASK_METRICS
+		runCounter->Increment();
+#endif
 
 		uint32_t loopEndMS = getTimeMS();
 
