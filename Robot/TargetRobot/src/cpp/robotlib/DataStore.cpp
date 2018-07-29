@@ -1,6 +1,15 @@
 #include "robotlib/DataStore.h"
 #include <iostream>
 
+
+#ifdef WIN32
+HANDLE DataStore::mutex;
+#else
+pthread_mutex_t DataStore::mutex;
+#endif
+
+std::vector<DataItem *> DataStore::DataItems;
+
 void DataItem::Lock()
 {
 #ifdef WIN32
@@ -69,6 +78,23 @@ DataItem * DataStore::LookupDataItem(std::string name)
 	std::cout << "Failed to lookup DataStore Item: " << name << std::endl;
 	return NULL;
 	
+}
+
+std::vector<DataItem *> DataStore::LookupDataItemBeginsWith(std::string name)
+{
+	Lock();
+	std::vector<DataItem *> temp;	
+	
+	for (std::vector<DataItem *>::iterator i = DataItems.begin();
+		i != DataItems.end();
+		i++)
+	{
+		if ((*i)->GetName().compare(0, name.length(), name) == 0)
+			temp.push_back((*i));
+	}
+
+	Unlock();
+	return temp;
 }
 
 void DataStore::Lock()

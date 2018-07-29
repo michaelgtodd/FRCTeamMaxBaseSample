@@ -5,6 +5,7 @@
 #ifndef WIN32
 #include "pthread.h"
 #else
+#define NOMINMAX
 #include <Windows.h>
 #endif
 
@@ -29,15 +30,16 @@ private:
 class DataStore
 {
 public:
-	void RegisterDataItem(std::string name, DataItem * item);
-	DataItem * LookupDataItem(std::string name);
+	static void RegisterDataItem(std::string name, DataItem * item);
+	static DataItem * LookupDataItem(std::string name);
+	static std::vector<DataItem *> LookupDataItemBeginsWith(std::string name);
 private:
-	std::vector<DataItem *> DataItems;
-	void Lock();
-	void Unlock();
+	static std::vector<DataItem *> DataItems;
+	static void Lock();
+	static void Unlock();
 #ifdef WIN32
-	HANDLE mutex;
+	static HANDLE mutex;
 #else
-	pthread_mutex_t mutex;
+	static pthread_mutex_t mutex;
 #endif
 };
