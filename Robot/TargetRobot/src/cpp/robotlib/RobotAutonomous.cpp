@@ -1,8 +1,20 @@
 #include "robotlib\RobotAutonomous.h"
 #include "robotlib\RobotDataStream.h"
 #include "iostream"
+#ifndef WIN32
+#include "Timer.h"
+#endif
 
 AutonomousManager AutonomousManagerInstance;
+
+uint32_t AutonomousTask::getTimeMS()
+{
+#ifndef WIN32
+	return (uint32_t)(Timer::GetFPGATimestamp() * 1000.0);
+#else
+	return timeGetTime();
+#endif
+}
 
 RegisterAutonomousAction::RegisterAutonomousAction(AutonomousTask * AutonomousTask)
 {

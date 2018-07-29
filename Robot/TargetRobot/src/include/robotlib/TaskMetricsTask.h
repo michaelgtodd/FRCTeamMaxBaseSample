@@ -1,6 +1,7 @@
 #pragma once
 
 #include "robotlib/RobotTask.h"
+#include "math.h"
 
 class TaskMetricsTask : public RobotTask
 {

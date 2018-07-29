@@ -9,11 +9,8 @@ void SampleAutonomous::Init()
 
 	std::cout << "Auto Init" << std::endl;
 
-#ifndef WIN32
-	StartTime = Timer::GetFPGATimestamp();
-#else
-	StartTime = 0;
-#endif
+	StartTime = getTimeMS();
+	
 	LastMessage = 0;
 }
 
@@ -24,11 +21,7 @@ void SampleAutonomous::ControllerUpdate(RobotControl * controls)
 
 void SampleAutonomous::Autonomous()
 {
-#ifndef WIN32
-	double CurrentTime = Timer::GetFPGATimestamp();
-#else
-	double CurrentTime = 0;
-#endif
+	double CurrentTime = getTimeMS();
 	RunTime = CurrentTime - StartTime;
 	if (floor(RunTime) > LastMessage)
 	{
@@ -40,11 +33,7 @@ void SampleAutonomous::Autonomous()
 
 void SampleAutonomous::End()
 {
-#ifndef WIN32
-	double CurrentTime = Timer::GetFPGATimestamp();
-#else
-	double CurrentTime = 0;
-#endif
+	double CurrentTime = getTimeMS();
 	RunTime = CurrentTime - StartTime;
 	LastMessage = (int) floor(RunTime);
 	RobotLog::LogInfo("Ending Auto after " + std::to_string(LastMessage) + " seconds");

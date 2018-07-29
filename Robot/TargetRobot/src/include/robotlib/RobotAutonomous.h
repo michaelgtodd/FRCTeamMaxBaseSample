@@ -17,6 +17,9 @@ public:
 	void virtual Autonomous() = 0;
 	void virtual End() = 0;
 	std::string virtual GetName() = 0;
+
+protected:
+	uint32_t getTimeMS();
 };
 
 class RegisterAutonomousAction : public RobotAction

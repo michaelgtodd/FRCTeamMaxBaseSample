@@ -1,6 +1,9 @@
 #include "robotlib/RobotAction.h"
 #include <iostream>
 #include <sstream>
+#ifndef WIN32
+#include <Timer.h>
+#endif
 
 void ActionRunnerDataItem::SetRunnerName(std::string name)
 {
@@ -50,7 +53,7 @@ bool RobotAction::isTimeoutExpired()
 #ifdef WIN32
 		timedOut = expiredTime < timeGetTime();
 #else
-		timedOut = expiredTime < (uint32_t)(Timer::GetFPGATimeStamp() * 1000.0);
+		timedOut = expiredTime < (uint32_t)(Timer::GetFPGATimestamp() * 1000.0);
 #endif
 	}
 	if (timedOut)
@@ -68,7 +71,7 @@ void RobotAction::baseStart()
 #ifdef WIN32
 		expiredTime = timeGetTime() + timeoutTime;
 #else
-		expiredTime = (Timer::GetFPGATimeStamp() * 1000) + timeoutTime;
+		expiredTime = (Timer::GetFPGATimestamp() * 1000) + timeoutTime;
 #endif
 	}
 	this->start();	
@@ -305,7 +308,10 @@ SerialActionRunner::~SerialActionRunner()
 {
 	ActionRunner::Lock();
 	baseAction.done();
+#ifdef WIN32
+	// not sure why frc toolchain doesn't like this
 	ActionRunner::~ActionRunner();
+#endif
 }
 
 void SerialActionRunner::Run()
@@ -433,6 +439,9 @@ ParallelActionRunner::~ParallelActionRunner()
 	ActionRunner::Lock();
 
 	baseAction.done();
+#ifdef WIN32
+	// not sure why frc toolchain doesn't like this
 	ActionRunner::~ActionRunner();
+#endif
 }
 
