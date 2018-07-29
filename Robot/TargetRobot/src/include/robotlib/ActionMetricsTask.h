@@ -1,8 +1,10 @@
 #pragma once
+#pragma once
 
 #include "robotlib/RobotTask.h"
+#include "robotlib/RobotAction.h"
 
-class TaskMetricsTask : public RobotTask
+class ActionMetricsTask : public RobotTask
 {
 public:
 	void Always();
@@ -12,6 +14,6 @@ public:
 	void Start();
 	void Init();
 private:
-	std::vector<DataItem *> TaskCounters;
+	std::vector<DataItem *> ActionMetrics;
 	uint32_t LastReport;
-}; 
+};

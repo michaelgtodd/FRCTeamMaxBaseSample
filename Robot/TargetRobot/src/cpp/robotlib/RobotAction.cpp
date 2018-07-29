@@ -1,5 +1,36 @@
 #include "robotlib/RobotAction.h"
 #include <iostream>
+#include <sstream>
+
+void ActionRunnerDataItem::SetRunnerName(std::string name)
+{
+	Lock();
+	RunnerName = name;
+	Unlock();
+}
+
+std::string ActionRunnerDataItem::GetRunnerName()
+{
+	Lock();
+	std::string temp = RunnerName;
+	Unlock();
+	return temp;
+}
+
+void ActionRunnerDataItem::SetRunningActions(std::vector<std::string> actions)
+{
+	Lock();
+	RunningActions = actions;
+	Unlock();
+}
+
+std::vector<std::string> ActionRunnerDataItem::GetRunningActions()
+{
+	Lock();
+	std::vector<std::string> temp = RunningActions;
+	Unlock();
+	return temp;
+}
 
 uint32_t RobotAction::getCount()
 {
@@ -79,6 +110,9 @@ void ParallelAction::update()
 		(*i)->update();
 		if ((*i)->isFinished() || (*i)->isTimeoutExpired())
 		{
+#ifdef ACTION_METRICS_LOG
+			std::cout << "ACTIONMETRICSLOG: Finishing: " << (*i)->getName()[0] << std::endl;
+#endif
 			(*i)->done();
 			delete (*i);
 			i = ActionList.erase(i);
@@ -105,7 +139,6 @@ void ParallelAction::start()
 {
 	if (ActionList.empty())
 		return;
-
 	for (std::vector<RobotAction *>::iterator i = ActionList.begin();
 		i != ActionList.end();
 		i++)
@@ -163,6 +196,11 @@ void SerialAction::update()
 	{
 		do 
 		{
+
+#ifdef ACTION_METRICS_LOG
+			std::cout << "ACTIONMETRICSLOG: Finishing: " << (*i)->getName()[0] << std::endl;
+#endif
+
 			(*i)->done();
 			delete (*i);
 			i = ActionList.erase(i);
@@ -171,6 +209,10 @@ void SerialAction::update()
 				return;
 
 			(*i)->baseStart();
+
+#ifdef ACTION_METRICS_LOG
+			std::cout << "ACTIONMETRICSLOG: Starting: " << (*i)->getName()[0] << std::endl;
+#endif
 
 			(*i)->update();
 		} while ((*i)->isFinished() || (*i)->isTimeoutExpired());
@@ -252,6 +294,11 @@ SerialActionRunner::SerialActionRunner(std::string name, uint32_t actionLimit)
 {
 	ActionRunner::name_ = name;
 	ActionRunner::actionLimit_ = actionLimit;
+#ifdef ACTION_METRICS
+	MetricsData = new ActionRunnerDataItem();
+	MetricsData->SetRunnerName(name_);
+	DataStore::RegisterDataItem("/actionmetrics/" + name_, MetricsData);
+#endif
 }
 
 SerialActionRunner::~SerialActionRunner()
@@ -265,6 +312,13 @@ void SerialActionRunner::Run()
 {
 	ActionRunner::Lock();
 	baseAction.update();
+
+#ifdef ACTION_METRICS
+	std::vector<std::string> actions = baseAction.getName();
+	actions.erase(actions.begin());
+	MetricsData->SetRunningActions(actions);
+#endif
+
 	ActionRunner::Unlock();
 }
 
@@ -310,6 +364,11 @@ ParallelActionRunner::ParallelActionRunner(std::string name, uint32_t actionLimi
 {
 	ActionRunner::name_ = name;
 	ActionRunner::actionLimit_ = actionLimit;
+#ifdef ACTION_METRICS
+	MetricsData = new ActionRunnerDataItem();
+	MetricsData->SetRunnerName(name_);
+	DataStore::RegisterDataItem("/actionmetrics/" + name_, MetricsData);
+#endif
 }
 
 void ParallelActionRunner::queueAction(RobotAction * Action)
@@ -318,6 +377,9 @@ void ParallelActionRunner::queueAction(RobotAction * Action)
 	if (baseAction.getCount() < ActionRunner::actionLimit_)
 	{
 		Action->baseStart();
+#ifdef ACTION_METRICS_LOG
+		std::cout << "ACTIONMETRICSLOG: Starting: " << Action->getName()[0] << std::endl;
+#endif
 		baseAction.AddAction(Action);
 	}
 	else
@@ -337,6 +399,9 @@ void ParallelActionRunner::queueActions(std::vector<RobotAction *> Actions)
 			i++)
 		{
 			(*i)->baseStart();
+#ifdef ACTION_METRICS_LOG
+			std::cout << "ACTIONMETRICSLOG: Starting: " << (*i)->getName()[0] << std::endl;
+#endif
 		}
 		baseAction.AddActions(Actions);
 	}
@@ -353,6 +418,12 @@ void ParallelActionRunner::Run()
 	ActionRunner::Lock();
 
 	baseAction.update();
+
+#ifdef ACTION_METRICS
+	std::vector<std::string> actions = baseAction.getName();
+	actions.erase(actions.begin());
+	MetricsData->SetRunningActions(actions);
+#endif
 
 	ActionRunner::Unlock();
 }

@@ -12,6 +12,7 @@
 #include <iostream>
 #include "Robot.h"
 #include "robotlib/TaskMetricsTask.h"
+#include "robotlib/ActionMetricsTask.h"
 
 std::vector<RobotTask*> TaskSchedule::TaskList;
 
@@ -92,9 +93,17 @@ void TaskSchedule::SetTaskPriorty(int priority, std::string taskname, std::threa
 
 void TaskSchedule::AddLibraryTasks()
 {
+	TaskContainer * LoggingSuperLoop = new TaskContainer();
+
 #ifdef TASK_METRICS
-	TaskSchedule::AddTask(new TaskMetricsTask(), "TaskMetricsTask", 1);
+	LoggingSuperLoop->AddTask(new TaskMetricsTask(), "TaskMetricsTask");
 #endif
+
+#ifdef ACTION_METRICS
+	LoggingSuperLoop->AddTask(new ActionMetricsTask(), "ActionMetricsTask");
+#endif
+
+	TaskSchedule::AddTask(LoggingSuperLoop, "LoggingSuperLoop", 1);
 }
 
 void TaskSchedule::LaunchTasks()
@@ -206,7 +215,11 @@ void TaskContainer::Run()
 	{
 		(*i)->Run();
 		(*i)->Always();
+#ifdef TASK_METRICS
+		(*i)->taskMetricsData->IncrementRuns();
+#endif
 	}
+	
 }
 
 void TaskContainer::Disable()
@@ -217,6 +230,9 @@ void TaskContainer::Disable()
 	{
 		(*i)->Disable();
 		(*i)->Always();
+#ifdef TASK_METRICS
+		(*i)->taskMetricsData->IncrementRuns();
+#endif
 	}
 }
 
@@ -233,6 +249,19 @@ void TaskContainer::Autonomous()
 	{
 		(*i)->Autonomous();
 		(*i)->Always();
+#ifdef TASK_METRICS
+		(*i)->taskMetricsData->IncrementRuns();
+#endif
+	}
+}
+
+void TaskContainer::Start()
+{
+	for (std::vector<RobotTask *>::iterator i = TaskList.begin();
+		i != TaskList.end();
+		i++)
+	{
+		(*i)->Start();
 	}
 }
 

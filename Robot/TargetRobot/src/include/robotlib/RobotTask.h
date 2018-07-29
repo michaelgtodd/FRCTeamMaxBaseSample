@@ -23,6 +23,7 @@ private:
 
 class RobotTask 
 {
+	friend class TaskContainer;
 public:
 	void virtual Run() = 0;
 	void virtual Disable() = 0;
@@ -73,6 +74,7 @@ public:
 	void Disable();
 	void Always();
 	void Autonomous();
+	void Start();
 	void Init();
 
 private:

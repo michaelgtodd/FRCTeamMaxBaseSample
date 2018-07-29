@@ -33,7 +33,7 @@ void ParallelCounterSampleTask::Start()
 void ParallelCounterSampleTask::Init()
 {
 	ActionRunner.queueAction(new PrintAction("Starting parallel counter action test..."));
-	CounterAction * sampleCounterAction = new CounterAction(1500000);
+	CounterAction * sampleCounterAction = new CounterAction(40);
 	ActionRunner.queueAction(sampleCounterAction);
 	ActionRunner.queueAction(new TimeoutPrintAction(std::to_string(sampleCounterAction->getCounter()), 1000));
 	ActionRunner.queueAction(new TimeoutPrintAction(std::to_string(sampleCounterAction->getCounter()), 2000));

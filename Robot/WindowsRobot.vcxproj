@@ -154,6 +154,7 @@
     <ClInclude Include="TargetRobot\src\include\Robot.h" />
     <ClInclude Include="TargetRobot\src\include\RobotControl.h" />
     <ClInclude Include="TargetRobot\src\include\RobotLibConfig.h" />
+    <ClInclude Include="TargetRobot\src\include\robotlib\ActionMetricsTask.h" />
     <ClInclude Include="TargetRobot\src\include\robotlib\BaseDataStoreTypes.h" />
     <ClInclude Include="TargetRobot\src\include\robotlib\DataStore.h" />
     <ClInclude Include="TargetRobot\src\include\robotlib\ip\IpEndpointName.h" />
@@ -192,6 +193,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="TargetRobot\src\cpp\Robot.cpp" />
+    <ClCompile Include="TargetRobot\src\cpp\robotlib\ActionMetricsTask.cpp" />
     <ClCompile Include="TargetRobot\src\cpp\robotlib\BaseDataStoreTypes.cpp" />
     <ClCompile Include="TargetRobot\src\cpp\robotlib\DataStore.cpp" />
     <ClCompile Include="TargetRobot\src\cpp\robotlib\ip\IpEndpointName.cpp">

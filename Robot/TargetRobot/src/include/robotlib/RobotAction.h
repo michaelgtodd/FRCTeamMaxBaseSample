@@ -1,11 +1,25 @@
 #pragma once
 #include <vector>
 #include <string>
+#include "DataStore.h"
+#include "RobotLibConfig.h"
 #ifndef WIN32
 #include "pthread.h"
 #else
 #include <Windows.h>
 #endif
+
+class ActionRunnerDataItem : public DataItem
+{
+public:
+	void SetRunnerName(std::string name);
+	std::string GetRunnerName();
+	void SetRunningActions(std::vector<std::string> actions);
+	std::vector<std::string> GetRunningActions();
+private:
+	std::vector<std::string> RunningActions;
+	std::string RunnerName;
+};
 
 class RobotAction
 {
@@ -101,6 +115,9 @@ public:
 private:
 	SerialActionRunner();
 	SerialAction baseAction;
+#ifdef ACTION_METRICS
+	ActionRunnerDataItem * MetricsData;
+#endif
 };
 
 class ParallelActionRunner : public ActionRunner
@@ -114,4 +131,7 @@ public:
 private:
 	ParallelActionRunner();
 	ParallelAction baseAction;
+#ifdef ACTION_METRICS
+	ActionRunnerDataItem * MetricsData;
+#endif
 };

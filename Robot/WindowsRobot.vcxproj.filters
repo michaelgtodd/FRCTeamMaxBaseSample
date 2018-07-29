@@ -153,6 +153,9 @@
     <ClInclude Include="TargetRobot\src\include\robotlib\TaskMetricsTask.h">
       <Filter>Header Files\TargetRobot\robotlib</Filter>
     </ClInclude>
+    <ClInclude Include="TargetRobot\src\include\robotlib\ActionMetricsTask.h">
+      <Filter>Header Files\TargetRobot\robotlib</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -225,6 +228,9 @@
       <Filter>Source Files\TargetRobot\robotlib</Filter>
     </ClCompile>
     <ClCompile Include="TargetRobot\src\cpp\robotlib\TaskMetricsTask.cpp">
+      <Filter>Source Files\TargetRobot\robotlib</Filter>
+    </ClCompile>
+    <ClCompile Include="TargetRobot\src\cpp\robotlib\ActionMetricsTask.cpp">
       <Filter>Source Files\TargetRobot\robotlib</Filter>
     </ClCompile>
   </ItemGroup>
