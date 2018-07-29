@@ -141,6 +141,12 @@
     <ClInclude Include="TargetRobot\src\include\ParallelCounterSampleTask.h">
       <Filter>Header Files\TargetRobot</Filter>
     </ClInclude>
+    <ClInclude Include="TargetRobot\src\include\robotlib\DataStore.h">
+      <Filter>Header Files\TargetRobot\robotlib</Filter>
+    </ClInclude>
+    <ClInclude Include="TargetRobot\src\include\robotlib\BaseDataStoreTypes.h">
+      <Filter>Header Files\TargetRobot\robotlib</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -205,6 +211,12 @@
     </ClCompile>
     <ClCompile Include="TargetRobot\src\cpp\ParallelCounterSampleTask.cpp">
       <Filter>Source Files\TargetRobot</Filter>
+    </ClCompile>
+    <ClCompile Include="TargetRobot\src\cpp\robotlib\DataStore.cpp">
+      <Filter>Source Files\TargetRobot\robotlib</Filter>
+    </ClCompile>
+    <ClCompile Include="TargetRobot\src\cpp\robotlib\BaseDataStoreTypes.cpp">
+      <Filter>Source Files\TargetRobot\robotlib</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
