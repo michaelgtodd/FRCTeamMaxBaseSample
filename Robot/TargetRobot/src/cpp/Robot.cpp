@@ -16,7 +16,7 @@ void Robot::RobotInit()
 	AutonomousManagerInstance.RegisterAutonomous(new SampleAutonomous);
 
 	// Task names cannot contain spaces at this time
-	TaskSchedule::AddTask((RobotTask*)&AutonomousManagerInstance, "AutoManager", 100);
+	TaskSchedule::AddTask((RobotTask*)&AutonomousManagerInstance, "AutoManager", 500);
 	//TaskContainer * SuperLoop = new TaskContainer();
 	//SuperLoop->AddTask(new SampleTask(), "SampleTask");
 	//SuperLoop->AddTask(new SampleTask(), "SampleTask2");

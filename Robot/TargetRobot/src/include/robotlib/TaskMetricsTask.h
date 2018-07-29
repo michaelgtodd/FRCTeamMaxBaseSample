@@ -3,7 +3,7 @@
 #include "robotlib/RobotTask.h"
 #include "robotlib/RobotAction.h"
 
-class ParallelCounterSampleTask : public RobotTask
+class TaskMetricsTask : public RobotTask
 {
 public:
 	void Always();
@@ -13,7 +13,6 @@ public:
 	void Start();
 	void Init();
 private:
-	ParallelActionRunner ActionRunner;
-public:
-	ParallelCounterSampleTask() : ActionRunner("Tom's Sample Runner", 15) {}
-};
+	std::vector<DataItem *> TaskCounters;
+	uint32_t LastReport;
+}; 

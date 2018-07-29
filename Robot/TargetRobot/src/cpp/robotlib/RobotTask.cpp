@@ -11,8 +11,46 @@
 #include <math.h>
 #include <iostream>
 #include "Robot.h"
+#include "robotlib/TaskMetricsTask.h"
 
 std::vector<RobotTask*> TaskSchedule::TaskList;
+
+void TaskMetricsData::ResetRuns()
+{
+	Lock();
+	runCounter = 0;
+	Unlock();
+}
+
+uint32_t TaskMetricsData::GetRuns()
+{
+	Lock();
+	uint32_t temp = runCounter;
+	Unlock();
+	return temp;
+}
+
+void TaskMetricsData::IncrementRuns()
+{
+	Lock();
+	runCounter++;
+	Unlock();
+}
+
+void TaskMetricsData::SetPeriod(uint32_t period)
+{
+	Lock();
+	targetPeriod = period;
+	Unlock();
+}
+
+uint32_t TaskMetricsData::GetPeriod()
+{
+	Lock();
+	uint32_t temp = targetPeriod;
+	Unlock();
+	return temp;
+}
 
 void TaskSchedule::AddTask(RobotTask* task, std::string taskname, uint32_t period)
 {
@@ -36,8 +74,33 @@ void TaskSchedule::SetTaskPriorty(int priority, std::string taskname)
 #endif
 }
 
+void TaskSchedule::SetTaskPriorty(int priority, std::string taskname, std::thread * thread)
+{
+#ifndef WIN32
+	sched_param sch;
+	sch.sched_priority = priority;
+
+	if (pthread_setschedparam(thread->native_handle(), SCHED_FIFO, &sch) != 0)
+	{
+		std::cout << "Failed to set task: " << taskname << " priority: " << priority << " Error: " << " " << strerror(errno) << std::endl;
+	}
+	else {
+		std::cout << "Set priority for task: " << taskname << " priority: " << priority << std::endl;
+	}
+#endif
+}
+
+void TaskSchedule::AddLibraryTasks()
+{
+#ifdef TASK_METRICS
+	TaskSchedule::AddTask(new TaskMetricsTask(), "TaskMetricsTask", 1);
+#endif
+}
+
 void TaskSchedule::LaunchTasks()
 {
+	TaskSchedule::AddLibraryTasks();
+
 	TaskSchedule::SetTaskPriorty(99, "DS_Task");
 
 	RobotLog::LogInfo("Starting tasks");
@@ -69,8 +132,9 @@ void RobotTask::ExecInit(std::string taskname, uint32_t task_period)
 	task_period_ = capped_period;
 
 #ifdef TASK_METRICS
-	runCounter = new DataItemCounter();
-	DataStore::RegisterDataItem("/taskmetricsruns/" + taskname, runCounter);
+	taskMetricsData = new TaskMetricsData();
+	taskMetricsData->SetPeriod(task_period_);
+	DataStore::RegisterDataItem("/taskmetrics/" + taskname, (DataItem *)taskMetricsData);
 #endif
 	Init();
 }
@@ -87,8 +151,10 @@ uint32_t RobotTask::getTimeMS()
 void RobotTask::Launch(int priority)
 {
 	RobotLog::LogInfo("Launching: " + taskname_);
+	Start();
+	lastLoopEndTargetMS = getTimeMS();
 	running_thread = std::thread(&RobotTask::ThreadProcess, this);
-	TaskSchedule::SetTaskPriorty(priority, taskname_);
+	TaskSchedule::SetTaskPriorty(priority, taskname_, &running_thread);
 }
 
 void RobotTask::ThreadProcess()
@@ -112,14 +178,14 @@ void RobotTask::ThreadProcess()
 		Always();
 
 #ifdef TASK_METRICS
-		runCounter->Increment();
+		taskMetricsData->IncrementRuns();
 #endif
 
 		// Note this code will fail after about 590 hours
 		// FRC robots don't expect to operate that long, and it's more efficient to be less defensive
-		uint32_t targetLoopEnd = lastLoopEndMS + (int32_t)(1000 / task_period_);
+		uint32_t targetLoopEnd = lastLoopEndTargetMS + (int32_t)(1000 / task_period_);
+		lastLoopEndTargetMS = targetLoopEnd;
 		uint32_t thisLoopEnd = getTimeMS();
-		lastLoopEndMS = thisLoopEnd;
 
 		uint32_t minsleep = std::max((int32_t)(targetLoopEnd - thisLoopEnd), (int32_t) 1);
 		std::this_thread::sleep_for(std::chrono::milliseconds(minsleep));

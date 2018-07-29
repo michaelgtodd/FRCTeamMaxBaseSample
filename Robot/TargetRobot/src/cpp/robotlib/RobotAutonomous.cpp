@@ -17,6 +17,7 @@ bool RegisterAutonomousAction::isFinished()
 void RegisterAutonomousAction::update()
 {
 	AutonomousManagerInstance.ProcessRegisterAutonomous(AutonomousTask_);
+	ranOnce = true;
 }
 
 void RegisterAutonomousAction::done() {}
@@ -42,6 +43,7 @@ bool SelectAutonomousAction::isFinished()
 void SelectAutonomousAction::update()
 {
 	AutonomousManagerInstance.ProcessSelectAutonomous(AutonomousName_);
+	ranOnce = true;
 }
 
 void SelectAutonomousAction::done() {}
@@ -69,6 +71,11 @@ void AutonomousManager::Always()
 void AutonomousManager::Disable()
 {
 	EndAutonomous();
+}
+
+void AutonomousManager::Start()
+{
+
 }
 
 void AutonomousManager::EndAutonomous()

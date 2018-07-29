@@ -63,6 +63,7 @@ public:
 	void Always();
 	void Disable();
 	void Autonomous();
+	void Start();
 
 	void RegisterAutonomous(AutonomousTask * AutonomousTask);
 	void SelectAutonomous(std::string AutonomousName);

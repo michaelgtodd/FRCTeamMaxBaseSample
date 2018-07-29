@@ -25,9 +25,9 @@ void ParallelCounterSampleTask::Autonomous()
 
 }
 
-void ParallelCounterSampleTask::ControllerUpdate(RobotControl * controls)
+void ParallelCounterSampleTask::Start()
 {
-	RobotControl * controls_ = (RobotControl *)(controls);
+
 }
 
 void ParallelCounterSampleTask::Init()
