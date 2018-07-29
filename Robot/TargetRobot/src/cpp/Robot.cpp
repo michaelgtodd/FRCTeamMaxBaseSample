@@ -5,13 +5,12 @@
 #include "SampleAutonomous.h"
 #include "ParallelCounterSampleTask.h"
 #include "SampleTask.h"
-#include "iostream"
 
 void Robot::RobotInit() 
 {
-	std::cout << "Initializing Robot..." << std::endl;
+	RobotReporter::LogMessage(RobotReporter::Pass, "Initializing Robot...");
 
-	RobotLog::InitializeRobotLog();
+	//RobotLog::InitializeRobotLog();
 
 	AutonomousManagerInstance.RegisterAutonomous(new SampleAutonomous);
 

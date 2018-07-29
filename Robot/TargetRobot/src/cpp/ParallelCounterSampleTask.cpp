@@ -1,5 +1,4 @@
 #include "ParallelCounterSampleTask.h"
-#include <iostream>
 #include "robotlib/RobotDataStream.h"
 #include "SampleActions/CounterAction.h"
 #include "SampleActions/PrintAction.h"

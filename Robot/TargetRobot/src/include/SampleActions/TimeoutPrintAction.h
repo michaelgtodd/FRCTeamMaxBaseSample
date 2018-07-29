@@ -14,5 +14,4 @@ public:
 private:
 	std::string printText_;
 	TimeoutPrintAction();
-	bool ranOnce = false;
 };

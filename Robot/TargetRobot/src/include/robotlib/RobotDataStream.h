@@ -1,14 +1,42 @@
 #pragma once
 #include <string>
+#include <sstream>
 #include "RobotTask.h"
-#include <vector>
+#include "RobotAction.h"
+#include <string>
 
-namespace RobotLog
+
+class RobotReporter : public RobotTask
 {
-	void InitializeRobotLog();
-	void LogPass(std::string error_message);
-	void LogInfo(std::string error_message);
-	void LogError(std::string error_message);
+	friend class RobotReporterPrintAction;
+public:
+	enum ReportType { Pass, Info, Error };
+	void Always();
+	void Run();
+	void Disable();
+	void Autonomous();
+	void Start();
+	void Init();
+	static void LogMessage(ReportType type, std::string message);
+private:
+	static void ProcessMessage(ReportType type, std::string message);
+	static SerialActionRunner ActionRunner;
+};
 
-	void AddTargetAddress(std::string address);
-}
+class RobotReporterPrintAction : public RobotAction
+{
+public:
+	RobotReporterPrintAction(RobotReporter::ReportType type, std::string message);
+
+	bool isFinished();
+	void update();
+	void done();
+	void start();
+
+	std::vector<std::string> getName();
+private:
+	RobotReporterPrintAction();
+	RobotReporter::ReportType type;
+	std::string message;
+	bool ranOnce = false;
+};

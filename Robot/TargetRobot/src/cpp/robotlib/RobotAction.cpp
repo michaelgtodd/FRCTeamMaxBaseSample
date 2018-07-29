@@ -1,5 +1,5 @@
 #include "robotlib/RobotAction.h"
-#include <iostream>
+#include "robotlib/RobotDataStream.h"
 #include <sstream>
 #ifndef WIN32
 #include <Timer.h>
@@ -58,7 +58,9 @@ bool RobotAction::isTimeoutExpired()
 	}
 	if (timedOut)
 	{
-		std::cout << "Hey I'm a " << this->getName()[0] << " and I timed out after " << RobotAction::timeoutTime << " milliseconds." << std::endl;
+		std::stringstream output;
+		output << "Hey I'm a " << this->getName()[0] << " and I timed out after " << RobotAction::timeoutTime << " milliseconds.";
+		RobotReporter::LogMessage(RobotReporter::Info, output.str());
 	}
 
 	return timedOut;
@@ -113,9 +115,6 @@ void ParallelAction::update()
 		(*i)->update();
 		if ((*i)->isFinished() || (*i)->isTimeoutExpired())
 		{
-#ifdef ACTION_METRICS_LOG
-			std::cout << "ACTIONMETRICSLOG: Finishing: " << (*i)->getName()[0] << std::endl;
-#endif
 			(*i)->done();
 			delete (*i);
 			i = ActionList.erase(i);
@@ -199,11 +198,6 @@ void SerialAction::update()
 	{
 		do 
 		{
-
-#ifdef ACTION_METRICS_LOG
-			std::cout << "ACTIONMETRICSLOG: Finishing: " << (*i)->getName()[0] << std::endl;
-#endif
-
 			(*i)->done();
 			delete (*i);
 			i = ActionList.erase(i);
@@ -212,11 +206,7 @@ void SerialAction::update()
 				return;
 
 			(*i)->baseStart();
-
-#ifdef ACTION_METRICS_LOG
-			std::cout << "ACTIONMETRICSLOG: Starting: " << (*i)->getName()[0] << std::endl;
-#endif
-
+			
 			(*i)->update();
 		} while ((*i)->isFinished() || (*i)->isTimeoutExpired());
 	}
@@ -342,7 +332,7 @@ void SerialActionRunner::queueAction(RobotAction * Action)
 	}
 	else
 	{
-		std::cout << "Ruhroh - " << ActionRunner::name_  << "'s queue is overflown." << std::endl;
+		RobotReporter::LogMessage(RobotReporter::Error, "Ruhroh - " + ActionRunner::name_ + "'s queue is overflown.");
 	}
 	ActionRunner::Unlock();
 }
@@ -360,7 +350,7 @@ void SerialActionRunner::queueActions(std::vector<RobotAction *> Actions)
 	}
 	else
 	{
-		std::cout << "Ruhroh - " << ActionRunner::name_ << "'s queue is overflown." << std::endl;
+		RobotReporter::LogMessage(RobotReporter::Error, "Ruhroh - " + ActionRunner::name_ + "'s queue is overflown.");
 	}
 
 	ActionRunner::Unlock();
@@ -383,14 +373,12 @@ void ParallelActionRunner::queueAction(RobotAction * Action)
 	if (baseAction.getCount() < ActionRunner::actionLimit_)
 	{
 		Action->baseStart();
-#ifdef ACTION_METRICS_LOG
-		std::cout << "ACTIONMETRICSLOG: Starting: " << Action->getName()[0] << std::endl;
-#endif
+
 		baseAction.AddAction(Action);
 	}
 	else
 	{
-		std::cout << "Ruhroh - " << ActionRunner::name_ << "'s queue is overflown." << std::endl;
+		RobotReporter::LogMessage(RobotReporter::Error, "Ruhroh - " + ActionRunner::name_ + "'s queue is overflown.");
 	}
 	ActionRunner::Unlock();
 }
@@ -405,15 +393,12 @@ void ParallelActionRunner::queueActions(std::vector<RobotAction *> Actions)
 			i++)
 		{
 			(*i)->baseStart();
-#ifdef ACTION_METRICS_LOG
-			std::cout << "ACTIONMETRICSLOG: Starting: " << (*i)->getName()[0] << std::endl;
-#endif
 		}
 		baseAction.AddActions(Actions);
 	}
 	else
 	{
-		std::cout << "Ruhroh - " << ActionRunner::name_ << "'s queue is overflown." << std::endl;
+		RobotReporter::LogMessage(RobotReporter::Error, "Ruhroh - " + ActionRunner::name_ + "'s queue is overflown.");
 	}
 
 	ActionRunner::Unlock();

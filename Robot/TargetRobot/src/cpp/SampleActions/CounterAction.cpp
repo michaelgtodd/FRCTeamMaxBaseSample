@@ -1,5 +1,4 @@
 #include "SampleActions/CounterAction.h"
-#include <iostream>
 
 CounterAction::CounterAction(int counterMax)
 {

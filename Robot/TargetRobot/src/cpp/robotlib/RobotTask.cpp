@@ -9,10 +9,10 @@
 #endif
 #include "robotlib/RobotDataStream.h"
 #include <math.h>
-#include <iostream>
 #include "Robot.h"
 #include "robotlib/TaskMetricsTask.h"
 #include "robotlib/ActionMetricsTask.h"
+#include <sstream>
 
 std::vector<RobotTask*> TaskSchedule::TaskList;
 
@@ -67,26 +67,35 @@ void TaskSchedule::SetTaskPriorty(int priority, std::string taskname)
 
 	if (pthread_setschedparam(pthread_self(), SCHED_FIFO, &sch) != 0)
 	{
-		std::cout << "Failed to set task: " << taskname << " priority: " << priority << " Error: " << " " << strerror(errno) << std::endl;
+		std::stringstream output;
+		output << "Failed to set task: " << taskname << " priority: " << priority << " Error: " << " " << strerror(errno) << std::endl;
+		RobotReporter::LogMessage(RobotReporter::Error, output.str());
 	}
 	else {
-		std::cout << "Set priority for task: " << taskname << " priority: " << priority << std::endl;
+		std::stringstream output;
+		output << "Set priority for task: " << taskname << " priority: " << priority << std::endl;
+		RobotReporter::LogMessage(RobotReporter::Error, output.str());
 	}
 #endif
 }
 
 void TaskSchedule::SetTaskPriorty(int priority, std::string taskname, std::thread * thread)
 {
+
 #ifndef WIN32
 	sched_param sch;
 	sch.sched_priority = priority;
 
 	if (pthread_setschedparam(thread->native_handle(), SCHED_FIFO, &sch) != 0)
 	{
-		std::cout << "Failed to set task: " << taskname << " priority: " << priority << " Error: " << " " << strerror(errno) << std::endl;
+		std::stringstream output;
+		output << "Failed to set task: " << taskname << " priority: " << priority << " Error: " << " " << strerror(errno) << std::endl;
+		RobotReporter::LogMessage(RobotReporter::Error, output.str());
 	}
 	else {
-		std::cout << "Set priority for task: " << taskname << " priority: " << priority << std::endl;
+		std::stringstream output;
+		output << "Set priority for task: " << taskname << " priority: " << priority << std::endl;
+		RobotReporter::LogMessage(RobotReporter::Error, output.str());
 	}
 #endif
 }
@@ -94,16 +103,22 @@ void TaskSchedule::SetTaskPriorty(int priority, std::string taskname, std::threa
 void TaskSchedule::AddLibraryTasks()
 {
 	TaskContainer * LoggingSuperLoop = new TaskContainer();
+	LoggingSuperLoop->AddTask(new RobotReporter(), "RobotReporter");
+	TaskSchedule::AddTask(LoggingSuperLoop, "LoggingSuperLoop", 10);
 
+#if defined(TASK_METRICS) || defined (ACTION_METRICS)
+	TaskContainer * MetricsSuperLoop = new TaskContainer();
+#endif
 #ifdef TASK_METRICS
-	LoggingSuperLoop->AddTask(new TaskMetricsTask(), "TaskMetricsTask");
+	MetricsSuperLoop->AddTask(new TaskMetricsTask(), "TaskMetricsTask");
 #endif
 
 #ifdef ACTION_METRICS
-	LoggingSuperLoop->AddTask(new ActionMetricsTask(), "ActionMetricsTask");
+	MetricsSuperLoop->AddTask(new ActionMetricsTask(), "ActionMetricsTask");
 #endif
-
-	TaskSchedule::AddTask(LoggingSuperLoop, "LoggingSuperLoop", 1);
+#if defined(TASK_METRICS) || defined (ACTION_METRICS)
+	TaskSchedule::AddTask(MetricsSuperLoop, "MetricsSuperLoop", 1);
+#endif
 }
 
 void TaskSchedule::LaunchTasks()
@@ -112,7 +127,6 @@ void TaskSchedule::LaunchTasks()
 
 	TaskSchedule::SetTaskPriorty(99, "DS_Task");
 
-	RobotLog::LogInfo("Starting tasks");
 	int priority = 80;
 	for (std::vector<RobotTask*>::iterator i = TaskList.begin();
 		i != TaskList.end();
@@ -159,7 +173,6 @@ uint32_t RobotTask::getTimeMS()
 
 void RobotTask::Launch(int priority)
 {
-	RobotLog::LogInfo("Launching: " + taskname_);
 	Start();
 	lastLoopEndTargetMS = getTimeMS();
 	running_thread = std::thread(&RobotTask::ThreadProcess, this);

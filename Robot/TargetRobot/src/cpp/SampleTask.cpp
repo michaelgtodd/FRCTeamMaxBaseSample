@@ -1,5 +1,4 @@
 #include "SampleTask.h"
-#include <iostream>
 #include "robotlib/RobotDataStream.h"
 #include "SampleActions/PrintAction.h"
 #include "SampleActions/TimeoutPrintAction.h"

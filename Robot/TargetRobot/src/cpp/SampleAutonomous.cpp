@@ -1,13 +1,11 @@
 #include "SampleAutonomous.h"
 #include "robotlib/RobotDataStream.h"
-#include "iostream"
 #include <math.h>
+#include <sstream>
 
 void SampleAutonomous::Init()
 {
-	RobotLog::LogInfo("Starting Auto");
-
-	std::cout << "Auto Init" << std::endl;
+	RobotReporter::LogMessage(RobotReporter::Pass, "Auto Init");
 
 	StartTime = getTimeMS();
 	
@@ -26,8 +24,10 @@ void SampleAutonomous::Autonomous()
 	if (floor(RunTime) > LastMessage)
 	{
 		LastMessage = (int) floor(RunTime);
-		std::cout << "Running at " << std::to_string(LastMessage) << " seconds" << std::endl;
-		RobotLog::LogInfo("Running at " + std::to_string(LastMessage) + " seconds");
+
+		std::stringstream output;
+		output << "Running at " << std::to_string(LastMessage) << " seconds" << std::endl;
+		RobotReporter::LogMessage(RobotReporter::Info, output.str());
 	}
 }
 
@@ -36,7 +36,6 @@ void SampleAutonomous::End()
 	double CurrentTime = getTimeMS();
 	RunTime = CurrentTime - StartTime;
 	LastMessage = (int) floor(RunTime);
-	RobotLog::LogInfo("Ending Auto after " + std::to_string(LastMessage) + " seconds");
 }
 
 std::string SampleAutonomous::GetName()

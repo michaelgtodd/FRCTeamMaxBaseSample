@@ -1,5 +1,6 @@
 #include "robotlib/DataStore.h"
-#include <iostream>
+#include "robotlib/RobotDataStream.h"
+#include <sstream>
 
 
 #ifdef WIN32
@@ -42,6 +43,7 @@ void DataStore::RegisterDataItem(std::string name, DataItem * item)
 {
 	Lock();
 	item->SetName(name);
+	std::stringstream output;
 
 	for (std::vector<DataItem *>::iterator i = DataItems.begin();
 		i != DataItems.end();
@@ -50,7 +52,9 @@ void DataStore::RegisterDataItem(std::string name, DataItem * item)
 		if ((*i)->GetName() == name)
 		{
 			Unlock();
-			std::cout << "Failed to register duplicate data item: " << name << std::endl;
+
+			output << "Failed to register duplicate data item: " << name << std::endl;
+			RobotReporter::LogMessage(RobotReporter::Error, output.str());
 			return;
 		}
 	}
@@ -75,7 +79,7 @@ DataItem * DataStore::LookupDataItem(std::string name)
 	}
 
 	Unlock();
-	std::cout << "Failed to lookup DataStore Item: " << name << std::endl;
+	RobotReporter::LogMessage(RobotReporter::Error, "Failed to lookup DataStore Item : " + name);
 	return NULL;
 	
 }

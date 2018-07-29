@@ -1,6 +1,5 @@
 #include "robotlib\RobotAutonomous.h"
 #include "robotlib\RobotDataStream.h"
-#include "iostream"
 #ifndef WIN32
 #include "Timer.h"
 #endif
@@ -105,8 +104,7 @@ void AutonomousManager::Autonomous()
 	AutoRunning = true;
 	if (!LastStateAutonomous)
 	{
-		RobotLog::LogInfo("Starting Autonomous: " + SelectedAutonomous->GetName());
-		std::cout << "Starting auto..." << std::endl;
+		RobotReporter::LogMessage(RobotReporter::Pass, "Starting auto...");
 		SelectedAutonomous->Init();
 	}
 
@@ -145,12 +143,14 @@ void AutonomousManager::ProcessSelectAutonomous(std::string AutonomousName)
 			{
 				if (SelectedAutonomous->GetName() != AutonomousName)
 				{
-					std::cout << "Selecting " << AutonomousName << " Auto." << std::endl;
+					RobotReporter::LogMessage(RobotReporter::Pass, "Selecting " + AutonomousName + " Auto.");
 				}
 				SelectedAutonomous = (*i);
+				return;
 			}
 		}
 	}
+	RobotReporter::LogMessage(RobotReporter::Error, "Invalid autonomous " + AutonomousName);
 }
 
 void AutonomousManager::Lock()

@@ -1,5 +1,5 @@
 #include "SampleActions/TimeoutPrintAction.h"
-#include <iostream>
+#include "robotlib/RobotDataStream.h"
 
 TimeoutPrintAction::TimeoutPrintAction(std::string printText, uint32_t timeout)
 {
@@ -14,16 +14,12 @@ bool TimeoutPrintAction::isFinished()
 
 void TimeoutPrintAction::update()
 {
-	if (!ranOnce)
-	{
-		std::cout << printText_ << std::endl;
-	}	
-	ranOnce = true;
+
 }
 
 void TimeoutPrintAction::done()
 {
-	std::cout << printText_ << std::endl;
+	RobotReporter::LogMessage(RobotReporter::Info, printText_);
 }
 
 void TimeoutPrintAction::start()

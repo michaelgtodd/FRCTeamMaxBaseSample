@@ -1,5 +1,5 @@
 #include "robotlib/TaskMetricsTask.h"
-#include <iostream>
+#include "robotlib/RobotDataStream.h"
 #include <sstream>
 
 void TaskMetricsTask::Run()
@@ -28,7 +28,7 @@ void TaskMetricsTask::Always()
 		counter->ResetRuns();
 	}
 	LastReport = getTimeMS();
-	std::cout << output.rdbuf();
+	RobotReporter::LogMessage(RobotReporter::Info, output.str());
 }
 
 void TaskMetricsTask::Autonomous()

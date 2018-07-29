@@ -1,5 +1,5 @@
 #include "robotlib/ActionMetricsTask.h"
-#include <iostream>
+#include "robotlib/RobotDataStream.h"
 #include <sstream>
 
 void ActionMetricsTask::Run()
@@ -36,7 +36,7 @@ void ActionMetricsTask::Always()
 		}
 	}
 	LastReport = getTimeMS();
-	std::cout << output.rdbuf();
+	RobotReporter::LogMessage(RobotReporter::Info, output.str());
 }
 
 void ActionMetricsTask::Autonomous()
@@ -47,7 +47,6 @@ void ActionMetricsTask::Autonomous()
 void ActionMetricsTask::Start()
 {
 	ActionMetrics = DataStore::LookupDataItemBeginsWith("/actionmetrics/");
-	std::cout << "looked up..." << std::endl;
 	LastReport = getTimeMS();
 }
 

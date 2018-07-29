@@ -1,5 +1,5 @@
 #include "SampleActions/PrintAction.h"
-#include <iostream>
+#include "robotlib/RobotDataStream.h"
 
 PrintAction::PrintAction(std::string printText)
 {
@@ -13,7 +13,7 @@ bool PrintAction::isFinished()
 
 void PrintAction::update()
 {
-	std::cout << printText_ << std::endl;
+	RobotReporter::LogMessage(RobotReporter::Info, printText_);
 	ranOnce = true;
 }
 
