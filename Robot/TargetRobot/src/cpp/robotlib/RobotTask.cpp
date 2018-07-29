@@ -115,12 +115,11 @@ void RobotTask::ThreadProcess()
 		runCounter->Increment();
 #endif
 
-		uint32_t loopEndMS = getTimeMS();
+		uint32_t targetLoopEnd = lastLoopEndMS + (int32_t)(1000 / task_period_);
+		uint32_t thisLoopEnd = getTimeMS();
+		lastLoopEndMS = thisLoopEnd;
 
-		lastLoopEndMS = loopEndMS;
-
-		uint32_t loopElapsedTimeMS = (uint32_t)((loopEndMS - loopStartMS));
-		uint32_t minsleep = std::max((int32_t)(1000 / task_period_) - (int32_t)loopElapsedTimeMS, (int32_t) 1);
+		uint32_t minsleep = std::max((int32_t)(targetLoopEnd - thisLoopEnd), (int32_t) 1);
 		std::this_thread::sleep_for(std::chrono::milliseconds(minsleep));
 	}
 }
