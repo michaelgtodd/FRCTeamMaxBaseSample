@@ -115,6 +115,8 @@ void RobotTask::ThreadProcess()
 		runCounter->Increment();
 #endif
 
+		// Note this code will fail after about 590 hours
+		// FRC robots don't expect to operate that long, and it's more efficient to be less defensive
 		uint32_t targetLoopEnd = lastLoopEndMS + (int32_t)(1000 / task_period_);
 		uint32_t thisLoopEnd = getTimeMS();
 		lastLoopEndMS = thisLoopEnd;
