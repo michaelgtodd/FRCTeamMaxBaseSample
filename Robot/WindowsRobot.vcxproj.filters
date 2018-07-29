@@ -147,6 +147,9 @@
     <ClInclude Include="TargetRobot\src\include\robotlib\BaseDataStoreTypes.h">
       <Filter>Header Files\TargetRobot\robotlib</Filter>
     </ClInclude>
+    <ClInclude Include="TargetRobot\src\include\RobotLibConfig.h">
+      <Filter>Header Files\TargetRobot</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
