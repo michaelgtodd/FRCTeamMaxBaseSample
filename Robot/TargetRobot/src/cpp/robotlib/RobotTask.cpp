@@ -106,6 +106,10 @@ void TaskSchedule::AddLibraryTasks()
 	LoggingSuperLoop->AddTask(new RobotReporter(), "RobotReporter");
 	TaskSchedule::AddTask(LoggingSuperLoop, "LoggingSuperLoop", 10);
 
+	TaskContainer * DashboardSuperLoop = new TaskContainer();
+	DashboardSuperLoop->AddTask(new OSCReporter(), "OSCReporter");
+	TaskSchedule::AddTask(DashboardSuperLoop, "DashboardSuperLoop", 20);
+
 #if defined(TASK_METRICS) || defined (ACTION_METRICS)
 	TaskContainer * MetricsSuperLoop = new TaskContainer();
 #endif
@@ -132,6 +136,7 @@ void TaskSchedule::LaunchTasks()
 		i != TaskList.end();
 		i++)
 	{
+		RobotReporter::LogMessage(RobotReporter::Pass, "Launching: " + (*i)->GetTaskName());
 		(*i)->Launch(priority);
 		priority--;
 	}

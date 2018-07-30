@@ -173,7 +173,6 @@
     <ClInclude Include="TargetRobot\src\include\robotlib\RobotAction.h" />
     <ClInclude Include="TargetRobot\src\include\robotlib\RobotAutonomous.h" />
     <ClInclude Include="TargetRobot\src\include\robotlib\RobotDataStream.h" />
-    <ClInclude Include="TargetRobot\src\include\robotlib\RobotDefs.h" />
     <ClInclude Include="TargetRobot\src\include\robotlib\RobotTask.h" />
     <ClInclude Include="TargetRobot\src\include\robotlib\TaskMetricsTask.h" />
     <ClInclude Include="TargetRobot\src\include\SampleActions\CounterAction.h" />

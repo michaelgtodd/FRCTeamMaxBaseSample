@@ -105,9 +105,6 @@
     <ClInclude Include="TargetRobot\src\include\robotlib\RobotDataStream.h">
       <Filter>Header Files\TargetRobot\robotlib</Filter>
     </ClInclude>
-    <ClInclude Include="TargetRobot\src\include\robotlib\RobotDefs.h">
-      <Filter>Header Files\TargetRobot\robotlib</Filter>
-    </ClInclude>
     <ClInclude Include="TargetRobot\src\include\robotlib\RobotTask.h">
       <Filter>Header Files\TargetRobot\robotlib</Filter>
     </ClInclude>
