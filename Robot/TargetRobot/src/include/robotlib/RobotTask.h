@@ -37,6 +37,9 @@ public:
 	void ExecInit(std::string taskname, uint32_t task_period);
 	void Launch(int priority);
 	void virtual Init() = 0;
+#ifdef TASK_METRICS
+	void OverridePeriod(uint32_t task_period);
+#endif
 
 protected:
 	uint32_t getTimeMS();

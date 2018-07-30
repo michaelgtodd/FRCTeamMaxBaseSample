@@ -4,9 +4,6 @@
 #else
 #include "WPILib.h"
 #endif
-#include "SampleTask.h"
-
-#define CONSOLE_LOG_INFO
 
 class Robot : public frc::SampleRobot 
 {

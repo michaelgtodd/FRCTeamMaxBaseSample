@@ -46,12 +46,6 @@
     <Filter Include="Source Files\WindowsRobot\ip">
       <UniqueIdentifier>{60da7611-5688-4b72-a3b9-99cf446f178c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\TargetRobot\SampleActions">
-      <UniqueIdentifier>{5faf28e6-9f06-45cc-8cc4-8c337b2b168f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\TargetRobot\SampleActions">
-      <UniqueIdentifier>{0e2357a3-802e-4c3e-8912-905bb752bd00}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -111,12 +105,6 @@
     <ClInclude Include="TargetRobot\src\include\Robot.h">
       <Filter>Header Files\TargetRobot</Filter>
     </ClInclude>
-    <ClInclude Include="TargetRobot\src\include\SampleAutonomous.h">
-      <Filter>Header Files\TargetRobot</Filter>
-    </ClInclude>
-    <ClInclude Include="TargetRobot\src\include\SampleTask.h">
-      <Filter>Header Files\TargetRobot</Filter>
-    </ClInclude>
     <ClInclude Include="WindowsRobot\include\FRCWindowsRobot.h">
       <Filter>Header Files\WindowsRobot</Filter>
     </ClInclude>
@@ -125,18 +113,6 @@
     </ClInclude>
     <ClInclude Include="TargetRobot\src\include\robotlib\RobotAction.h">
       <Filter>Header Files\TargetRobot\robotlib</Filter>
-    </ClInclude>
-    <ClInclude Include="TargetRobot\src\include\SampleActions\PrintAction.h">
-      <Filter>Header Files\TargetRobot\SampleActions</Filter>
-    </ClInclude>
-    <ClInclude Include="TargetRobot\src\include\SampleActions\TimeoutPrintAction.h">
-      <Filter>Header Files\TargetRobot\SampleActions</Filter>
-    </ClInclude>
-    <ClInclude Include="TargetRobot\src\include\SampleActions\CounterAction.h">
-      <Filter>Header Files\TargetRobot\SampleActions</Filter>
-    </ClInclude>
-    <ClInclude Include="TargetRobot\src\include\ParallelCounterSampleTask.h">
-      <Filter>Header Files\TargetRobot</Filter>
     </ClInclude>
     <ClInclude Include="TargetRobot\src\include\robotlib\DataStore.h">
       <Filter>Header Files\TargetRobot\robotlib</Filter>
@@ -152,6 +128,12 @@
     </ClInclude>
     <ClInclude Include="TargetRobot\src\include\robotlib\ActionMetricsTask.h">
       <Filter>Header Files\TargetRobot\robotlib</Filter>
+    </ClInclude>
+    <ClInclude Include="TargetRobot\src\include\DashboardTask.h">
+      <Filter>Header Files\TargetRobot</Filter>
+    </ClInclude>
+    <ClInclude Include="TargetRobot\src\include\RobotLoggerTask.h">
+      <Filter>Header Files\TargetRobot</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -188,12 +170,6 @@
     <ClCompile Include="TargetRobot\src\cpp\Robot.cpp">
       <Filter>Source Files\TargetRobot</Filter>
     </ClCompile>
-    <ClCompile Include="TargetRobot\src\cpp\SampleAutonomous.cpp">
-      <Filter>Source Files\TargetRobot</Filter>
-    </ClCompile>
-    <ClCompile Include="TargetRobot\src\cpp\SampleTask.cpp">
-      <Filter>Source Files\TargetRobot</Filter>
-    </ClCompile>
     <ClCompile Include="WindowsRobot\cpp\FRCWindowsRobot.cpp">
       <Filter>Source Files\WindowsRobot</Filter>
     </ClCompile>
@@ -206,18 +182,6 @@
     <ClCompile Include="TargetRobot\src\cpp\robotlib\RobotAction.cpp">
       <Filter>Source Files\TargetRobot\robotlib</Filter>
     </ClCompile>
-    <ClCompile Include="TargetRobot\src\cpp\SampleActions\TimeoutPrintAction.cpp">
-      <Filter>Source Files\TargetRobot\SampleActions</Filter>
-    </ClCompile>
-    <ClCompile Include="TargetRobot\src\cpp\SampleActions\PrintAction.cpp">
-      <Filter>Source Files\TargetRobot\SampleActions</Filter>
-    </ClCompile>
-    <ClCompile Include="TargetRobot\src\cpp\SampleActions\CounterAction.cpp">
-      <Filter>Source Files\TargetRobot\SampleActions</Filter>
-    </ClCompile>
-    <ClCompile Include="TargetRobot\src\cpp\ParallelCounterSampleTask.cpp">
-      <Filter>Source Files\TargetRobot</Filter>
-    </ClCompile>
     <ClCompile Include="TargetRobot\src\cpp\robotlib\DataStore.cpp">
       <Filter>Source Files\TargetRobot\robotlib</Filter>
     </ClCompile>
@@ -228,6 +192,15 @@
       <Filter>Source Files\TargetRobot\robotlib</Filter>
     </ClCompile>
     <ClCompile Include="TargetRobot\src\cpp\robotlib\ActionMetricsTask.cpp">
+      <Filter>Source Files\TargetRobot\robotlib</Filter>
+    </ClCompile>
+    <ClCompile Include="TargetRobot\src\cpp\DashboardTask.cpp">
+      <Filter>Source Files\TargetRobot</Filter>
+    </ClCompile>
+    <ClCompile Include="TargetRobot\src\cpp\RobotLoggerTask.cpp">
+      <Filter>Source Files\TargetRobot</Filter>
+    </ClCompile>
+    <ClCompile Include="TargetRobot\src\cpp\DashboardTaskBackend.cpp">
       <Filter>Source Files\TargetRobot\robotlib</Filter>
     </ClCompile>
   </ItemGroup>

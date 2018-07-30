@@ -13,6 +13,8 @@
 #include "robotlib/TaskMetricsTask.h"
 #include "robotlib/ActionMetricsTask.h"
 #include <sstream>
+#include "DashboardTask.h"
+#include "RobotLoggerTask.h"
 
 std::vector<RobotTask*> TaskSchedule::TaskList;
 
@@ -103,10 +105,12 @@ void TaskSchedule::SetTaskPriorty(int priority, std::string taskname, std::threa
 void TaskSchedule::AddLibraryTasks()
 {
 	TaskContainer * LoggingSuperLoop = new TaskContainer();
+	LoggingSuperLoop->AddTask(new RobotLoggerTask(), "RobotLogger");
 	LoggingSuperLoop->AddTask(new RobotReporter(), "RobotReporter");
 	TaskSchedule::AddTask(LoggingSuperLoop, "LoggingSuperLoop", 10);
 
 	TaskContainer * DashboardSuperLoop = new TaskContainer();
+	DashboardSuperLoop->AddTask(new DashboardTask(), "DashboardTask");
 	DashboardSuperLoop->AddTask(new OSCReporter(), "OSCReporter");
 	TaskSchedule::AddTask(DashboardSuperLoop, "DashboardSuperLoop", 20);
 
@@ -184,6 +188,13 @@ void RobotTask::Launch(int priority)
 	TaskSchedule::SetTaskPriorty(priority, taskname_, &running_thread);
 }
 
+#ifdef TASK_METRICS
+void RobotTask::OverridePeriod(uint32_t task_period)
+{
+	taskMetricsData->SetPeriod(task_period);
+}
+#endif
+
 void RobotTask::ThreadProcess()
 {
 	while (true)
@@ -221,7 +232,7 @@ void RobotTask::ThreadProcess()
 
 void TaskContainer::AddTask(RobotTask * Task, std::string taskname)
 {
-	Task->ExecInit(taskname, 1);
+	Task->ExecInit(taskname, 0);
 	TaskList.push_back(Task);
 }
 
@@ -285,10 +296,14 @@ void TaskContainer::Start()
 
 void TaskContainer::Init()
 {
+	// This intentionally doesn't dispatch to the subtask init routiunes, as they're
+	// called from execinit
+#ifdef TASK_METRICS
 	for (std::vector<RobotTask *>::iterator i = TaskList.begin();
 		i != TaskList.end();
 		i++)
 	{
-		(*i)->Init();
+		(*i)->OverridePeriod(task_period_);
 	}
+#endif
 }

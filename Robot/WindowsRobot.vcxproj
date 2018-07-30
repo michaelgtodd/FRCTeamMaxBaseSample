@@ -151,6 +151,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="TargetRobot\src\include\DashboardTask.h" />
     <ClInclude Include="TargetRobot\src\include\Robot.h" />
     <ClInclude Include="TargetRobot\src\include\RobotControl.h" />
     <ClInclude Include="TargetRobot\src\include\RobotLibConfig.h" />
@@ -175,13 +176,8 @@
     <ClInclude Include="TargetRobot\src\include\robotlib\RobotDataStream.h" />
     <ClInclude Include="TargetRobot\src\include\robotlib\RobotTask.h" />
     <ClInclude Include="TargetRobot\src\include\robotlib\TaskMetricsTask.h" />
-    <ClInclude Include="TargetRobot\src\include\SampleActions\CounterAction.h" />
-    <ClInclude Include="TargetRobot\src\include\SampleActions\PrintAction.h" />
-    <ClInclude Include="TargetRobot\src\include\SampleActions\TimeoutPrintAction.h" />
-    <ClInclude Include="TargetRobot\src\include\SampleAutonomous.h" />
-    <ClInclude Include="TargetRobot\src\include\SampleTask.h" />
+    <ClInclude Include="TargetRobot\src\include\RobotLoggerTask.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="TargetRobot\src\include\ParallelCounterSampleTask.h" />
     <ClInclude Include="WindowsRobot\include\FRCWindowsRobot.h" />
   </ItemGroup>
   <ItemGroup>
@@ -191,6 +187,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="TargetRobot\src\cpp\DashboardTask.cpp" />
+    <ClCompile Include="TargetRobot\src\cpp\DashboardTaskBackend.cpp" />
     <ClCompile Include="TargetRobot\src\cpp\Robot.cpp" />
     <ClCompile Include="TargetRobot\src\cpp\robotlib\ActionMetricsTask.cpp" />
     <ClCompile Include="TargetRobot\src\cpp\robotlib\BaseDataStoreTypes.cpp" />
@@ -217,12 +215,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="TargetRobot\src\cpp\robotlib\TaskMetricsTask.cpp" />
-    <ClCompile Include="TargetRobot\src\cpp\SampleActions\CounterAction.cpp" />
-    <ClCompile Include="TargetRobot\src\cpp\SampleActions\PrintAction.cpp" />
-    <ClCompile Include="TargetRobot\src\cpp\SampleActions\TimeoutPrintAction.cpp" />
-    <ClCompile Include="TargetRobot\src\cpp\SampleAutonomous.cpp" />
-    <ClCompile Include="TargetRobot\src\cpp\SampleTask.cpp" />
-    <ClCompile Include="TargetRobot\src\cpp\ParallelCounterSampleTask.cpp" />
+    <ClCompile Include="TargetRobot\src\cpp\RobotLoggerTask.cpp" />
     <ClCompile Include="WindowsRobot.cpp" />
     <ClCompile Include="WindowsRobot\cpp\FRCWindowsRobot.cpp" />
     <ClCompile Include="WindowsRobot\cpp\ip\NetworkingUtils.cpp" />

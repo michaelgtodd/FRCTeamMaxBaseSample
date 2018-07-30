@@ -194,6 +194,8 @@ void SerialAction::update()
 		return;
 
 	std::vector<RobotAction *>::iterator i = ActionList.begin();
+	(*i)->update();
+
 	if ((*i)->isFinished() || (*i)->isTimeoutExpired())
 	{
 		do 
@@ -209,9 +211,6 @@ void SerialAction::update()
 			
 			(*i)->update();
 		} while ((*i)->isFinished() || (*i)->isTimeoutExpired());
-	}
-	else {
-		(*i)->update();
 	}
 }
 

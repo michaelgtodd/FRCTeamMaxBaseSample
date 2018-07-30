@@ -56,7 +56,7 @@ private:
 	bool ranOnce = false;
 };
 
-class AutonomousManager : RobotTask
+class AutonomousManager : public RobotTask
 {
 	friend class RegisterAutonomousAction;
 	friend class SelectAutonomousAction;

@@ -53,6 +53,7 @@ private:
 
 class OSCTransmitAction : public RobotAction
 {
+public:
 	OSCTransmitAction(OSCData * DataPacket);
 	bool isFinished();
 	void update();
@@ -72,13 +73,15 @@ class OSCReporter : public RobotTask
 	friend class OSCDouble;
 	friend class OSCString;
 	friend class OSCInt;
-
+public:
 	void Always();
 	void Run();
 	void Disable();
 	void Autonomous();
 	void Start();
 	void Init();
+
+	static void AddOSCObject(OSCData * DataPacket);
 private:
 	static osc::OutboundPacketStream OSCStream;
 	static SerialActionRunner ActionRunner;
@@ -89,7 +92,7 @@ class RobotReporter : public RobotTask
 {
 	friend class RobotReporterPrintAction;
 public:
-	enum ReportType { Pass, Info, Error };
+	enum ReportType { Pass, Info, Error, Log };
 	void Always();
 	void Run();
 	void Disable();
