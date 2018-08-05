@@ -2,6 +2,7 @@
 #include "robotlib/RobotTask.h"
 #include "robotlib/RobotDataStream.h"
 #include "robotlib/RobotAutonomous.h"
+#include "DriveTrainTask.h"
 
 void Robot::RobotInit() 
 {
@@ -10,6 +11,7 @@ void Robot::RobotInit()
 	//AutonomousManagerInstance.RegisterAutonomous(new SampleAutonomous);
 
 	// Task names cannot contain spaces at this time
+	TaskSchedule::AddTask(new DriveTrainTask(), "DriveTrain", 100);
 	TaskSchedule::AddTask(&AutonomousManagerInstance, "AutoManager", 100);
 
 	TaskSchedule::LaunchTasks();

@@ -152,6 +152,7 @@
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="TargetRobot\src\include\DashboardTask.h" />
+    <ClInclude Include="TargetRobot\src\include\DriveTrainTask.h" />
     <ClInclude Include="TargetRobot\src\include\Robot.h" />
     <ClInclude Include="TargetRobot\src\include\RobotControl.h" />
     <ClInclude Include="TargetRobot\src\include\RobotLibConfig.h" />
@@ -189,6 +190,7 @@
     </ClCompile>
     <ClCompile Include="TargetRobot\src\cpp\DashboardTask.cpp" />
     <ClCompile Include="TargetRobot\src\cpp\DashboardTaskBackend.cpp" />
+    <ClCompile Include="TargetRobot\src\cpp\DriveTrainTask.cpp" />
     <ClCompile Include="TargetRobot\src\cpp\Robot.cpp" />
     <ClCompile Include="TargetRobot\src\cpp\robotlib\ActionMetricsTask.cpp" />
     <ClCompile Include="TargetRobot\src\cpp\robotlib\BaseDataStoreTypes.cpp" />

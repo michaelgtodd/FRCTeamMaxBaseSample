@@ -135,6 +135,9 @@
     <ClInclude Include="TargetRobot\src\include\RobotLoggerTask.h">
       <Filter>Header Files\TargetRobot</Filter>
     </ClInclude>
+    <ClInclude Include="TargetRobot\src\include\DriveTrainTask.h">
+      <Filter>Header Files\TargetRobot</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -202,6 +205,9 @@
     </ClCompile>
     <ClCompile Include="TargetRobot\src\cpp\DashboardTaskBackend.cpp">
       <Filter>Source Files\TargetRobot\robotlib</Filter>
+    </ClCompile>
+    <ClCompile Include="TargetRobot\src\cpp\DriveTrainTask.cpp">
+      <Filter>Source Files\TargetRobot</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
